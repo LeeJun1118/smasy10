@@ -1,4 +1,4 @@
-package com.smasy10.apple.controller;
+package com.smasy10.apple.web.controller;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
