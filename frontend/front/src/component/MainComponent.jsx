@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
+import {Button} from "react-bootstrap";
 
 class MainComponent extends Component {
 
@@ -31,6 +32,7 @@ class MainComponent extends Component {
                 Main 페이지
                 <br/>
                 {this.state.message}
+
             </div>
         )
     }
