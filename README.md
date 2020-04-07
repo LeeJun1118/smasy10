@@ -22,4 +22,4 @@
     
 2. 리액트
     - [리액트자습서](https://ko.reactjs.org/)
-    - [MaterialUI](https://material-ui.com/)
+    - [BootStrap](https://react-bootstrap.github.io/)
