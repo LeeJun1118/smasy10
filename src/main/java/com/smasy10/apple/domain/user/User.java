@@ -23,8 +23,26 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     private String phoneNo;
 
+    @Column(nullable = false)
+    private String address;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
 
+    @Builder
+    public User(String name, String phoneNo, String address, Role role) {
+        this.name = name;
+        this.phoneNo = phoneNo;
+        this.address = address;
+        this.role = role;
+    }
+
+    public User update(String name, String phoneNo,String address){
+        this.name = name;
+        this.phoneNo = phoneNo;
+        this.address = address;
+
+        return this;
+    }
 }
