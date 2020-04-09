@@ -26,11 +26,28 @@ repositories {
 }
 
 dependencies {
+/*
+    - compile → 먼저 compile 시점에 필요한 디펜던시 라이브러리들을 compile로 정의합니다.
+    - runtime → 런타임 시에 참조할 라이브러리를 정의합니다. 기본적으로 compile 라이브러리를 포함합니다.
+    - compileOnly → 컴파일 시점에만 사용하고 런타임에는 필요없는 라이브러리를 정의합니다.
+    - testCompile → 프로젝트의 테스트를 위한 디펜던시 라이브러리를 정의합니다. 기본적으로 Compile된 클래스와 compile 라이브러리를 포함합니다.
+*/
+
+    //스프링부트요 Spring Data JPA 추상화 라이브러리
+    //스프링부트의 버전에 맞춰 자동의 JPA 관련 라이브러리들의 버전을 관리
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    //세션 저장소를 jdbc 를 사용
     compile('org.springframework.boot:spring-boot-starter-jdbc')
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    //Getter,Setter,기본생성자,toString,Builder 등을 어노테이션으로 자동 생성
     compileOnly 'org.projectlombok:lombok'
+
+    //소스가 변할때 마다 자동으로 서버 재가동
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    //mysqlDB 사용
     runtimeOnly('mysql:mysql-connector-java')
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
@@ -42,6 +59,8 @@ test {
     useJUnitPlatform()
 }
 
+
+//Connect Spring Boot + React
 def webappDir = "$projectDir/frontend/front"
 
 task appNpmInstall(type: NpmTask) {
