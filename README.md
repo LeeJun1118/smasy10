@@ -37,4 +37,6 @@
 
 6. Spring Boot + JPA + MySQL 게시판 구현
     - [velog.io](https://velog.io/@max9106/Spring-Boot-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%83%9D%EC%84%B1)
-    - [victolee tistory 블로그](https://victorydntmd.tistory.com/320?category=764331)
+    - [victolee tistory](https://victorydntmd.tistory.com/320?category=764331)
+7. Spring & Spring Boot 참고 사이트
+    - [jojoldu tistory](https://jojoldu.tistory.com/)
