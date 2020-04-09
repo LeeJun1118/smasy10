@@ -1,6 +1,7 @@
 package com.smasy10.apple.domain.reply;
 
 
+import com.smasy10.apple.domain.BaseTimeEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -22,7 +23,8 @@ import java.time.LocalDate;
 //테이블과 연결될 클래스임을 나타냄
 //기본 값으로 클래스의 카멜케이스 이름을 언더스코어 네이밍(_)으로 테이블 이름을 매칭함(ex:SalesManger.java -> sales_manager table)
 @Entity
-public class Reply {
+//BaseTimeEntity 을 상속하여 필드들(createDate,modifiedDate)도 컬럼으로 인식
+public class Reply extends BaseTimeEntity {
 
     //해당 테이블의 PK 필드를 나타냄
     @Id
@@ -31,11 +33,4 @@ public class Reply {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //Entity 가 생성되어 저장될 때 시간이 자동 저장
-    @CreatedDate
-    private LocalDate createDate;
-
-    //Entity 가 값을 변경할 때 시간이 자동 저장
-    @LastModifiedDate
-    private LocalDate modifiedDate;
 }
