@@ -32,7 +32,9 @@
     - [카카오-참고](https://electricburglar.tistory.com/151)
     
 5. DB 구현
-    - [참고블로그-네이버](https://m.blog.naver.com/sim4858/220985748658)
+    - [SpringBoot& DB 연동 & Entity 관계 사용법(2017.04.19.게시물)](https://m.blog.naver.com/sim4858/220985748658)
+    - [Spring JPA 연관관계 매핑 & Entity 관계 사용법(2018.04.29.게시물)](https://victorydntmd.tistory.com/208)
 
 6. Spring Boot + JPA + MySQL 게시판 구현
     - [velog.io](https://velog.io/@max9106/Spring-Boot-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%83%9D%EC%84%B1)
+    - [victolee tistory 블로그](https://victorydntmd.tistory.com/320?category=764331)
