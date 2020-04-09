@@ -16,7 +16,7 @@
     5. http://localhost:8080/ 로 들어가서 실행이 잘 되는지 확인
 
     
-### 유용한 사이트
+### 참고 사이트
 1. Spring + React.js
     - [참고블로그](https://lemontia.tistory.com/912)
     
@@ -30,3 +30,6 @@
     
 4. 로그인 구현
     - [카카오-참고](https://electricburglar.tistory.com/151)
+    
+5. DB 구현
+    - [참고블로그-네이버](https://m.blog.naver.com/sim4858/220985748658)
