@@ -41,6 +41,7 @@ public class User extends BaseTimeEntity {
     @Column(length = 500,nullable = false)
     private String address;
 
+    //로그인한 사용자인지 구분하기 위한 변수
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
