@@ -15,6 +15,20 @@
     4. java -jar jar파일이름 
     5. http://localhost:8080/ 로 들어가서 실행이 잘 되는지 확인
 
+3. MySQL 설정
+    1. 설치 후 
+    2. MySQL WorkBench 들어가기
+    3. 왼쪽 상단에 Schemas 칸의 빈 여백에 마우스 우측 클릭
+    4. Create Schemas -> Name : smasy
+    5. CharSet : utf8mb4    Collation : utf8mb4_general_ci
+    6. 인텔리제이 우측 Database 클릭
+    7. + 클릭 -> Data Source -> MySQL
+    8. User : Mysql 설치할 때 만든 id(아무설정 안했다면 default로 root가 설정 됨)
+    9. Password : Mysql 설치할 때 만든 비밀번호 
+    10. database : smasy
+    11. test Connection 했을 때 안되면 time_zone 문제인지 에러 확인
+    12. [time_zone 문제 해결 사이트](https://jwkim96.tistory.com/23)
+    13. 해결이 됐다면 6 ~ 10 까지 한 후 Apply 누르고 닫기
     
 ### 참고 사이트
 1. Spring + React.js
