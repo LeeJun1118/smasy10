@@ -9,7 +9,8 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
-
+//lombok 어노테이션
+//클래스 내 모든 필드의 Get 매소드 자동 생성
 @Getter
 
 //모든 Entity 의 상위 클래스가 됨
