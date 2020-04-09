@@ -33,3 +33,6 @@
     
 5. DB 구현
     - [참고블로그-네이버](https://m.blog.naver.com/sim4858/220985748658)
+
+6. Spring Boot + JPA + MySQL 게시판 구현
+    - [velog.io](https://velog.io/@max9106/Spring-Boot-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%83%9D%EC%84%B1)
