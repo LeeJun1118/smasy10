@@ -6,6 +6,8 @@ import 'react-calendar/dist/Calendar.css';
 import MainComponent from './MainComponent'
 import DashboardComponent from './DashboardComponent'
 import LoginComponent from './LoginComponent'
+import Logins from './Logins';
+import KakaoLogin from "./KakaoLogin";
 
 class TopMenuComponent extends Component {
     constructor(props) {
@@ -65,7 +67,8 @@ class TopMenuComponent extends Component {
                     </Navbar.Collapse>
                 </Navbar>
 
-                <Route path="/login" component={LoginComponent} />
+                <Route path="/login2" component={Logins} />
+                <Route path="/login" component={KakaoLogin} />
                 <Route path="/main" component={MainComponent} />
             </Router>
         )
