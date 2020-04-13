@@ -1,6 +1,7 @@
 package com.smasy10.apple.domain.user;
 
 import com.smasy10.apple.domain.BaseTimeEntity;
+import com.smasy10.apple.domain.reply.Reply;
 import com.smasy10.apple.domain.room.Room;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 //lombok 어노테이션
@@ -51,16 +53,21 @@ public class User extends BaseTimeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
-    private Room room_id;
+    private Room room;
+
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    private List<Reply> replies;
 
     //해당 클래스의 빌더 패턴 클래스 생성
     //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
     @Builder
-    public User(String name, String phoneNo, String address, Role role) {
+    public User(String name, String phoneNo, String address, Role role, Room room, List<Reply> replies) {
         this.name = name;
         this.phoneNo = phoneNo;
         this.address = address;
         this.role = role;
+        this.room = room;
+        this.replies = replies;
     }
 
     public User update(String name, String phoneNo,String address){
