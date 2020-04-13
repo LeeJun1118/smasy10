@@ -40,7 +40,12 @@ public class Reply extends BaseTimeEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    //다대일 관계 매핑
+    //엔티티 자신을 기준으로 다중성을 생각해야함
     @ManyToOne(fetch = FetchType.LAZY)
+    //외래키를 매핑할 떄 사용
+    //name 속성에는 매핑할 외래 키 이름을 지정
+    //Place 의 id 를 외래키로 가지므로 place_id 로 작성
     @JoinColumn(name = "place_id")
     private Place place;
 

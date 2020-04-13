@@ -38,6 +38,10 @@ public class Place {
     @Column
     private String phoneNo;
 
+    //일대다 매핑
+    //엔티티 자신을 기준으로 다중성을 생각해야함
+    //mappedBy 속성을 사용해 연관관계의 주인을 정함
+    //replies 의 주인은 place(replies 는 place 에 의해 매핑됨)
     @OneToMany(mappedBy = "place",fetch = FetchType.LAZY)
     private List<Reply> replies;
 
