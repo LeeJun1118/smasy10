@@ -4,6 +4,7 @@ package com.smasy10.apple.domain.reply;
 import com.smasy10.apple.domain.BaseTimeEntity;
 import com.smasy10.apple.domain.place.Place;
 import com.smasy10.apple.domain.user.User;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -32,12 +33,23 @@ public class Reply extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false,length = 500)
+    private String contents;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user_id;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "place_id")
-    private Place place_id;
+    private Place place;
+
+    //해당 클래스의 빌더 패턴 클래스 생성
+    //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
+    @Builder
+    public Reply(String contents, User user, Place place) {
+        this.contents = contents;
+        this.user = user;
+        this.place = place;
+    }
 }

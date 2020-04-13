@@ -35,9 +35,18 @@ public class Reservation extends BaseTimeEntity {
     //LAZY 옵션은 Room 객체를 조회하는 시점이 아닌 객체가 실제로 사용될 때 조회하는 옵션
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
-    private Room room_id;
+    private Room room;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "place_id")
-    private Place place_id;
+    private Place place;
+
+    //해당 클래스의 빌더 패턴 클래스 생성
+    //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
+    @Builder
+    public Reservation(Room room, Place place) {
+        this.room = room;
+        this.place = place;
+    }
+
 }

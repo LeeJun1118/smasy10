@@ -1,9 +1,12 @@
 package com.smasy10.apple.domain.place;
 
+import com.smasy10.apple.domain.reply.Reply;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 //lombok 어노테이션
 //클래스 내 모든 필드의 Get 매소드 자동 생성
@@ -35,4 +38,15 @@ public class Place {
     @Column
     private String phoneNo;
 
+    @OneToMany(mappedBy = "place",fetch = FetchType.LAZY)
+    private List<Reply> replies;
+
+    //해당 클래스의 빌더 패턴 클래스 생성
+    //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
+    @Builder
+    public Place(String address, String phoneNo, List<Reply> replies) {
+        this.address = address;
+        this.phoneNo = phoneNo;
+        this.replies = replies;
+    }
 }
