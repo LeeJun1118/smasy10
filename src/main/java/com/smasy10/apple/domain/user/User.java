@@ -1,9 +1,11 @@
 package com.smasy10.apple.domain.user;
 
 import com.smasy10.apple.domain.BaseTimeEntity;
+import com.smasy10.apple.domain.room.Room;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -11,6 +13,7 @@ import javax.persistence.*;
 //lombok 어노테이션
 //클래스 내 모든 필드의 Get 매소드를 자동 생성
 @Getter
+@Setter
 
 //기본 생성자 자동 추가
 //public 클래스명(){} 와 같은 효과
@@ -45,6 +48,10 @@ public class User extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_id")
+    private Room room_id;
 
     //해당 클래스의 빌더 패턴 클래스 생성
     //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함

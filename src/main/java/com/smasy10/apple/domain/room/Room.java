@@ -1,6 +1,6 @@
 package com.smasy10.apple.domain.room;
 
-import com.smasy10.apple.domain.BaseTimeEntity;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

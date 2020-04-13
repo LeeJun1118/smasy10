@@ -2,13 +2,12 @@ package com.smasy10.apple.domain.reply;
 
 
 import com.smasy10.apple.domain.BaseTimeEntity;
+import com.smasy10.apple.domain.place.Place;
+import com.smasy10.apple.domain.user.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 
 //lombok 어노테이션
@@ -33,4 +32,12 @@ public class Reply extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user_id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "place_id")
+    private Place place_id;
 }
