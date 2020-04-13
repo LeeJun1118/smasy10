@@ -54,6 +54,7 @@
     - [victolee tistory](https://victorydntmd.tistory.com/320?category=764331)
 7. Spring & Spring Boot 참고 사이트
     - [jojoldu tistory](https://jojoldu.tistory.com/)
+    - [havijy tistory](https://haviyj.tistory.com/11)   
 
 8. Spring boot + devtools 설정 - 소스가 변할때 마다 자동으로 서버 재가동
     - [havijy tistory](https://haviyj.tistory.com/11)   
