@@ -33,19 +33,24 @@ public class Reply extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //테이블의 컬럼을 나타내면 굳이 선언하지 않아도 해당 클래스의 모든 필드는 모두 컬럼이 됨.
+    //기본 값 외에 추가 변경 옵션이 있을 때 사용
+    //옵션 : null 허용 안함,문자열의 경우 기본값은 varchar(255)인데 500으로 바꿈
     @Column(nullable = false,length = 500)
     private String contents;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    //다대일 관계 매핑
+    //다대일 매핑
     //엔티티 자신을 기준으로 다중성을 생각해야함
+    //LAZY 옵션은 Room 객체를 조회하는 시점이 아닌 객체가 실제로 사용될 때 조회하는 옵션
     @ManyToOne(fetch = FetchType.LAZY)
     //외래키를 매핑할 떄 사용
     //name 속성에는 매핑할 외래 키 이름을 지정
-    //Place 의 id 를 외래키로 가지므로 place_id 로 작성
+    //User 의 id 를 외래키로 가지므로 user_id 로 작성
+    @JoinColumn(name = "user_id")
+    //실제로 DB에 저장될 때는 User 의 PK 값이 저장됨.
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "place_id")
     private Place place;
 
