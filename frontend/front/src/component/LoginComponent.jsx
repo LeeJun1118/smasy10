@@ -6,7 +6,6 @@ class LoginComponent extends Component {
         return(
             <div>
                 Login 페이지
-                <Button variant="outline-info" onClick={this.handleClick}>로그인</Button>
             </div>
         )
     }

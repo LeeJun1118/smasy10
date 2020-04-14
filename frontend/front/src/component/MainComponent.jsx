@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import axios from "axios";
-import {Button} from "react-bootstrap";
 
 class MainComponent extends Component {
 

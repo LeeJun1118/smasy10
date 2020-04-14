@@ -6,6 +6,8 @@ import 'react-calendar/dist/Calendar.css';
 import MainComponent from './MainComponent'
 import DashboardComponent from './DashboardComponent'
 import LoginComponent from './LoginComponent'
+import HomeComponent from './HomeComponent'
+import KakaoLogin from "./KakaoLogin";
 
 class TopMenuComponent extends Component {
     constructor(props) {
@@ -33,7 +35,7 @@ class TopMenuComponent extends Component {
             <Router>
                 <Navbar bg="light" sticky="top">
                     <Navbar.Collapse className="justify-content-center">
-                        <Navbar.Brand href="/"><h1>SMASY</h1></Navbar.Brand>
+                        <Navbar.Brand href="/home"><h1>SMASY</h1></Navbar.Brand>
                     </Navbar.Collapse>
                 </Navbar>
                 <Navbar bg="dark"
@@ -47,16 +49,16 @@ class TopMenuComponent extends Component {
                         <NavDropdown.Item onClick={this.handleClick}>당구</NavDropdown.Item>
                     </NavDropdown>
                     <NavDropdown title="지역" id="collasible-nav-dropdown" value="navdrop">
-                        <DropdownButton
-                            as={ButtonGroup} id="dropdown-variants-info" drop="right" variant="secondary" title="부산">
-                            <Dropdown.Item eventKey="1" onClick={this.handleClick}>진구</Dropdown.Item>
-                            <Dropdown.Item eventKey="2" onClick={this.handleClick}>해운대구</Dropdown.Item>
-                        </DropdownButton>
-                        <DropdownButton
-                            as={ButtonGroup} id="dropdown-variants-info" drop="right" variant="secondary" title="부산">
-                            <Dropdown.Item eventKey="1" onClick={this.handleClick}>진구</Dropdown.Item>
-                            <Dropdown.Item eventKey="2" onClick={this.handleClick}>해운대구</Dropdown.Item>
-                        </DropdownButton>
+                        <NavDropdown title="부산" id="collasible-nav-dropdown" value="navdrop" variant="dark">
+                            <NavDropdown.Item onClick={this.handleClick}>남구</NavDropdown.Item>
+                            <NavDropdown.Item onClick={this.handleClick}>부산진구</NavDropdown.Item>
+                            <NavDropdown.Item onClick={this.handleClick}>해운대구</NavDropdown.Item>
+                        </NavDropdown>
+                        <NavDropdown title="서울" id="collasible-nav-dropdown" value="navdrop" variant="dark">
+                            <NavDropdown.Item onClick={this.handleClick}>남구</NavDropdown.Item>
+                            <NavDropdown.Item onClick={this.handleClick}>부구</NavDropdown.Item>
+                            <NavDropdown.Item onClick={this.handleClick}>해구</NavDropdown.Item>
+                        </NavDropdown>
                     </NavDropdown>
                         {/*<Calendar onChange={this.onDateChange} value={this.state.date}/>*/}
                     </Nav>
@@ -67,6 +69,8 @@ class TopMenuComponent extends Component {
 
                 <Route path="/login" component={LoginComponent} />
                 <Route path="/main" component={MainComponent} />
+                <Route path="/home" component={HomeComponent} />
+
             </Router>
         )
     }

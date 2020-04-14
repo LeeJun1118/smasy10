@@ -30,10 +30,12 @@
     12. [time_zone 문제 해결 사이트](https://jwkim96.tistory.com/23)
     13. 해결이 됐다면 6 ~ 10 까지 한 후 Apply 누르고 닫기
     14. ./db/tables.sql 파일 열어서 ctrl+a -> ctrl+enter
-
-### 로그인 관련 참고 사이트
-- [spring boot](https://xmfpes.github.io/spring/spring-security/)
-- []
+    
+4. 카카오 로그인
+    1. npm install react-kakao-login
+    2. npm i --save kakaojs
+    3. ...
+    
 ### 참고 사이트
 1. Spring + React.js
     - [참고블로그](https://lemontia.tistory.com/912)
@@ -46,8 +48,10 @@
     - [캘린더 패키지](https://www.npmjs.com/package/react-calendar)
     - [참고](https://codingmania.tistory.com/360)
     
-4. 로그인 구현
+4. 카카오 로그인 구현
     - [카카오-참고](https://electricburglar.tistory.com/151)
+    - [참고2](https://m.blog.naver.com/PostView.nhn?blogId=hjinha2&logNo=221176502285&proxyReferer=https:%2F%2Fwww.google.com%2F)
+    - [참고3](https://krksap.tistory.com/1579)
     
 5. DB 구현
     - [SpringBoot& DB 연동 & Entity 관계 사용법(2017.04.19.게시물)](https://m.blog.naver.com/sim4858/220985748658)

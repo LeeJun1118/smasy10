@@ -5,6 +5,7 @@ import './App.css';
 import TopMenuComponent from "./component/TopMenuComponent";
 import {Button} from "react-bootstrap";
 import MainComponent from "./component/MainComponent";
+import HomeComponent from "./component/HomeComponent";
 
 function App() {
     return (
