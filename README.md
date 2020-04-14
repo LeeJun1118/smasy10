@@ -30,7 +30,10 @@
     12. [time_zone 문제 해결 사이트](https://jwkim96.tistory.com/23)
     13. 해결이 됐다면 6 ~ 10 까지 한 후 Apply 누르고 닫기
     14. ./db/tables.sql 파일 열어서 ctrl+a -> ctrl+enter
-    
+
+### 로그인 관련 참고 사이트
+- [spring boot](https://xmfpes.github.io/spring/spring-security/)
+- []
 ### 참고 사이트
 1. Spring + React.js
     - [참고블로그](https://lemontia.tistory.com/912)
