@@ -4,7 +4,6 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
 import MainComponent from './MainComponent'
-import DashboardComponent from './DashboardComponent'
 import LoginComponent from './LoginComponent'
 import HomeComponent from './HomeComponent'
 import KakaoLogin from "./KakaoLogin";
@@ -33,39 +32,29 @@ class TopMenuComponent extends Component {
     render() {
         return (
             <Router>
-                <Navbar bg="light" sticky="top">
+                <Navbar bg="dark" sticky="top" variant="dark">
                     <Navbar.Collapse className="justify-content-center">
                         <Navbar.Brand href="/home"><h1>SMASY</h1></Navbar.Brand>
                     </Navbar.Collapse>
+                    <Navbar.Brand  href="/login" id="mylogin">로그인</Navbar.Brand>
                 </Navbar>
-                <Navbar bg="dark"
-                        variant="dark">
-                    <Nav>
-                    <NavDropdown title="종목" id="collasible-nav-dropdown" value="navdrop">
-                        <NavDropdown.Item onClick={this.handleClick}>축구</NavDropdown.Item>
-                        <NavDropdown.Item onClick={this.handleClick}>야구</NavDropdown.Item>
-                        <NavDropdown.Item onClick={this.handleClick}>족구</NavDropdown.Item>
-                        <NavDropdown.Item onClick={this.handleClick}>농구</NavDropdown.Item>
-                        <NavDropdown.Item onClick={this.handleClick}>당구</NavDropdown.Item>
-                    </NavDropdown>
-                    <NavDropdown title="지역" id="collasible-nav-dropdown" value="navdrop">
-                        <NavDropdown title="부산" id="collasible-nav-dropdown" value="navdrop" variant="dark">
-                            <NavDropdown.Item onClick={this.handleClick}>남구</NavDropdown.Item>
-                            <NavDropdown.Item onClick={this.handleClick}>부산진구</NavDropdown.Item>
-                            <NavDropdown.Item onClick={this.handleClick}>해운대구</NavDropdown.Item>
-                        </NavDropdown>
-                        <NavDropdown title="서울" id="collasible-nav-dropdown" value="navdrop" variant="dark">
-                            <NavDropdown.Item onClick={this.handleClick}>남구</NavDropdown.Item>
-                            <NavDropdown.Item onClick={this.handleClick}>부구</NavDropdown.Item>
-                            <NavDropdown.Item onClick={this.handleClick}>해구</NavDropdown.Item>
-                        </NavDropdown>
-                    </NavDropdown>
-                        {/*<Calendar onChange={this.onDateChange} value={this.state.date}/>*/}
-                    </Nav>
-                    <Navbar.Collapse className="justify-content-end">
-                    <Navbar.Brand href="/login" id="mylogin">로그인</Navbar.Brand>
-                    </Navbar.Collapse>
-                </Navbar>
+                {/*<Navbar bg="dark"*/}
+                {/*        variant="dark">*/}
+                {/*    <Nav>*/}
+                {/*    <NavDropdown title="종목" id="collasible-nav-dropdown" value="navdrop">*/}
+                {/*        <NavDropdown.Item onClick={this.handleClick}>축구</NavDropdown.Item>*/}
+                {/*    </NavDropdown>*/}
+                {/*    <NavDropdown title="지역" id="collasible-nav-dropdown" value="navdrop">*/}
+                {/*        <NavDropdown title="부산" id="collasible-nav-dropdown" value="navdrop" variant="dark">*/}
+                {/*            <NavDropdown.Item onClick={this.handleClick}>남구</NavDropdown.Item>*/}
+                {/*        </NavDropdown>*/}
+                {/*        <NavDropdown title="서울" id="collasible-nav-dropdown" value="navdrop" variant="dark">*/}
+                {/*            <NavDropdown.Item onClick={this.handleClick}>남구</NavDropdown.Item>*/}
+                {/*        </NavDropdown>*/}
+                {/*    </NavDropdown>*/}
+                {/*        /!*<Calendar onChange={this.onDateChange} value={this.state.date}/>*!/*/}
+                {/*    </Nav>*/}
+                {/*</Navbar>*/}
 
                 <Route path="/login" component={LoginComponent} />
                 <Route path="/main" component={MainComponent} />
@@ -76,4 +65,4 @@ class TopMenuComponent extends Component {
     }
 }
 
-export default TopMenuComponent;
+export default TopMenuComponent
