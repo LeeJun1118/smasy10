@@ -35,10 +35,15 @@
     1. npm install react-kakao-login
     2. npm i --save kakaojs
     3. ...
-    
+### 로그인 관련 사이트
+ 1. [참고사이트](https://xmfpes.github.io/spring/spring-security/)
+ 2. [spring document](https://spring.io/guides/tutorials/spring-boot-oauth2/)
+ 
 ### 참고 사이트
 1. Spring + React.js
     - [참고블로그](https://lemontia.tistory.com/912)
+    - [spring document](https://spring.io/guides/tutorials/react-and-spring-data-rest?utm_content=buffer6f4d3&utm_medium=social&utm_source=plus.google.com&utm_campaign=buffer/)
+ 
     
 2. 리액트
     - [리액트자습서](https://ko.reactjs.org/)

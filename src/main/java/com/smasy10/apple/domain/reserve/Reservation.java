@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 
 //**lombok 어노테이션
 //클래스 내 모든 필드의 Getter 매소드 자동 생성
@@ -30,13 +29,17 @@ public class Reservation extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //도메인 Reservation 와 Reservation 이 필드값으로 갖고 있는 Room 도메인을 1:1 관계로 설정하는 어노테이션
-    //실제로 DB에 저장될 때는 Room 의 PK 값이 저장됨.
+    //일대일 매핑 어노테이션
     //LAZY 옵션은 Room 객체를 조회하는 시점이 아닌 객체가 실제로 사용될 때 조회하는 옵션
     @OneToOne(fetch = FetchType.LAZY)
+    //외래키를 매핑할 떄 사용
+    //name 속성에는 매핑할 외래 키 이름을 지정
+    //Room 의 id 를 외래키로 가지므로 room_id 로 작성
     @JoinColumn(name = "room_id")
+    //실제로 DB에 저장될 때는 Room 의 PK 값이 저장됨.
     private Room room;
 
+    //다대일 매핑 어노테이션
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "place_id")
     private Place place;
