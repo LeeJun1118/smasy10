@@ -8,12 +8,6 @@ class MroomComponent extends Component {
             </div>
         )
     }
-
-    handleClick = () => {
-        console.log("Click");
-    }
 }
 
-
-
-export default MroomComponent
+export default MroomComponent;

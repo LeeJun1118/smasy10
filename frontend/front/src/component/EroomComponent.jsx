@@ -13,10 +13,6 @@ class EroomComponent extends Component {
             </div>
         )
     }
-
-    handleClick = () => {
-        console.log("Click");
-    }
 }
 
 

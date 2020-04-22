@@ -71,3 +71,34 @@
 
 8. Spring boot + devtools 설정 - 소스가 변할때 마다 자동으로 서버 재가동
     - [havijy tistory](https://haviyj.tistory.com/11)   
+
+
+***
+** 고쳤습니다 <br>
+(1번만 실행하면 될 듯,<br>
+2번은 디렉토리 구조 정리 참고,<br>
+3번은 package.json 파일 고친 것,<br>
+나머지 부분은 아래 링크 참고하고,<br>
+이해 안되는 부분 말해주세여 알려드릴게요)
+- [참고 : react-route-dom](https://velopert.com/3417)
+<br><br>
+1. npm install cross-env --save
+
+2. 디렉토리 구성
+    - src/component: 컴포넌트들이 위치하는 디렉토리
+    - src/pages: 각 라우트들이 위치하는 디렉토리
+    - src/client: 브라우저 측에서 사용할 최상위 컴포넌트. 우리가 추후 서버사이드 렌더링을 구현 할 것이기 때문에 디렉토리를 따로 구분. (서버사이드 렌더링을 할 때에는 서버 전용 라우터를 써야함) 여기서 라우터를 설정.
+    - src/server: 서버측에서 사용 할 리액트 관련 코드
+    - src/shared: 서버와 클라이언트에서 공용으로 사용되는 컴포넌트 App.js 가 여기에 위치.
+    - src/lib: 나중에 웹 연동을 구현 할 때 사용 할 API와 코드스플리팅 할 때 필요한 코드
+    
+3. NODE_ENV 설정
+<br>(우리가 코드들을 불러올 때 ‘../components/Something’ -> ‘components/Something’ 이렇게 불러 올 수 있도록 프로젝트의 루트경로를 설정)
+    - package.json 파일의 script 부분을 다음과 같이 수정<br>
+  "scripts": {<br>
+    "start": "cross-env NODE_PATH=src react-scripts start",<br>
+    "build": "cross-env NODE_PATH=src react-scripts build",<br>
+    "test": "react-scripts test --env=jsdom",<br>
+    "eject": "react-scripts eject"<br>
+  }
+

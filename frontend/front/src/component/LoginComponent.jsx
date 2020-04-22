@@ -1,5 +1,4 @@
 import React,{Component} from "react";
-import {Button} from "react-bootstrap";
 
 class LoginComponent extends Component {
     render() {
@@ -9,12 +8,6 @@ class LoginComponent extends Component {
             </div>
         )
     }
-
-    handleClick = () => {
-        console.log("Click");
-    }
 }
-
-
 
 export default LoginComponent

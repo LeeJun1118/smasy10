@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import {Button} from "react-bootstrap";
-import './css/Home.css';
-import {BrowserRouter as Router, Route} from "react-router-dom";
-import MroomComponent from "./MroomComponent";
-import EroomComponent from "./EroomComponent";
+import {BrowserRouter as Router, Route, NavLink} from "react-router-dom";
+import '../css/Home.css';
+import MroomComponent from "../component/MroomComponent";
+import EroomComponent from "../component/EroomComponent";
 
 class HomeComponent extends Component {
     handleClick = () => {
@@ -24,7 +24,6 @@ class HomeComponent extends Component {
 
                 <Route path="/makeAroom" component={MroomComponent} />
                 <Route path="/enterAroom" component={EroomComponent} />
-
             </Router>
         )
     }
