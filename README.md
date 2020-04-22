@@ -91,6 +91,8 @@
     - src/server: 서버측에서 사용 할 리액트 관련 코드
     - src/shared: 서버와 클라이언트에서 공용으로 사용되는 컴포넌트 App.js 가 여기에 위치.
     - src/lib: 나중에 웹 연동을 구현 할 때 사용 할 API와 코드스플리팅 할 때 필요한 코드
+    - src/css: css 파일
+    - public/img: 이미지 파일 
     
 3. NODE_ENV 설정
 <br>(우리가 코드들을 불러올 때 ‘../components/Something’ -> ‘components/Something’ 이렇게 불러 올 수 있도록 프로젝트의 루트경로를 설정)
