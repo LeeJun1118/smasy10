@@ -103,4 +103,11 @@
     "test": "react-scripts test --env=jsdom",<br>
     "eject": "react-scripts eject"<br>
   }
+    - 본 코드 <br>
+    "scripts": {<br>
+        "start": "react-scripts start",<br>
+        "build": "react-scripts build",<br>
+        "test": "react-scripts test",<br>
+        "eject": "react-scripts eject"<br>
+      }
 
