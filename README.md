@@ -35,6 +35,7 @@
     1. npm install react-kakao-login
     2. npm i --save kakaojs
     3. ...
+    
 ### 로그인 관련 사이트
  1. [참고사이트](https://xmfpes.github.io/spring/spring-security/)
  2. [spring document](https://spring.io/guides/tutorials/spring-boot-oauth2/)
@@ -44,7 +45,6 @@
     - [참고블로그](https://lemontia.tistory.com/912)
     - [spring document](https://spring.io/guides/tutorials/react-and-spring-data-rest?utm_content=buffer6f4d3&utm_medium=social&utm_source=plus.google.com&utm_campaign=buffer/)
  
-    
 2. 리액트
     - [리액트자습서](https://ko.reactjs.org/)
     - [BootStrap](https://react-bootstrap.github.io/)
@@ -52,11 +52,9 @@
 3. 캘린더
     - [캘린더 패키지](https://www.npmjs.com/package/react-calendar)
     - [참고](https://codingmania.tistory.com/360)
-    
+
 4. 카카오 로그인 구현
-    - [카카오-참고](https://electricburglar.tistory.com/151)
-    - [참고2](https://m.blog.naver.com/PostView.nhn?blogId=hjinha2&logNo=221176502285&proxyReferer=https:%2F%2Fwww.google.com%2F)
-    - [참고3](https://krksap.tistory.com/1579)
+    -하단 참고
     
 5. DB 구현
     - [SpringBoot& DB 연동 & Entity 관계 사용법(2017.04.19.게시물)](https://m.blog.naver.com/sim4858/220985748658)
@@ -110,4 +108,15 @@
         "test": "react-scripts test",<br>
         "eject": "react-scripts eject"<br>
       }
+      
+---
+###카카오 로그인
 
+   - [카카오 로그인](https://developers.kakao.com/docs/latest/ko/kakaologin/common)
+   - [JavaScript SDK 다운로드](https://developers.kakao.com/docs/latest/ko/sdk-download/js)
+   - [JavaScript SDK 사용법](https://developers.kakao.com/docs/latest/ko/getting-started/sdk-js)
+
+   - [참고](http://macaronics.net/index.php/m03/codeigniter/view/905)
+   - [카카오-참고](https://electricburglar.tistory.com/151)
+   - [참고2](https://m.blog.naver.com/PostView.nhn?blogId=hjinha2&logNo=221176502285&proxyReferer=https:%2F%2Fwww.google.com%2F)
+   - [참고3](https://krksap.tistory.com/1579)
