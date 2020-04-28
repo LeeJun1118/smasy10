@@ -8,6 +8,7 @@
     4. npm install axios --save
     5. npm run build
     6. frontend/front/build 라는 폴더가 생성되었다면
+    
 2. 빌드하기
     1. 우측에 Gradle 클릭 -> Tasks -> build 폴더 들어가서 bootJar 더블 클릭
     2. ./build/libs 폴더에 jar 파일 만들어졌다면
@@ -15,7 +16,7 @@
     4. java -jar jar파일이름 
     5. http://localhost:8080/ 로 들어가서 실행이 잘 되는지 확인
 
-3. MySQL 설정
+3. MySQL 설정 - 사용 안해도 될 
     1. 설치 후 
     2. MySQL WorkBench 들어가기
     3. 왼쪽 상단에 Schemas 칸의 빈 여백에 마우스 우측 클릭
@@ -36,6 +37,11 @@
     2. npm i --save kakaojs
     3. ...
     
+5. h2 인 메모리 데이터 베이스 사용
+    1. 프로젝트 실행
+    2. http://localhost:8080/h2-console 
+    3. connect 클릭
+
 ### 로그인 관련 사이트
  1. [참고사이트](https://xmfpes.github.io/spring/spring-security/)
  2. [spring document](https://spring.io/guides/tutorials/spring-boot-oauth2/)

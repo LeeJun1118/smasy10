@@ -29,6 +29,9 @@ public class Place {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private String name;
+
     //테이블의 컬럼을 나타내면 굳이 선언하지 않아도 해당 클래스의 모든 필드는 모두 컬럼이 됨.
     //기본 값 외에 추가 변경 옵션이 있을 때 사용
     //문자열의 경우 기본값은 varchar(255)인데 500으로 바꿈
@@ -50,7 +53,8 @@ public class Place {
     //해당 클래스의 빌더 패턴 클래스 생성
     //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
     @Builder
-    public Place(String address, String phoneNo, List<Reply> replies) {
+    public Place(String name, String address, String phoneNo, List<Reply> replies) {
+        this.name = name;
         this.address = address;
         this.phoneNo = phoneNo;
         this.replies = replies;
