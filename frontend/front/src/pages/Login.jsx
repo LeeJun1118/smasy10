@@ -1,10 +1,22 @@
-import React,{Component} from "react";
+import React, {Component, useState, useEffect} from "react";
+
 
 const Login = () => {
+
+    const [message, setMessage] = useState("");
+    useEffect(() => {
+        fetch('/api/login')
+            .then(response => response.text())
+            .then(message => {
+                setMessage(message);
+            });
+    }, [])
+
     return (
-            <div>
-                Login 페이지
-            </div>
+        <div>
+            Login 페이지
+            <h1 className="App-title">{message}</h1>
+        </div>
     )
 }
 
