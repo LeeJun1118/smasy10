@@ -50,8 +50,10 @@ dependencies {
     //소스가 변할때 마다 자동으로 서버 재가동
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-    //mysqlDB 사용
-    runtimeOnly('mysql:mysql-connector-java')
+    compile('com.h2database:h2')
+
+    compile("org.mariadb.jdbc:mariadb-java-client")
+    
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
