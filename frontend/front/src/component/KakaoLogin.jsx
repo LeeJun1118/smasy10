@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import Kakao from 'kakaojs';
 
@@ -6,8 +5,9 @@ class KakaoLogin extends Component{
 
     componentDidMount(){
         console.log("hello-------");
-        Kakao.init('e9c4b1d97b8bac697985d17eb59516b3');
-        console.log(Kakao);
+        Kakao.init('eee07da53bc4c518e9c78198be5dfba7');
+        console.log(Kakao.isInitialized());
+
         Kakao.Auth.createLoginButton({
             container: '#kakao-login-btn',
             success: function(authObj) {
@@ -21,9 +21,9 @@ class KakaoLogin extends Component{
     render(){
         return (
             <div>
-            <a id="kakao-login-btn"></a>
+                <a id="kakao-login-btn"></a>
             </div>
-    );
+        );
     }
 }
 

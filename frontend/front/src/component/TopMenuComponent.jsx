@@ -6,7 +6,7 @@ import 'react-calendar/dist/Calendar.css';
 import MainComponent from './MainComponent'
 import LoginComponent from './LoginComponent'
 import HomeComponent from './HomeComponent'
-import KakaoLogin from "./KakaoLogin";
+import KakaoLogin from "../pages/KakaoLogin";
 
 class TopMenuComponent extends Component {
     constructor(props) {
