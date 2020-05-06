@@ -38,7 +38,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     //세션 저장소를 jdbc 를 사용
-    compile('org.springframework.boot:spring-boot-starter-jdbc')
+    compile('org.springframework.session:spring-session-jdbc')
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     //Getter,Setter,기본생성자,toString,Builder 등을 어노테이션으로 자동 생성

@@ -84,6 +84,18 @@ public class User extends BaseTimeEntity {
     //해당 클래스의 빌더 패턴 클래스 생성
     //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
     @Builder
+    public User(String name, String email, String phoneNo, String address, Role role, Room room) {
+        this.name = name;
+        this.email = email;
+        this.phoneNo = phoneNo;
+        this.address = address;
+        this.role = role;
+        this.room = room;
+
+    }
+    //해당 클래스의 빌더 패턴 클래스 생성
+    //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
+    @Builder
     public User(String name, String email, String phoneNo, String address, Role role, Room room, List<Reply> replies) {
         this.name = name;
         this.email = email;
@@ -93,6 +105,7 @@ public class User extends BaseTimeEntity {
         this.room = room;
         this.replies = replies;
     }
+
 
     public User update(String name, String email, String phoneNo, String address) {
         this.name = name;

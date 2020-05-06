@@ -35,7 +35,15 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception{
-        userRepository.save(new User("이준","ejun1118@naver.com","010-2222-3333","부산 남구", Role.USER));
-        roomRepository.save(new Room("부산","축구","축구할 사람 구함",userRepository.getOne((long) 1)));
+
+        //방없는 User
+        User user1 = new User("User1","ejun1118@naver.com","010-2222-3333","부산 남구", Role.USER);
+
+        Room room1 = new Room("부산","축구","축구할 사람 구함");
+
+
+        roomRepository.save(room1);
+
+        userRepository.save(new User("User2","test@gmail.com","010-1111-2222","부산",Role.USER,room1));
     }
 }
