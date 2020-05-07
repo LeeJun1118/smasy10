@@ -40,9 +40,17 @@ public class Application implements CommandLineRunner {
         User user1 = new User("User1","ejun1118@naver.com","010-2222-3333","부산 남구", Role.USER);
 
         Room room1 = new Room("부산","축구","축구할 사람 구함");
+        Room room2 = new Room("울산","야구","야구 하자");
+        Room room3 = new Room("대구","농구","농구가 좋아");
+        Room room4 = new Room("포항","축구","축구 사랑");
+        Room room5 = new Room("경남","배구","배구 굿");
 
 
         roomRepository.save(room1);
+        roomRepository.save(room2);
+        roomRepository.save(room3);
+        roomRepository.save(room4);
+        roomRepository.save(room5);
 
         userRepository.save(new User("User2","test@gmail.com","010-1111-2222","부산",Role.USER,room1));
     }
