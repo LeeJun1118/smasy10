@@ -40,8 +40,8 @@ public class Room {
     @Column(nullable = false)
     private String sportsType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User header;
+   /* @ManyToOne(fetch = FetchType.LAZY)
+    private User header;*/
 
     //해당 클래스의 빌더 패턴 클래스 생성
     //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
@@ -52,7 +52,7 @@ public class Room {
         this.sportsType = sportsType;
     }
 
-    //해당 클래스의 빌더 패턴 클래스 생성
+/*    //해당 클래스의 빌더 패턴 클래스 생성
     //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
     @Builder
     public Room(String title, String area, String sportsType, User header) {
@@ -60,5 +60,5 @@ public class Room {
         this.area = area;
         this.sportsType = sportsType;
         this.header = header;
-    }
+    }*/
 }
