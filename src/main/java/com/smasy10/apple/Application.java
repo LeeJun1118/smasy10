@@ -1,14 +1,13 @@
 package com.smasy10.apple;
 
-import com.smasy10.apple.domain.BaseTimeEntity;
-import com.smasy10.apple.domain.place.PlaceRepository;
-import com.smasy10.apple.domain.reply.ReplyRepository;
-import com.smasy10.apple.domain.reserve.ReservationRepository;
-import com.smasy10.apple.domain.room.Room;
-import com.smasy10.apple.domain.room.RoomRepository;
-import com.smasy10.apple.domain.user.Role;
-import com.smasy10.apple.domain.user.User;
-import com.smasy10.apple.domain.user.UserRepository;
+import com.smasy10.apple.repository.PlaceRepository;
+import com.smasy10.apple.repository.ReplyRepository;
+import com.smasy10.apple.repository.ReservationRepository;
+import com.smasy10.apple.domain.Room;
+import com.smasy10.apple.repository.RoomRepository;
+import com.smasy10.apple.domain.Role;
+import com.smasy10.apple.domain.User;
+import com.smasy10.apple.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

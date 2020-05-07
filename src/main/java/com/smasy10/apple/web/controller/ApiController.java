@@ -1,8 +1,8 @@
 package com.smasy10.apple.web.controller;
 
 
-import com.smasy10.apple.domain.room.Room;
-import com.smasy10.apple.domain.room.RoomRepository;
+import com.smasy10.apple.domain.Room;
+import com.smasy10.apple.repository.RoomRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

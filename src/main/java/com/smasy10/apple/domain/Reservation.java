@@ -1,8 +1,5 @@
-package com.smasy10.apple.domain.reserve;
+package com.smasy10.apple.domain;
 
-import com.smasy10.apple.domain.BaseTimeEntity;
-import com.smasy10.apple.domain.place.Place;
-import com.smasy10.apple.domain.room.Room;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

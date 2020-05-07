@@ -1,4 +1,4 @@
-package com.smasy10.apple.domain.user;
+package com.smasy10.apple.domain;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

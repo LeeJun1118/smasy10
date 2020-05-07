@@ -1,9 +1,6 @@
-package com.smasy10.apple.domain.reply;
+package com.smasy10.apple.domain;
 
 
-import com.smasy10.apple.domain.BaseTimeEntity;
-import com.smasy10.apple.domain.place.Place;
-import com.smasy10.apple.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,5 @@
-package com.smasy10.apple.domain.place;
+package com.smasy10.apple.domain;
 
-import com.smasy10.apple.domain.reply.Reply;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
