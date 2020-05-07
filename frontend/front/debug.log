@@ -40,3 +40,6 @@
 [0430/152249.645:ERROR:crash_report_database_win.cc(580)] CreateDirectory C:\Program Files (x86)\Google\Chrome\reports: 액세스가 거부되었습니다. (0x5)
 [0430/152249.650:ERROR:registration_protocol_win.cc(131)] TransactNamedPipe: 파이프가 끝났습니다. (0x6D)
 [0430/152249.651:ERROR:crash_report_database_win.cc(580)] CreateDirectory C:\Program Files (x86)\Google\Chrome\reports: 액세스가 거부되었습니다. (0x5)
+[0507/132107.044:ERROR:crash_report_database_win.cc(580)] CreateDirectory C:\Program Files (x86)\Google\Chrome\reports: 액세스가 거부되었습니다. (0x5)
+[0507/132107.052:ERROR:registration_protocol_win.cc(131)] TransactNamedPipe: 파이프가 끝났습니다. (0x6D)
+[0507/132107.053:ERROR:crash_report_database_win.cc(580)] CreateDirectory C:\Program Files (x86)\Google\Chrome\reports: 액세스가 거부되었습니다. (0x5)

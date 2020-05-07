@@ -2,9 +2,8 @@ import React, {Component, useEffect} from 'react';
 // import 'bootstrap/dist/css/bootstrap.min.css'
 import '../css/App.css';
 import {Route} from 'react-router-dom';
-import {Home, About, Login, Mroom, Eroom, KakaoLogin} from "pages";
+import {Home, About, Login, Mroom, Eroom, KakaoLogin, Logink} from "pages";
 import Menu from "../pages/Menu";
-import Logink from "../pages/Logink";
 
 class App extends Component {
     render() {

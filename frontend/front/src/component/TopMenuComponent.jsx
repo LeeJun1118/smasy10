@@ -10,7 +10,7 @@ import KakaoLogin from "../pages/KakaoLogin";
 
 class TopMenuComponent extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {selectedValue:'node'}
     }
     handleClick = () => {

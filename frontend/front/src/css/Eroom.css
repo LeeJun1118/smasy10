@@ -1,0 +1,13 @@
+.Eroom{
+    text-align-last: center;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#table {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 30px;
+}

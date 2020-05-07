@@ -3,14 +3,20 @@ import '../css/Home.css';
 
 const Home = () => {
     return (
-            <div className="img">
+        <div className="imgt">
+
                 <a href="/makeAroom">
-                    <img src="/img/fire.jpg" alt="" onClick={handleClick}/>
+                    <img src="/img/fire3.gif" alt="" onClick={handleClick} className="img"/>
+                    {/*<img src="/img/make.png" className="subimg"/>*/}
                 </a>
+
                 <a href="/enterAroom">
-                    <img src="/img/fire.jpg" alt="" onClick={handleClick}/>
+                    <img src="/img/fire3.gif" alt="" onClick={handleClick} className="img"/>
+                    {/*<img src="/img/enter.png" alt="" onClick={handleClick} className="subimg"/>*/}
                 </a>
-            </div>
+
+        </div>
+
     );
 };
 const handleClick = () => {

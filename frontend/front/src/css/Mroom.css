@@ -1,0 +1,19 @@
+.Mroom{
+    text-align-last: center;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#sports, #area, #facility {
+    width: 50%;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+#date {
+    width: 350px;
+    margin: auto;
+    margin-bottom: 30px;
+}
