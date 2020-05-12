@@ -1,4 +1,4 @@
-package com.smasy10.apple.web.controller;
+package com.smasy10.apple.web;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;

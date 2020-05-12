@@ -1,4 +1,4 @@
-package com.smasy10.apple.web.controller;
+package com.smasy10.apple.controller;
 
 
 import com.smasy10.apple.domain.Room;
