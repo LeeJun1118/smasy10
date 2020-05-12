@@ -4,6 +4,8 @@ import com.smasy10.apple.domain.Room;
 import com.smasy10.apple.domain.User;
 import lombok.Getter;
 
+//선택한 방 정보를 보여주는 클래스
+
 @Getter
 public class RoomResponseDto {
 
