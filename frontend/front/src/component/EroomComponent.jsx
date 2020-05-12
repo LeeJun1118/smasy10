@@ -27,7 +27,7 @@ class EroomComponent extends Component {
 
     componentDidMount() {
         axios
-            .get("http://localhost:8080/h2-console")
+            .get("http://localhost:8080/api/room/list")
             .then(res => {
                 this.setState({
                     allAssignments: res.data
