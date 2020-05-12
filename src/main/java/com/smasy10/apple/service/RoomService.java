@@ -20,7 +20,7 @@ public class RoomService {
         return roomRepository.findById(id);
     }
 
-    public Page<Room> findAllByOrderByCreatedDateDescPageable(Pageable pageable) {
+    public Page<Room> findAllByOrderByIdPageable(Pageable pageable) {
         return roomRepository.findAllByOrderById(pageable);
     }
 }

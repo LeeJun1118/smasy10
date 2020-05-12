@@ -9,9 +9,6 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
 
-/*
-* https://github.com/keumtae-kim/spring-boot-react-blog/blob/master/blog-backend/src/main/java/me/ktkim/blog/
-* */
 public interface RoomRepository extends JpaRepository<Room,Long> {
     @Query("From Room r WHERE r.id=:searchText OR r.title=:searchText OR r.area=:searchText OR r.sports=:searchText ORDER BY r.id")
     Page<Room> findAllRooms(Pageable pageable, @Param("searchText") String searchText);
