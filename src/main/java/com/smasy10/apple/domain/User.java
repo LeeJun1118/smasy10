@@ -74,10 +74,17 @@ public class User extends BaseTimeEntity {
         this.phoneNo = phoneNo;
         this.address = address;
         this.role = role;
-        this.name = name;
         this.room = room;
         this.replies = replies;
         this.reserved = reserved;
+    }
+
+    public User(String name, String email, String phoneNo, String address, Role role) {
+        this.name = name;
+        this.email = email;
+        this.phoneNo = phoneNo;
+        this.address = address;
+        this.role = role;
     }
 
     public User update(String name, String email, String phoneNo, String address) {
