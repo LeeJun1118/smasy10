@@ -1,6 +1,7 @@
 package com.smasy10.apple.domain.dto.roomDto;
 
 import lombok.Getter;
+import com.smasy10.apple.domain.Room;
 
 import java.time.LocalDateTime;
 
@@ -11,10 +12,10 @@ public class RoomListResponseDto {
     private String area;
     private String sport;
 
-    public RoomListResponseDto(Long id, String title, String area, String sport) {
-        this.id = id;
-        this.title = title;
-        this.area = area;
-        this.sport = sport;
+    public RoomListResponseDto(Room room) {
+        this.id = room.getId();
+        this.title = room.getTitle();
+        this.area = room.getArea();
+        this.sport = room.getSport();
     }
 }

@@ -1,14 +1,21 @@
 import React from "react";
 import {Table} from "react-bootstrap";
 import '../css/Eroom.css';
+import moment from 'moment';
 
-const Eroom = () => {
+const cx = classNames.bind(styles);
+
+const Eroom = ({ id, title, sport, area, resDate, memCount }) => {
+    if (id === undefined) {
+        return null;
+    }
+
     return(
         <div className="Eroom">
 
             <Table striped bordered hover id="table">
                 <thead>
-                <tr><th>#</th><th>종목</th><th>지역</th><th>시설</th><th>날짜</th><th>인원</th></tr>
+                <tr><th>#</th><th>제목</th><th>종목</th><th>지역</th><th>날짜</th><th>인원</th></tr>
                 </thead>
                 <tbody>
                 <tr>
