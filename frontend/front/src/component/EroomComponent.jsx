@@ -1,20 +1,58 @@
 import React,{Component} from "react";
-import {Button} from "react-bootstrap";
+import Eroom from "../pages/Eroom";
+import axios from "axios";
+
+const ShowRoom = (props) => (
+    <tr>
+        <td>{props.eroom.roomNumber}</td>
+        <td>{props.eroom.roomSport}</td>
+        <td>{props.eroom.roomArea}</td>
+        <td>{props.eroom.roomFacility}</td>
+        <td>{props.eroom.roomDate}</td>
+        <td>1</td>
+    </tr>
+);
 
 class EroomComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            roomNumber: "",
+            roomSport: "",
+            roomArea: "",
+            roomFacility: "",
+            roomDate: "",
+        };
+    }
+
+    componentDidMount() {
+        axios
+            .get("http://localhost:8080/h2-console")
+            .then(res => {
+                this.setState({
+                    allAssignments: res.data
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    getRows() {
+        if (!this.state.allAssignments && !this.state.allAssignments.length) return null;
+        return this.state.allAssignments.map((currentAssignment, id) => {
+            return <ShowRoom book={currentAssignment} key={id} />
+        });
+    }
+
     render() {
         return(
             <div>
-                방 들어가는 페이지
-                <div>
-                    <Button variant="outline-info" >버튼</Button>
-                    <Button variant="outline-info">테스트</Button>
-                </div>
+                방 입장 페이지
+                <Eroom/>
             </div>
         )
     }
 }
-
-
 
 export default EroomComponent

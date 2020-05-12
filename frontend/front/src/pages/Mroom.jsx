@@ -56,11 +56,6 @@ const Mroom = () => {
                     </Form.Control>
                 </Form.Group>
 
-                <Form.Group id="date">
-                    <Form.Label>날짜</Form.Label>
-                        <Calendar />
-                </Form.Group>
-
                 <Form.Group controlId="exampleForm.ControlSelect1" id="facility">
                     <Form.Label>시설</Form.Label>
                     <Form.Control as="select">
@@ -71,6 +66,12 @@ const Mroom = () => {
                         <option>E</option>
                     </Form.Control>
                 </Form.Group>
+
+                <Form.Group id="date">
+                    <Form.Label>날짜</Form.Label>
+                        <Calendar />
+                </Form.Group>
+
                 {/* 각 시설 위치 지도 보여주면 좋을 듯*/}
 
                 <Button variant="dark" type="submit">개설하기</Button>

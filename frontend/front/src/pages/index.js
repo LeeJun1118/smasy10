@@ -7,4 +7,4 @@ export { default as About } from './About';
 export { default as Logink } from './Logink';
 
 export { default as Mroom } from './Mroom';
-export { default as Eroom } from './Eroom';
+export { default as EroomComponent } from 'component/EroomComponent';
