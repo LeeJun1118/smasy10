@@ -34,14 +34,14 @@ public class RoomController {
     @Autowired
     private RoomService roomService;
 
-    @GetMapping(value = "/enterAroom/{id}")
+    @GetMapping(value = "/room/{id}")
     public ResponseEntity<RoomListResponseDto> getRoom(@PathVariable Long id) {
         log.debug("REST request to get Post : {}", id);
         Room room = roomService.findForId(id).orElseThrow(() -> new ApiException("Post does not exist", HttpStatus.NOT_FOUND));
         return new ResponseEntity<>(new RoomListResponseDto(room), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/enterAroom")
+    @GetMapping(value = "/room/list")
     public ResponseEntity<List<RoomListResponseDto>> getRoomList(Pageable pageable) {
         log.debug("REST request to get Posts : {}", pageable);
         Page<Room> rooms = roomService.findAllByOrderByIdPageable(pageable);
