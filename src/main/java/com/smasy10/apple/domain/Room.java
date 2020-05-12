@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 //lombok 어노테이션
 //클래스 내 모든 필드의 Get 매소드를 자동 생성
@@ -37,27 +38,22 @@ public class Room {
     private String area;
 
     @Column(nullable = false)
-    private String sports;
+    private String sport;
 
-   /* @ManyToOne(fetch = FetchType.LAZY)
-    private User header;*/
+    @Column(nullable = false)
+    private String date;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User headerId;
 
     //해당 클래스의 빌더 패턴 클래스 생성
     //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
     @Builder
-    public Room(String title, String area, String sports) {
+    public Room(String title, String area, String sport, User headerId,String date) {
         this.title = title;
         this.area = area;
-        this.sports = sports;
+        this.sport = sport;
+        this.headerId = headerId;
+        this.date = date;
     }
-
-/*    //해당 클래스의 빌더 패턴 클래스 생성
-    //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
-    @Builder
-    public Room(String title, String area, String sportsType, User header) {
-        this.title = title;
-        this.area = area;
-        this.sportsType = sportsType;
-        this.header = header;
-    }*/
 }

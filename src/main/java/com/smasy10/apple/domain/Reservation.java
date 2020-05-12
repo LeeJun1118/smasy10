@@ -26,9 +26,6 @@ public class Reservation extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //일대일 매핑 어노테이션
-    //LAZY 옵션은 Room 객체를 조회하는 시점이 아닌 객체가 실제로 사용될 때 조회하는 옵션
-    @OneToOne(fetch = FetchType.LAZY)
     //외래키를 매핑할 떄 사용
     //name 속성에는 매핑할 외래 키 이름을 지정
     //Room 의 id 를 외래키로 가지므로 room_id 로 작성
@@ -41,12 +38,15 @@ public class Reservation extends BaseTimeEntity {
     @JoinColumn(name= "place_id")
     private Place place;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+
     //해당 클래스의 빌더 패턴 클래스 생성
     //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
     @Builder
-    public Reservation(Room room, Place place) {
+    public Reservation(Room room, Place place, User user) {
         this.room = room;
         this.place = place;
+        this.user = user;
     }
-
 }

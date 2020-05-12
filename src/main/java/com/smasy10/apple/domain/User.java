@@ -51,58 +51,34 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     private Role role;
 
-    //다대일 매핑 어노테이션
-    //LAZY 옵션은 Room 객체를 조회하는 시점이 아닌 객체가 실제로 사용될 때 조회하는 옵션
-    @ManyToOne(fetch = FetchType.LAZY)
-    //외래키를 매핑할 떄 사용
-    //name 속성에는 매핑할 외래 키 이름을 지정
-    //Room 의 id 를 외래키로 가지므로 room_id 로 작성
-    @JoinColumn(name = "room_id")
-    private Room room;
-
     //일대다 매핑
     //엔티티 자신을 기준으로 다중성을 생각해야함
     //mappedBy 속성을 사용해 연관관계의 주인을 정함
     //replies 의 주인은 user(replies 는 user 에 의해 매핑됨)
+    //LAZY 옵션은 Room 객체를 조회하는 시점이 아닌 객체가 실제로 사용될 때 조회하는 옵션
+    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
+    private List<Room> room;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Reply> replies;
 
-    //해당 클래스의 빌더 패턴 클래스 생성
-    //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
-    @Builder
-    public User(String name, String email, String phoneNo, String address, Role role) {
-        this.name = name;
-        this.email = email;
-        this.phoneNo = phoneNo;
-        this.address = address;
-        this.role = role;
-    }
+    @OneToMany(mappedBy = "reservation", fetch = FetchType.LAZY)
+    private List<Reservation> reserved;
 
     //해당 클래스의 빌더 패턴 클래스 생성
     //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
     @Builder
-    public User(String name, String email, String phoneNo, String address, Role role, Room room) {
+    public User(String name, String email, String phoneNo, String address, Role role, List<Room> room, List<Reply> replies, List<Reservation> reserved) {
         this.name = name;
         this.email = email;
         this.phoneNo = phoneNo;
         this.address = address;
         this.role = role;
-        this.room = room;
-
-    }
-    //해당 클래스의 빌더 패턴 클래스 생성
-    //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
-    @Builder
-    public User(String name, String email, String phoneNo, String address, Role role, Room room, List<Reply> replies) {
         this.name = name;
-        this.email = email;
-        this.phoneNo = phoneNo;
-        this.address = address;
-        this.role = role;
         this.room = room;
         this.replies = replies;
+        this.reserved = reserved;
     }
-
 
     public User update(String name, String email, String phoneNo, String address) {
         this.name = name;
