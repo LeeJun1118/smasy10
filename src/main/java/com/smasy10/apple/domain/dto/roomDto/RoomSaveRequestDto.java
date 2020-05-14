@@ -6,19 +6,21 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @NoArgsConstructor
 public class RoomSaveRequestDto {
     private String title;
-    private User headerId;
+    private List<User> user;
     private String area;
     private String sport;
     private String date;
 
     @Builder
-    public RoomSaveRequestDto(String title, User headerId, String area, String sport,String date) {
+    public RoomSaveRequestDto(String title, List<User> user, String area, String sport,String date) {
         this.title = title;
-        this.headerId = headerId;
+        this.user = user;
         this.area = area;
         this.sport = sport;
         this.date = date;
@@ -27,10 +29,10 @@ public class RoomSaveRequestDto {
     public Room toEntity(){
         return Room.builder()
                 .title(title)
-                .headerId(headerId)
                 .area(area)
                 .sport(sport)
                 .date(date)
+                .users(user)
                 .build();
     }
 }

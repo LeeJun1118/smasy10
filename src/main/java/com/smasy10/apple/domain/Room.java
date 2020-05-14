@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 //lombok 어노테이션
@@ -20,7 +21,7 @@ import java.util.List;
 //테이블과 연결될 클래스임을 나타냄
 //기본 값으로 클래스의 카멜케이스 이름을 언더스코어 네이밍(_)으로 테이블 이름을 매칭(ex: SalesManager.java -> sales_manager table)
 @Entity
-public class Room {
+public class Room extends BaseTimeEntity{
 
     //해당 테이블의 PK 필드를 나타냄
     @Id
@@ -43,17 +44,42 @@ public class Room {
     @Column(nullable = false)
     private String date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User headerId;
+    @OneToMany(mappedBy = "room")
+    private List<User> users = new ArrayList<>();
+
+    @OneToMany(mappedBy = "room")
+    private List<Reservation> reservations = new ArrayList<>();
+
+    public Room(String title, String area, String sport, String date) {
+        this.title = title;
+        this.area = area;
+        this.sport = sport;
+        this.date = date;
+    }
 
     //해당 클래스의 빌더 패턴 클래스 생성
     //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
     @Builder
-    public Room(String title, String area, String sport, User headerId,String date) {
+    public Room(String title, String area, String sport, String date, List<User> users) {
         this.title = title;
         this.area = area;
         this.sport = sport;
-        this.headerId = headerId;
         this.date = date;
+        this.users = users;
+    }
+
+    public List<User> getUsers(){
+        return users;
+    }
+
+    public void setUsers(List<User> users){
+        this.users = users;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "users=" + users +
+                '}';
     }
 }

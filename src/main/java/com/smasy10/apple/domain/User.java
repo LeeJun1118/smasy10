@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -56,35 +57,30 @@ public class User extends BaseTimeEntity {
     //mappedBy 속성을 사용해 연관관계의 주인을 정함
     //replies 의 주인은 user(replies 는 user 에 의해 매핑됨)
     //LAZY 옵션은 Room 객체를 조회하는 시점이 아닌 객체가 실제로 사용될 때 조회하는 옵션
-    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
-    private List<Room> room;
-
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Reply> replies;
+    private List<Reply> replies = new ArrayList<>();
 
-    @OneToMany(mappedBy = "reservation", fetch = FetchType.LAZY)
-    private List<Reservation> reserved;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Room room;
 
     //해당 클래스의 빌더 패턴 클래스 생성
     //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
     @Builder
-    public User(String name, String email, String phoneNo, String address, Role role, List<Room> room, List<Reply> replies, List<Reservation> reserved) {
-        this.name = name;
-        this.email = email;
-        this.phoneNo = phoneNo;
-        this.address = address;
-        this.role = role;
-        this.room = room;
-        this.replies = replies;
-        this.reserved = reserved;
-    }
-
     public User(String name, String email, String phoneNo, String address, Role role) {
         this.name = name;
         this.email = email;
         this.phoneNo = phoneNo;
         this.address = address;
         this.role = role;
+    }
+
+    public User(String name, String email, String phoneNo, String address, Role role, Room room) {
+        this.name = name;
+        this.email = email;
+        this.phoneNo = phoneNo;
+        this.address = address;
+        this.role = role;
+        this.room = room;
     }
 
     public User update(String name, String email, String phoneNo, String address) {
@@ -94,6 +90,21 @@ public class User extends BaseTimeEntity {
         this.address = address;
 
         return this;
+    }
+
+    public Room getRoom(){
+        return this.room;
+    }
+
+    public void setRooms(Room room){
+        this.room = room;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "room=" + room +
+                '}';
     }
 
     public String getRoleKey() {

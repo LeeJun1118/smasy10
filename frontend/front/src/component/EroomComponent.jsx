@@ -14,7 +14,7 @@ const ShowRoom = (props) => (
 );
 
 class EroomComponent extends Component {
-    constructor(props) {
+    /*constructor(props) {
         super(props);
         this.state = {
             roomNumber: "",
@@ -44,7 +44,7 @@ class EroomComponent extends Component {
             return <ShowRoom book={currentAssignment} key={id} />
         });
     }
-
+*/
     render() {
         return(
             <div>

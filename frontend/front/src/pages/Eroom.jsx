@@ -1,9 +1,9 @@
 import React from "react";
 import {Table} from "react-bootstrap";
 import '../css/Eroom.css';
-import moment from 'moment';
+/*import moment from 'moment';
 
-const cx = classNames.bind(styles);
+const cx = classNames.bind(styles);*/
 
 const Eroom = ({ id, title, sport, area, resDate, memCount }) => {
     if (id === undefined) {

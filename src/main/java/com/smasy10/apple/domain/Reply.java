@@ -44,7 +44,7 @@ public class Reply extends BaseTimeEntity {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "place_id")
+    //@JoinColumn(name = "place_id")
     private Place place;
 
     //해당 클래스의 빌더 패턴 클래스 생성

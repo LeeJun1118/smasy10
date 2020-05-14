@@ -29,13 +29,14 @@ public class Reservation extends BaseTimeEntity {
     //외래키를 매핑할 떄 사용
     //name 속성에는 매핑할 외래 키 이름을 지정
     //Room 의 id 를 외래키로 가지므로 room_id 로 작성
-    @JoinColumn(name = "room_id")
+    //@JoinColumn(name = "room_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     //실제로 DB에 저장될 때는 Room 의 PK 값이 저장됨.
     private Room room;
 
     //다대일 매핑 어노테이션
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name= "place_id")
+    //@JoinColumn(name= "place_id")
     private Place place;
 
     @ManyToOne(fetch = FetchType.LAZY)

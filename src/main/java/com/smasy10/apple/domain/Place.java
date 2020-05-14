@@ -58,4 +58,9 @@ public class Place {
         this.phoneNo = phoneNo;
         this.replies = replies;
     }
+    public Place(String name, String address, String phoneNo) {
+        this.name = name;
+        this.address = address;
+        this.phoneNo = phoneNo;
+    }
 }
