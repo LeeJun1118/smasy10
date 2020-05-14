@@ -41,7 +41,7 @@ public class RoomController {
         return new ResponseEntity<>(new RoomListResponseDto(room), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/room/list")
+    @GetMapping(value = "/rooms")
     public ResponseEntity<List<RoomListResponseDto>> getRoomList(Pageable pageable) {
         log.debug("REST request to get Posts : {}", pageable);
         Page<Room> rooms = roomService.findAllByOrderByIdPageable(pageable);

@@ -14,16 +14,16 @@ class HomeComponent extends Component {
         return(
             <Router>
                 <div className="img">
-                    <a href="/makeAroom">
+                    <a href="/room/create">
                         <img src="/img/fire.jpg" alt="" onClick={this.handleClick}/>
                     </a>
-                    <a href="/enterAroom">
+                    <a href="/rooms">
                         <img src="/img/fire.jpg" alt="" onClick={this.handleClick}/>
                     </a>
                 </div>
 
-                <Route path="/makeAroom" component={MroomComponent} />
-                <Route path="/enterAroom" component={EroomComponent} />
+                <Route path="/room/create" component={MroomComponent} />
+                <Route path="/rooms" component={EroomComponent} />
             </Router>
         )
     }

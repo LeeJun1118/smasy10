@@ -1,5 +1,6 @@
+/*
 import React from 'react';
-import Kakao from 'kakaojs';
+import Kakaoz from 'kakaojs';
 import {Kakao} from "https://developers.kakao.com/sdk/js/kakao.js";
 
 const KakaoLogin = () => {
@@ -27,4 +28,4 @@ const KakaoLogin = () => {
     );
 }
 
-export default KakaoLogin;
+export default KakaoLogin;*/
