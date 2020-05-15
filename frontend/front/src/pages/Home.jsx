@@ -5,12 +5,12 @@ const Home = () => {
     return (
         <div className="imgt">
 
-                <a href="/makeAroom">
+                <a href="/room/create">
                     <img src="/img/fire3.gif" alt="" onClick={handleClick} className="img"/>
                     {/*<img src="/img/make.png" className="subimg"/>*/}
                 </a>
 
-                <a href="/enterAroom">
+                <a href="/rooms">
                     <img src="/img/fire3.gif" alt="" onClick={handleClick} className="img"/>
                     {/*<img src="/img/enter.png" alt="" onClick={handleClick} className="subimg"/>*/}
                 </a>

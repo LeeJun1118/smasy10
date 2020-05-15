@@ -61,11 +61,11 @@ class TopMenuComponent extends Component {
                     </Nav>
                 </Navbar>*/}
 
+                <Route path="/" component={HomeComponent}/>
                 <Route path="/login" component={LoginComponent}/>
                 <Route path="/main" component={MainComponent}/>
-                <Route path="/" component={HomeComponent}/>
-                <Route path="/rooms" component={EroomComponent}/>
                 <Route path="/room/create" component={MroomComponent}/>
+                <Route path="/rooms" component={EroomComponent}/>
 
             </Router>
         )

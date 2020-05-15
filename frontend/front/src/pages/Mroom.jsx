@@ -5,17 +5,17 @@ import 'react-calendar/dist/Calendar.css';
 import '../css/Mroom.css';
 import customAxios from "../customAxios";
 
-const cx = classNames.bind(styles);
 
-const Mroom = ({roomName, roomSports, room}) => {
+const Mroom = () => {
     const [ip,setIp] = useState('');
     function callback(data) {
         setIp(data);
     }
+
     useEffect(
         () => {
             // 클라이언트의 IP주소를 알아내는 백엔드의 함수를 호출합니다.
-            customAxios('/makeAroom', callback);
+            customAxios('/room/create', callback);
         }, []
     );
 
@@ -32,14 +32,18 @@ const Mroom = ({roomName, roomSports, room}) => {
         console.log(date);
     }
     ////
-
     return(
         <div className="Mroom">
             <Form>
                 <Form.Group controlId="exampleForm.ControlSelect1" id="sports">
+                    <Form.Label>방 제목</Form.Label>
+                    <Form.Control type="text" placeholder="Enter title" />
+                </Form.Group>
+
+                <Form.Group controlId="exampleForm.ControlSelect1" id="sports">
                     <Form.Label>운동 종목</Form.Label>
                     <Form.Control as="select">
-                        <option value={}>1</option>
+                        <option>1</option>
                     </Form.Control>
                 </Form.Group>
 
