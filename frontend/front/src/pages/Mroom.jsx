@@ -13,7 +13,7 @@ const Mroom = () => {
     useEffect(
         () => {
             // 클라이언트의 IP주소를 알아내는 백엔드의 함수를 호출합니다.
-            customAxios('/makeAroom', callback);
+            customAxios('/room/create', callback);
         }, []
     );
 

@@ -69,7 +69,7 @@ class EroomComponent extends Component {
     };*/
 
 
-    changePage = event => {
+    /*changePage = event => {
         let targetPage = parseInt(event.target.value);
         if (this.state.search) {
             this.searchData(targetPage);
@@ -147,8 +147,7 @@ class EroomComponent extends Component {
                     currentPage: data.number + 1
                 });
             });
-    };
-
+    };*/
 
     /*getRows() {
         if (!this.state.allAssignments && !this.state.allAssignments.length) return null;
