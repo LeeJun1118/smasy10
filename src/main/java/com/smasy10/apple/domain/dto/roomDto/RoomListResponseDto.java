@@ -10,14 +10,14 @@ public class RoomListResponseDto {
     private Long id;
     private String title;
     private String area;
-    private String sport;
+    private String sports;
     private LocalDateTime modifiedDate;
 
     public RoomListResponseDto(Room room) {
         this.id = room.getId();
         this.title = room.getTitle();
         this.area = room.getArea();
-        this.sport = room.getSport();
+        this.sports = room.getSports();
         this.modifiedDate = room.getModifiedDate();
     }
 }

@@ -39,7 +39,7 @@ public class Room extends BaseTimeEntity{
     private String area;
 
     @Column(nullable = false)
-    private String sport;
+    private String sports;
 
     @Column(nullable = false)
     private String date;
@@ -50,20 +50,20 @@ public class Room extends BaseTimeEntity{
     @OneToMany(mappedBy = "room")
     private List<Reservation> reservations = new ArrayList<>();
 
-    public Room(String title, String area, String sport, String date) {
+    public Room(String title, String area, String sports, String date) {
         this.title = title;
         this.area = area;
-        this.sport = sport;
+        this.sports = sports;
         this.date = date;
     }
 
     //해당 클래스의 빌더 패턴 클래스 생성
     //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
     @Builder
-    public Room(String title, String area, String sport, String date, List<User> users) {
+    public Room(String title, String area, String sports, String date, List<User> users) {
         this.title = title;
         this.area = area;
-        this.sport = sport;
+        this.sports = sports;
         this.date = date;
         this.users = users;
     }

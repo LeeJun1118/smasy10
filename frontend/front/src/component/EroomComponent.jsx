@@ -19,7 +19,7 @@ class EroomComponent extends Component {
         super(props);
         this.state = {
             /*roomNumber: "",
-            roomSport: "",
+            roomSports: "",
             roomArea: "",
             roomFacility: "",
             roomDate: "",*/
@@ -164,6 +164,7 @@ class EroomComponent extends Component {
                         <Table>
                             <thead>
                             <tr>
+                                <th>방 번호</th>
                                 <th>방 제목</th>
                                 <th>지역</th>
                                 <th>운동 종목</th>
@@ -178,9 +179,10 @@ class EroomComponent extends Component {
                                     </tr> :
                                     rooms.map((room) => (
                                         <tr key={room.id}>
+                                            <td>{room.id}</td>
                                             <td>{room.title}</td>
                                             <td>{room.area}</td>
-                                            <td>{room.sport}</td>
+                                            <td>{room.sports}</td>
                                             <td>{room.date}</td>
                                         </tr>
                                     ))

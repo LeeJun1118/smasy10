@@ -15,7 +15,7 @@ public class RoomResponseDto {
     private List<User> user;
     private String title;
     private String area;
-    private String sport;
+    private String sports;
     private String date;
 
     public RoomResponseDto(Room room){
@@ -23,7 +23,7 @@ public class RoomResponseDto {
         this.user = room.getUsers();
         this.title = room.getTitle();
         this.area = room.getArea();
-        this.sport = room.getSport();
+        this.sports = room.getSports();
         this.date = room.getDate();
     }
 }

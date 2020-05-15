@@ -10,12 +10,12 @@ public class RoomUpdateRequestDto {
 
     private String title;
     private String area;
-    private String sport;
+    private String sports;
 
     @Builder
-    public RoomUpdateRequestDto(String title, String area, String sport) {
+    public RoomUpdateRequestDto(String title, String area, String sports) {
         this.title = title;
         this.area = area;
-        this.sport = sport;
+        this.sports = sports;
     }
 }

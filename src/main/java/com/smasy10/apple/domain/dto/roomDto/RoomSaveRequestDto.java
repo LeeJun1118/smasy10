@@ -14,15 +14,15 @@ public class RoomSaveRequestDto {
     private String title;
     private List<User> user;
     private String area;
-    private String sport;
+    private String sports;
     private String date;
 
     @Builder
-    public RoomSaveRequestDto(String title, List<User> user, String area, String sport,String date) {
+    public RoomSaveRequestDto(String title, List<User> user, String area, String sports,String date) {
         this.title = title;
         this.user = user;
         this.area = area;
-        this.sport = sport;
+        this.sports = sports;
         this.date = date;
     }
 
@@ -30,7 +30,7 @@ public class RoomSaveRequestDto {
         return Room.builder()
                 .title(title)
                 .area(area)
-                .sport(sport)
+                .sports(sports)
                 .date(date)
                 .users(user)
                 .build();

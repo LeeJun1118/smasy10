@@ -5,7 +5,7 @@ import '../css/Eroom.css';
 
 const cx = classNames.bind(styles);*/
 
-const Eroom = ({ id, title, sport, area, resDate, memCount }) => {
+const Eroom = ({ id, title, sports, area, resDate, memCount }) => {
     if (id === undefined) {
         return null;
     }
