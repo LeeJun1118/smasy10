@@ -46,6 +46,6 @@ public class Application implements CommandLineRunner {
         reservationRepository.save(reservation1);*/
 
 
-        userRepository.save(new User("User3","user3@naver.com","010-7777-3333","부산이다", Role.GUEST,room1));
+        userRepository.save(new User("User3","user3@naver.com","010-7777-3333","부산이다", Role.GUEST));
     }
 }
