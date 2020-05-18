@@ -1,9 +1,6 @@
 package com.smasy10.apple.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,6 +15,13 @@ import java.util.List;
 //기본 생성자 자동 추가
 //public 클래스명(){} 와 같은 효과
 @NoArgsConstructor
+
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
+
+//해당 클래스의 빌더 패턴 클래스 생성
+//생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
+@Builder
 
 //JPA 어노테이션
 //테이블과 연결될 클래스임을 나타냄
@@ -63,9 +67,9 @@ public class User extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Room room;
 
-    //해당 클래스의 빌더 패턴 클래스 생성
+   /* //해당 클래스의 빌더 패턴 클래스 생성
     //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
-    @Builder
+    @Builder*/
     public User(String name, String email, String phoneNo, String address, Role role) {
         this.name = name;
         this.email = email;
@@ -74,14 +78,14 @@ public class User extends BaseTimeEntity {
         this.role = role;
     }
 
-    public User(String name, String email, String phoneNo, String address, Role role, Room room) {
+    /*public User(String name, String email, String phoneNo, String address, Role role, Room room) {
         this.name = name;
         this.email = email;
         this.phoneNo = phoneNo;
         this.address = address;
         this.role = role;
         this.room = room;
-    }
+    }*/
 
     public User update(String name, String email, String phoneNo, String address) {
         this.name = name;
@@ -92,7 +96,7 @@ public class User extends BaseTimeEntity {
         return this;
     }
 
-    public Room getRoom(){
+    /*public Room getRoom(){
         return this.room;
     }
 
@@ -109,5 +113,5 @@ public class User extends BaseTimeEntity {
 
     public String getRoleKey() {
         return this.role.getKey();
-    }
+    }*/
 }

@@ -1,9 +1,7 @@
 package com.smasy10.apple.domain;
 
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -15,6 +13,10 @@ import javax.persistence.*;
 //기본 생성자 자동 추가
 //public 클래스명(){} 와 같은 효과
 @NoArgsConstructor
+
+@AllArgsConstructor
+@Builder
+@EqualsAndHashCode(of = "id")
 
 //JPA 어노테이션
 //테이블과 연결될 클래스임을 나타냄
@@ -47,12 +49,12 @@ public class Reply extends BaseTimeEntity {
     //@JoinColumn(name = "place_id")
     private Place place;
 
-    //해당 클래스의 빌더 패턴 클래스 생성
+    /*//해당 클래스의 빌더 패턴 클래스 생성
     //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
     @Builder
     public Reply(String contents, User user, Place place) {
         this.contents = contents;
         this.user = user;
         this.place = place;
-    }
+    }*/
 }
