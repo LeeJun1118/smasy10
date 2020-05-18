@@ -12,7 +12,7 @@ class MroomComponent extends Component {
         super(props);
         this.state = {
             roomTitle: '',
-            roomSport: '',
+            roomSports: '',
             roomArea: '',
             roomFacility: '',
             roomDate: new Date()
@@ -31,7 +31,7 @@ class MroomComponent extends Component {
 
         let room = {
             roomTitle: this.state.roomTitle,
-            roomSport: this.state.roomSport,
+            roomSports: this.state.roomSports,
             roomArea: this.state.roomArea,
             roomFacility: this.state.roomFacility,
             roomDate: this.state.roomDate
@@ -68,9 +68,9 @@ class MroomComponent extends Component {
                         <Form.Control type="text" placeholder="Enter title" onChange={this.onSelectChange} name="roomTitle"/>
                     </Form.Group>
 
-                    <Form.Group controlId="exampleForm.ControlSelect1" id="sports" value={this.state.roomSport}>
+                    <Form.Group controlId="exampleForm.ControlSelect1" id="sports" value={this.state.roomSports}>
                         <Form.Label>운동 종목</Form.Label>
-                        <Form.Control as="select" onChange={this.onSelectChange} name="roomSport">
+                        <Form.Control as="select" onChange={this.onSelectChange} name="roomSports">
                             <option selected disabled>Please select</option>
                             <option>1</option>
                         </Form.Control>

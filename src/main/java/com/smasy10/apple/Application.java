@@ -41,7 +41,7 @@ public class Application implements CommandLineRunner {
         userRepository.save(new User("User2","user2@naver.com","010-9999-3333","부산이다", Role.GUEST));
 
         Room room1 = new Room("축구할 사람 구함","부산","축구","2020-20-31");
-        Room room2 = new Room("야구할 사람 구함","울산","야구","2020-10-11");
+        Room room2 = new Room("야구할 사람 구함","울산","야구","2020-10-31");
 
         roomRepository.save(room1);
         roomRepository.save(room2);
