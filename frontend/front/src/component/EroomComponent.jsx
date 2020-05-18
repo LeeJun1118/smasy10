@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import Eroom from "../pages/Eroom";
 import axios from "axios";
 import {Card, Table} from 'react-bootstrap'
+import '../css/Eroom.css';
 
 /*const ShowRoom = (props) => (
     <tr>
@@ -158,10 +159,10 @@ class EroomComponent extends Component {
     render() {
         const {rooms, currentPage, totalPages, search} = this.state;
         return (
-            <div>
-                <Card style={{width: '18rem'}}>
-                    <Card.Body>
-                        <Table>
+            <div className="Eroom">
+                {/*<Card style={{width: '18rem'}}>*/}
+                {/*    <Card.Body>*/}
+                        <Table  striped bordered hover id="table">
                             <thead>
                             <tr>
                                 <th>방 번호</th>
@@ -189,8 +190,8 @@ class EroomComponent extends Component {
                             }
                             </tbody>
                         </Table>
-                    </Card.Body>
-                </Card>
+                {/*    </Card.Body>*/}
+                {/*</Card>*/}
 
             </div>
         )

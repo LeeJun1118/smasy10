@@ -6,14 +6,16 @@
     display: block;
 }
 
-#sports, #area, #facility {
+#title, #sports, #area, #facility {
     width: 50%;
     margin: auto;
     margin-bottom: 30px;
 }
 
-#date {
+#calendar {
     width: 350px;
     margin: auto;
     margin-bottom: 30px;
 }
+
+option[disabled]:first-child { display: none; }

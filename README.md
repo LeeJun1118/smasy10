@@ -42,6 +42,9 @@
     2. http://localhost:8080/h2-console 
     3. connect 클릭
 
+6. moment.js : 날짜 관련 작업을 위한 js 라이브러리
+    1. npm install moment
+
 ### 로그인 관련 사이트
  1. [참고사이트](https://xmfpes.github.io/spring/spring-security/)
  2. [spring document](https://spring.io/guides/tutorials/spring-boot-oauth2/)

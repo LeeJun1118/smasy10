@@ -2,20 +2,15 @@ import React, {Component, useEffect} from 'react';
 // import 'bootstrap/dist/css/bootstrap.min.css'
 import '../css/App.css';
 import {Route} from 'react-router-dom';
-
-import {Home, About, Login, Mroom, EroomComponent, KakaoLogin, Logink} from "pages";
+import {Home, About, Login, EroomComponent, KakaoLogin, Logink} from "pages";
 import Menu from "../pages/Menu";
 
 import TopMenuComponent from "../component/TopMenuComponent";
 import MroomComponent from "../component/MroomComponent";
+
 class App extends Component {
     render() {
         return (
-            // <div className="App">
-            //     <div>
-            //         <TopMenuComponent/>
-            //     </div>
-            // </div>
             <div>
                 <Menu/>
                 <Route exact path="/" component={Home}/>
