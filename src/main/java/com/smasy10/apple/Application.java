@@ -10,6 +10,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @SpringBootApplication
@@ -37,8 +40,8 @@ public class Application implements CommandLineRunner {
         userRepository.save(new User("User1","ejun1118@naver.com","010-2222-3333","부산 남구", Role.USER));
         userRepository.save(new User("User2","user2@naver.com","010-9999-3333","부산이다", Role.GUEST));
 
-        Room room1 = new Room("축구할 사람 구함","부산","축구","2020년 06월 20일");
-        Room room2 = new Room("야구할 사람 구함","울산","야구","2020년 06월 28일");
+        Room room1 = new Room("축구할 사람 구함","부산","축구","2020-20-31");
+        Room room2 = new Room("야구할 사람 구함","울산","야구","2020-10-11");
 
         roomRepository.save(room1);
         roomRepository.save(room2);

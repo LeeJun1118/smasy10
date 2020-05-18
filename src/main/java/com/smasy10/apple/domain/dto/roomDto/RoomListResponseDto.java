@@ -11,13 +11,17 @@ public class RoomListResponseDto {
     private String title;
     private String area;
     private String sports;
+    private String date;
     private LocalDateTime modifiedDate;
+    private LocalDateTime createdDate;
 
     public RoomListResponseDto(Room room) {
         this.id = room.getId();
         this.title = room.getTitle();
         this.area = room.getArea();
+        this.date = room.getDate();
         this.sports = room.getSports();
+        this.createdDate = room.getCreatedDate();
         this.modifiedDate = room.getModifiedDate();
     }
 }

@@ -1,18 +1,22 @@
 package com.smasy10.apple.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 //lombok 어노테이션
 //클래스 내 모든 필드의 Get 매소드를 자동 생성
 @Getter
-
+@Setter
 //기본 생성자 자동 추가
 //public 클래스명(){} 와 같은 효과
 @NoArgsConstructor
@@ -32,16 +36,16 @@ public class Room extends BaseTimeEntity{
 
     //테이블의 컬럼을 나타내며 굳이 선언하지 않아도 해당 클래스의 필드는 모두 컬럼이 됨
     //기본 값 외에 추가 옵션이 있을 때 사용
-    @Column(nullable = false)
+    @Column//(nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column//(nullable = false)
     private String area;
 
-    @Column(nullable = false)
+    @Column//(nullable = false)
     private String sports;
 
-    @Column(nullable = false)
+    @Column//(nullable = false)
     private String date;
 
     @OneToMany(mappedBy = "room")

@@ -29,10 +29,10 @@ public class RoomSaveRequestDto {
     public Room toEntity(){
         return Room.builder()
                 .title(title)
+                .users(user)
                 .area(area)
                 .sports(sports)
                 .date(date)
-                .users(user)
                 .build();
     }
 }
