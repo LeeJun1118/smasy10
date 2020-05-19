@@ -30,7 +30,7 @@ class RoomControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
-    /*@Test
+    @Test
     public void createRoom() throws Exception {
         List<User> userList = new ArrayList<>();
         User user1 = new User("User1","ejun1118@naver.com","010-2222-3333","부산 남구", Role.USER);
@@ -41,7 +41,6 @@ class RoomControllerTest {
                 .area("부산")
                 .date("2020-06-29")
                 .sports("축구")
-                .users((List<User>) user1)
                 .build();
 
         mockMvc.perform(post("/api/room/create")
@@ -54,9 +53,8 @@ class RoomControllerTest {
                 .andExpect(jsonPath("title").exists())
                 .andExpect(jsonPath("area").exists())
                 .andExpect(jsonPath("date").exists())
-                .andExpect(jsonPath("sports").exists())
-                .andExpect(jsonPath("users").exists());
+                .andExpect(jsonPath("sports").exists());
 
-    }*/
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.smasy10.apple.service;
 
 import com.smasy10.apple.domain.Room;
+import com.smasy10.apple.domain.dto.roomDto.RoomUpdateRequestDto;
 import com.smasy10.apple.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,4 +25,14 @@ public class RoomService {
     public Page<Room> findAllByOrderByIdPageable(Pageable pageable) {
         return roomRepository.findAllByOrderById(pageable);
     }
+
+    public Room update(Long id, Room requestDto){
+        Room room = roomRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id = "+ id));
+
+        room.update(requestDto.getTitle(),requestDto.getArea(),requestDto.getSports());
+        //return "updated room. " +"id = " + id;
+         return room;
+    }
+
 }

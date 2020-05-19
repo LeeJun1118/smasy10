@@ -59,6 +59,12 @@ public class Room extends BaseTimeEntity{
         this.date = date;
     }
 
+    public void update(String title,String area,String sports) {
+        this.title = title;
+        this.area = area;
+        this.sports = sports;
+    }
+
     /*public Room(String title, String area, String sports, String date) {
         this.title = title;
         this.area = area;
