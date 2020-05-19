@@ -60,7 +60,7 @@ public class RoomController {
     //방 만들기
     @PostMapping(value = "/api/room/create")
     //밑에 있는 @RequestBody : 포스트맨에서 실행시만에 주석 달기 테스트 코드에서는 주석해제
-    public ResponseEntity createRoom(/*@RequestBody*/Room room) {
+    public ResponseEntity createRoom(@RequestBody Room room) {
         log.debug("REST request to create Room : {}", room);
         Room roomSaved = roomRepository.save(room);
         /*return new ResponseEntity("Room created",HttpStatus.CREATED);*/
@@ -69,14 +69,12 @@ public class RoomController {
 
     //방 수정
     @PutMapping(value = "/api/room/update/{id}")
-    public ResponseEntity updateRoom(@PathVariable Long id, /*@RequestBody*/ Room room) {
-        Room roomUpdated = roomService.update(id,room);
+    public ResponseEntity updateRoom(@PathVariable Long id, @RequestBody Room room) {
+        return ResponseEntity.status(HttpStatus.OK).body(roomService.update(id, room));
+    }
 
-        /*Room roomUpdated = roomRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id = "+ id));
-
-        room.update(room.getTitle(),room.getArea(),room.getSports());*/
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(roomUpdated);
+    @DeleteMapping(value = "/api/room/delete/{id}")
+    public String deleteRoom(@PathVariable Long id) {
+        return roomService.delete(id);
     }
 }

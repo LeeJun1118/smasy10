@@ -4,6 +4,7 @@ import com.smasy10.apple.domain.Room;
 import com.smasy10.apple.domain.dto.roomDto.RoomUpdateRequestDto;
 import com.smasy10.apple.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
+import org.h2.util.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,4 +36,10 @@ public class RoomService {
          return room;
     }
 
+    public String delete(Long id) {
+        Room room = roomRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id = "+ id));
+        roomRepository.delete(room);
+        return "deleted : " + "id" + id;
+    }
 }
