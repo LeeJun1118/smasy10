@@ -47,7 +47,8 @@ class MroomComponent extends Component {
     };
 
     redirectHome = () => {
-        return this.props.history.push("/");
+        window.location.assign('/');
+        // return this.props.history.push("/");
     }
 
 
@@ -62,7 +63,7 @@ class MroomComponent extends Component {
     // state = () => {
     //     date:  new Date()
     // }
-    onClickDate = (date) => {
+    onChangeDate = (date) => {
         console.log(moment(date).format("YYYY-MM-DD"));
         this.setState({
             date: moment(date).format("YYYY-MM-DD")
@@ -112,9 +113,10 @@ class MroomComponent extends Component {
                         </Form.Control>
                     </Form.Group>*/}
 
-                    <Form.Group id="calendar" value={this.state.date} onClick={this.onClickDate}>
+                    <Form.Group id="calendar" value={this.state.date}>
                         <Form.Label>날짜</Form.Label>
-                        <Calendar name="date"/>
+                        <Calendar name="date"
+                                  onChange={this.onChangeDate}/>
                     </Form.Group>
 
                     {/* 각 시설 위치 지도 보여주면 좋을 듯*/}

@@ -3,27 +3,12 @@ import Eroom from "../pages/Eroom";
 import axios from "axios";
 import {Card, Table} from 'react-bootstrap'
 import '../css/Eroom.css';
-
-/*const ShowRoom = (props) => (
-    <tr>
-        <td>{props.eroom.roomNumber}</td>
-        <td>{props.eroom.roomSport}</td>
-        <td>{props.eroom.roomArea}</td>
-        <td>{props.eroom.roomFacility}</td>
-        <td>{props.eroom.roomDate}</td>
-        <td>1</td>
-    </tr>
-);*/
+import {EachRoom} from "../pages";
 
 class EroomComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            /*roomNumber: "",
-            roomSports: "",
-            roomArea: "",
-            roomFacility: "",
-            roomDate: "",*/
             rooms: [],
             search: '',
             currentPage: 1,
@@ -156,6 +141,12 @@ class EroomComponent extends Component {
             return <ShowRoom book={currentAssignment} key={id} />
         });
     }*/
+    onRoomEnter = (id) => {
+        window.location.assign('/rooms/enter/' + id);
+        // history.push('/room');
+        // return this.props.history.push("/");
+    }
+
     render() {
         const {rooms, currentPage, totalPages, search} = this.state;
         return (
@@ -169,17 +160,18 @@ class EroomComponent extends Component {
                                 <th>방 제목</th>
                                 <th>지역</th>
                                 <th>운동 종목</th>
-                                <th>최종수정시간</th>
+                                <th>경기 날짜</th>
                             </tr>
                             </thead>
                             <tbody>
                             {
                                 rooms.length === 0 ?
-                                    <tr align="center">
+                                    (<tr align="center">
                                         <td colSpan="7">방이 없습니다.</td>
-                                    </tr> :
+                                    </tr>)
+                                :
                                     rooms.map((room) => (
-                                        <tr key={room.id}>
+                                        <tr key={room.id} onClick={this.onRoomEnter(room.id)}>
                                             <td>{room.id}</td>
                                             <td>{room.title}</td>
                                             <td>{room.area}</td>
