@@ -1,0 +1,38 @@
+.EachRoom{
+    text-align: center;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.caption{
+    caption-side : top;
+}
+
+.table{
+    width: 80%;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+.btn{
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 30px;
+}
+
+.map{
+    margin: auto;
+    width: 80%;
+    margin-bottom: 30px;
+}
+
+.card{
+    display: inline-block;
+    width: 50%;
+}
+
+#fTable{
+    width: 40%;
+}
