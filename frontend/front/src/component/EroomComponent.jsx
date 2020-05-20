@@ -4,6 +4,8 @@ import axios from "axios";
 import {Card, Table} from 'react-bootstrap'
 import '../css/Eroom.css';
 import {EachRoom} from "../pages";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import {Link} from "react-router-dom";
 
 class EroomComponent extends Component {
     constructor(props) {
@@ -142,7 +144,7 @@ class EroomComponent extends Component {
         });
     }*/
     onRoomEnter = (id) => {
-        window.location.assign('/rooms/enter/' + id);
+        window.location.assign('/room/enter/' + id);
         // history.push('/room');
         // return this.props.history.push("/");
     }
@@ -161,6 +163,7 @@ class EroomComponent extends Component {
                                 <th>지역</th>
                                 <th>운동 종목</th>
                                 <th>경기 날짜</th>
+                                <th>입장 하기</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -171,12 +174,18 @@ class EroomComponent extends Component {
                                     </tr>)
                                 :
                                     rooms.map((room) => (
-                                        <tr key={room.id} onClick={this.onRoomEnter(room.id)}>
+                                        <tr key={room.id}>
                                             <td>{room.id}</td>
                                             <td>{room.title}</td>
                                             <td>{room.area}</td>
                                             <td>{room.sports}</td>
                                             <td>{room.date}</td>
+                                            <td >
+                                                <ButtonGroup>
+                                                    <Link to={"/room/enter/" + room.id} className="btn btn-sm btn-outline-primary">
+                                                    </Link>
+                                                </ButtonGroup>
+                                            </td>
                                         </tr>
                                     ))
                             }

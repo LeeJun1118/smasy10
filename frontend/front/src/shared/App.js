@@ -14,7 +14,7 @@ class App extends Component {
                 <Route exact path="/login" component={Login}/>
                 <Route exact path="/room/create" component={MroomComponent}/>
                 <Route exact path="/rooms" component={EroomComponent}/>
-                <Route exact path="/rooms/enter/:id" component={EachRoomComponent}/>
+                <Route exact path="/room/enter/:id" component={EachRoomComponent}/>
                 <Route exact path="/kakaologin" component={Logink}/>
             </div>
         );
