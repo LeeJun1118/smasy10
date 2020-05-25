@@ -3,19 +3,20 @@ import React, {Component, useEffect} from 'react';
 import '../css/App.css';
 import {Route, Switch} from 'react-router-dom';
 import {
-    Menu,
+    MenuComponent,
     Home,
-    About/*, Login*/,
     EroomComponent,
-    KakaoLogin,
-    Logink,
     MroomComponent,
-    EachRoomComponent
+    EachRoomComponent,
+    Login,
+    Signup,
+    Profile,
+    OAuth2RedirectHandler
 } from "pages";
-import Login from '../user/login/Login';
-import Signup from '../user/signup/Signup';
-import Profile from '../user/profile/Profile';
-import OAuth2RedirectHandler from '../user/oauth2/OAuth2RedirectHandler';
+// import Login from '../user/login/Login';
+// import Signup from '../user/signup/Signup';
+// import Profile from '../user/profile/Profile';
+// import OAuth2RedirectHandler from '../user/oauth2/OAuth2RedirectHandler';
 import {getCurrentUser} from '../util/APIUtils';
 import {ACCESS_TOKEN} from '../constants';
 import PrivateRoute from '../common/PrivateRoute';
@@ -76,14 +77,14 @@ class App extends Component {
                 }*/
         return (
             <div>
-                <div className="app-top-box">
-                    <AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout}/>
-                </div>
+                {/*<div className="app-top-box">*/}
+                {/*    <AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout}/>*/}
+                {/*</div>*/}
                 <div>
-                    <Menu/>
+                    <MenuComponent authenticated={this.state.authenticated} onLogout={this.handleLogout}/>
                     <Route exact path="/" component={Home}/>
-                    <Route exact path="/about" component={About}/>
-                    <Route exact path="/login" component={Login}/>
+                    {/*<Route exact path="/about" component={About}/>*/}
+                    {/*<Route exact path="/login" component={Login}/>*/}
                     <Route exact path="/room/create" component={MroomComponent}/>
                     <Route exact path="/rooms" component={EroomComponent}/>
                     <Route exact path="/room/enter/:id" component={EachRoomComponent}/>

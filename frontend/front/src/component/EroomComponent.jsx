@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import Eroom from "../pages/Eroom";
 import axios from "axios";
-import {Card, Table} from 'react-bootstrap'
+import {Card, Table, Button} from 'react-bootstrap'
 import '../css/Eroom.css';
 import {EachRoom} from "../pages";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -181,10 +181,11 @@ class EroomComponent extends Component {
                                             <td>{room.sports}</td>
                                             <td>{room.date}</td>
                                             <td >
-                                                <ButtonGroup>
-                                                    <Link to={"/room/enter/" + room.id} className="btn btn-sm btn-outline-primary">
-                                                    </Link>
-                                                </ButtonGroup>
+                                                <Button onClick={this.onRoomEnter}>
+                                                    {/*<Link to={"/room/enter/" + room.id} className="btn btn-sm btn-outline-primary">*/}
+                                                    {/*</Link>*/}
+                                                    입장
+                                                </Button>
                                             </td>
                                         </tr>
                                     ))
