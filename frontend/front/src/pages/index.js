@@ -17,8 +17,3 @@ export { default as MroomComponent } from '../component/MroomComponent';
 export { default as EroomComponent } from '../component/EroomComponent';
 
 export { default as EachRoomComponent } from '../component/EachRoomComponent';
-
-export { default as Login } from '../user/login/Login';
-export { default as Signup } from '../user/signup/Signup';
-export { default as Profile } from '../user/profile/Profile';
-export { default as OAuth2RedirectHandler } from '../user/oauth2/OAuth2RedirectHandler';

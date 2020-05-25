@@ -97,11 +97,15 @@ class LoginForm extends Component {
             localStorage.setItem(ACCESS_TOKEN, response.accessToken);
             Alert.success("You're successfully logged in!");
             this.props.history.push("/");
+            // window.location.replace('/');
+            // window.location.reload();
+            // this.props.history.go(0);
+            // window.location.assign('/');
         }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
         });
     }
-    
+
     render() {
         return (
             <form onSubmit={this.handleSubmit}>

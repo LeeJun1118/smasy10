@@ -8,15 +8,11 @@ import {
     EroomComponent,
     MroomComponent,
     EachRoomComponent,
-    Login,
-    Signup,
-    Profile,
-    OAuth2RedirectHandler
 } from "pages";
-// import Login from '../user/login/Login';
-// import Signup from '../user/signup/Signup';
-// import Profile from '../user/profile/Profile';
-// import OAuth2RedirectHandler from '../user/oauth2/OAuth2RedirectHandler';
+import Login from '../user/login/Login';
+import Signup from '../user/signup/Signup';
+import Profile from '../user/profile/Profile';
+import OAuth2RedirectHandler from '../user/oauth2/OAuth2RedirectHandler';
 import {getCurrentUser} from '../util/APIUtils';
 import {ACCESS_TOKEN} from '../constants';
 import PrivateRoute from '../common/PrivateRoute';
@@ -65,6 +61,9 @@ class App extends Component {
             currentUser: null
         });
         Alert.success("You're safely logged out!");
+        // this.props.history.push("/");
+        // window.location.replace('/');
+        /////////////////////////////////////////홈으로 돌아갔음 좋겠다ㅏ
     }
 
     componentDidMount() {
@@ -76,11 +75,12 @@ class App extends Component {
                     return <LoadingIndicator />
                 }*/
         return (
-            <div>
-                {/*<div className="app-top-box">*/}
-                {/*    <AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout}/>*/}
-                {/*</div>*/}
-                <MenuComponent authenticated={this.state.authenticated} onLogout={this.handleLogout}/>
+            <div className="app">
+                <div className="app-top-box">
+                    {/*<AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout}/>*/}
+                    <MenuComponent authenticated={this.state.authenticated} onLogout={this.handleLogout}/>
+                </div>
+                <div className="app-body">
                 <Switch>
                     <Route exact path="/" component={Home}/>
                     {/*<Route exact path="/about" component={About}/>*/}
@@ -99,6 +99,7 @@ class App extends Component {
                     <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}/>
                     <Route component={NotFound}/>
                 </Switch>
+                </div>
                 <Alert stack={{limit: 3}}
                        timeout={3000}
                        position='top-right' effect='slide' offset={65}/>

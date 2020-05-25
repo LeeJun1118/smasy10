@@ -34,7 +34,8 @@ class EachRoomComponent extends Component {
     }
 
     onExitRoom = () => {
-        window.location.assign('/rooms');
+        window.history.back();
+        // window.location.assign('/rooms');
         // history.push('/room');
         // return this.props.history.push("/");
     }
