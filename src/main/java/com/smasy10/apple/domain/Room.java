@@ -45,8 +45,8 @@ public class Room extends BaseTimeEntity{
     @Column(nullable = false)
     private String date;
 
-    @OneToMany(mappedBy = "room")
-    private List<User> users = new ArrayList<>();
+    /*@OneToMany(mappedBy = "room")
+    private List<User> users = new ArrayList<>();*/
 
     @OneToMany(mappedBy = "room")
     private List<Reservation> reservations = new ArrayList<>();

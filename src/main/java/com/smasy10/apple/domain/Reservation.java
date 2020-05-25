@@ -41,8 +41,8 @@ public class Reservation extends BaseTimeEntity {
     //@JoinColumn(name= "place_id")
     private Place place;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
+    /*@ManyToOne(fetch = FetchType.LAZY)
+    private User user;*/
 
     /*//해당 클래스의 빌더 패턴 클래스 생성
     //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함

@@ -30,7 +30,7 @@ class RoomControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
-    @Test
+    /*@Test
     public void createRoom() throws Exception {
         List<User> userList = new ArrayList<>();
         User user1 = new User("User1","ejun1118@naver.com","010-2222-3333","부산 남구", Role.USER);
@@ -55,6 +55,6 @@ class RoomControllerTest {
                 .andExpect(jsonPath("date").exists())
                 .andExpect(jsonPath("sports").exists());
 
-    }
+    }*/
 
 }
