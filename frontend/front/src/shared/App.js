@@ -80,8 +80,8 @@ class App extends Component {
                 {/*<div className="app-top-box">*/}
                 {/*    <AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout}/>*/}
                 {/*</div>*/}
-                <div>
-                    <MenuComponent authenticated={this.state.authenticated} onLogout={this.handleLogout}/>
+                <MenuComponent authenticated={this.state.authenticated} onLogout={this.handleLogout}/>
+                <Switch>
                     <Route exact path="/" component={Home}/>
                     {/*<Route exact path="/about" component={About}/>*/}
                     {/*<Route exact path="/login" component={Login}/>*/}
@@ -98,7 +98,7 @@ class App extends Component {
                            render={(props) => <Signup authenticated={this.state.authenticated} {...props} />}/>
                     <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}/>
                     <Route component={NotFound}/>
-                </div>
+                </Switch>
                 <Alert stack={{limit: 3}}
                        timeout={3000}
                        position='top-right' effect='slide' offset={65}/>

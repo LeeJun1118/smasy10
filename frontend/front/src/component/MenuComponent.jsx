@@ -17,12 +17,12 @@ class MenuComponent extends Component {
                         { this.props.authenticated ? (
                             <span>
                                 <NavLink className="link" to="/profile">Profile</NavLink>
-                                <a onClick={this.props.onLogout}>Logout</a>
+                                <Link className="link" onClick={this.props.onLogout}>Logout</Link>
                             </span>
                         ): (
                             <span>
-                                <Link className="link" to="/login">Login</Link>
-                                <Link className="link" to="/signup">Signup</Link>
+                                <NavLink className="link" to="/login">Login</NavLink>
+                                <NavLink className="link" to="/signup">Signup</NavLink>
                             </span>
 
                         )}
