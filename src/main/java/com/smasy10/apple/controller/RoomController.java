@@ -7,6 +7,7 @@ import com.smasy10.apple.domain.dto.roomDto.RoomResponseDto;
 import com.smasy10.apple.domain.dto.roomDto.RoomSaveRequestDto;
 import com.smasy10.apple.domain.dto.roomDto.RoomUpdateRequestDto;
 import com.smasy10.apple.repository.RoomRepository;
+import jdk.nashorn.internal.ir.RuntimeNode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;

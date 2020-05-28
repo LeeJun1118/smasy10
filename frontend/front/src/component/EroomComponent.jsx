@@ -144,9 +144,12 @@ class EroomComponent extends Component {
         });
     }*/
     onRoomEnter = (id) => {
-        window.location.assign('/room/enter/' + id);
+        // this.state.rooms.map((room) =>(
+        //             window.location.assign('/enter/' + room.id)
+        //         ));
         // history.push('/room');
         // return this.props.history.push("/");
+        // this.props.history.push("/enter/"+id);
     }
 
     render() {
@@ -170,7 +173,7 @@ class EroomComponent extends Component {
                             {
                                 rooms.length === 0 ?
                                     (<tr align="center">
-                                        <td colSpan="7">방이 없습니다.</td>
+                                        <td colSpan="7" onClick={this.onRoomEnter}>방이 없습니다.</td>
                                     </tr>)
                                 :
                                     rooms.map((room) => (
@@ -181,11 +184,8 @@ class EroomComponent extends Component {
                                             <td>{room.sports}</td>
                                             <td>{room.date}</td>
                                             <td >
-                                                <Button onClick={this.onRoomEnter}>
-                                                    {/*<Link to={"/room/enter/" + room.id} className="btn btn-sm btn-outline-primary">*/}
-                                                    {/*</Link>*/}
-                                                    입장
-                                                </Button>
+                                                {/*<Link to={"/rooms/" + room.id} className="btn btn-sm btn-outline-primary">입장</Link>*/}
+                                                <Link to={this.props.match.url+ "/enter/" + room.id} className="btn btn-sm btn-outline-primary">입장</Link>
                                             </td>
                                         </tr>
                                     ))

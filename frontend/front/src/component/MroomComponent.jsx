@@ -39,6 +39,7 @@ class MroomComponent extends Component {
                 if (response.data != null) {
                     this.setState({"show": true, "method": "post"});
                     setTimeout(() => this.setState({"show": false}), 3000);
+                    console.log(response.data);
                 } else {
                     this.setState({"show": false});
                 }

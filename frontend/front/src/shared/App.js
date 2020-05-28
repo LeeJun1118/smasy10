@@ -6,6 +6,7 @@ import {
     MenuComponent,
     Home,
     EroomComponent,
+    Eroom,
     MroomComponent,
     EachRoomComponent,
 } from "pages";
@@ -86,8 +87,9 @@ class App extends Component {
                     {/*<Route exact path="/about" component={About}/>*/}
                     {/*<Route exact path="/login" component={Login}/>*/}
                     <Route exact path="/room/create" component={MroomComponent}/>
-                    <Route exact path="/rooms" component={EroomComponent}/>
-                    <Route exact path="/room/enter/:id" component={EachRoomComponent}/>
+                    <Route path="/rooms" component={Eroom}/>
+                    {/*<Route exact path="/rooms" component={EroomComponent}/>*/}
+                    {/*<Route exact path="/rooms/enter/:id" component={EachRoomComponent}/>*/}
                     {/* <Route exact path="/kakaologin" component={Logink}/>*/}
                     <PrivateRoute path="/profile" authenticated={this.state.authenticated}
                                   currentUser={this.state.currentUser}

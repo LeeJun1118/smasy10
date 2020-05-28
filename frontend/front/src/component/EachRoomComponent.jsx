@@ -9,7 +9,8 @@ class EachRoomComponent extends Component {
         super(props);
         this.state = {
             rooms: [],
-            users : []
+            users : [],
+            memberCount : 0
         };
     }
 
@@ -34,7 +35,11 @@ class EachRoomComponent extends Component {
     }
 
     onExitRoom = () => {
+        this.setState(state => ({
+            memberCount: this.state.memberCount-1
+            }));
         window.history.back();
+        // this.props.history.goBack();
         // window.location.assign('/rooms');
         // history.push('/room');
         // return this.props.history.push("/");
@@ -78,7 +83,10 @@ class EachRoomComponent extends Component {
                             <thead><tr><th>이름</th><th>나이대</th></tr></thead>
                             <tbody>
                             <tr>
-                                <td>너야구</td><td>20대</td>
+                                <td>나축구</td><td>20대</td>
+                            </tr>
+                            <tr>
+                                <td>나축구</td><td>20대</td>
                             </tr>
                             </tbody>
                         </Table>

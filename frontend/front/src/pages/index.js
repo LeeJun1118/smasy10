@@ -15,5 +15,6 @@ export { default as About } from './About';
 
 export { default as MroomComponent } from '../component/MroomComponent';
 export { default as EroomComponent } from '../component/EroomComponent';
+export { default as Eroom } from './Eroom';
 
 export { default as EachRoomComponent } from '../component/EachRoomComponent';
