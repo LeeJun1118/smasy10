@@ -25,9 +25,7 @@ spring:
             scope:
               - email
               - profile
-    user:
-      name: testId
-      password: test1234
+
 app:
   auth:
     tokenSecret: 926D96C90030DD58429D2751AC1BDBBC11111111ABC926D96C90030DD58429D2751AC1BDBBC11111111ABC926D96C90030DD58429D2751AC1BDBBC11111111ABC

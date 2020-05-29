@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,8 @@ public class User /*extends BaseTimeEntity*/ {
     //테이블의 컬럼을 나타내면 굳이 선언하지 않아도 해당 클래스의 모든 필드는 모두 컬럼이 됨.
     //기본 값 외에 추가 변경 옵션이 있을 때 사용
     //문자열의 경우 기본값은 varchar(255)인데 500으로 바꿈
-    @Column(length = 500, nullable = false)
+    @Email
+    @Column(nullable = false)
     private String email;
 
     //소셜로그인데모프로젝트코드
