@@ -8,7 +8,7 @@ export { default as MenuComponent } from '../component/MenuComponent';
 
 export { default as Home } from './Home';
 // export { default as Login } from './Login';
-export { default as About } from './About';
+//export { default as About } from './About';
 
 // export { default as KakaoLogin } from './KakaoLogin';
 // export { default as Logink } from './Logink';

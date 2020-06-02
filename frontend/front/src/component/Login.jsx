@@ -1,3 +1,4 @@
+/*
 import KakaoLogin from 'react-kakao-login';
 
 const Login = (props: IProps) => {
@@ -17,4 +18,4 @@ const Login = (props: IProps) => {
     );
 };
 
-export default Login;
+export default Login;*/

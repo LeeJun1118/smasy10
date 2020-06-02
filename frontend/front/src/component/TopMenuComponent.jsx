@@ -10,7 +10,7 @@ import EroomComponent from './EroomComponent'
 import KakaoLogin from "../pages/KakaoLogin";
 import MroomComponent from "./MroomComponent";
 
-class TopMenuComponent extends Component {
+class TopMenuComponent extends Component {/*
     constructor(props) {
         super(props);
         this.state = {selectedValue: 'node'}
@@ -43,7 +43,7 @@ class TopMenuComponent extends Component {
                     </Navbar.Collapse>
                     <Navbar.Brand href="/login" id="mylogin">로그인</Navbar.Brand>
                 </Navbar>
-                {/*<Navbar bg="dark"
+                {/!*<Navbar bg="dark"
                         variant="dark">
                     <Nav>
                         <NavDropdown title="종목" id="collasible-nav-dropdown" value="navdrop">
@@ -59,7 +59,7 @@ class TopMenuComponent extends Component {
                         </NavDropdown>
                         <Calendar onChange={this.onDateChange} value={this.state.date}/>
                     </Nav>
-                </Navbar>*/}
+                </Navbar>*!/}
 
                 <Route path="/" component={HomeComponent}/>
                 <Route path="/login" component={LoginComponent}/>
@@ -69,7 +69,7 @@ class TopMenuComponent extends Component {
 
             </Router>
         )
-    }
+    }*/
 }
 
 export default TopMenuComponent

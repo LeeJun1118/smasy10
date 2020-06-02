@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Kakao from 'kakaojs';
-
+/*
 class KakaoLogin extends Component{
 
     componentDidMount(){
@@ -25,6 +25,6 @@ class KakaoLogin extends Component{
             </div>
         );
     }
-}
+}*/
 
-export default KakaoLogin;
+//export default KakaoLogin;

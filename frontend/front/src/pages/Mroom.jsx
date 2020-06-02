@@ -5,7 +5,7 @@ import 'react-calendar/dist/Calendar.css';
 import '../css/Mroom.css';
 import customAxios from "../customAxios";
 
-
+/*
 const Mroom = () => {
     const [ip,setIp] = useState('');
     function callback(data) {
@@ -74,7 +74,7 @@ const Mroom = () => {
                     <Calendar />
                 </Form.Group>
 
-                {/* 각 시설 위치 지도 보여주면 좋을 듯*/}
+                {/!* 각 시설 위치 지도 보여주면 좋을 듯*!/}
 
                 <Button variant="dark" type="submit" onClick={()=>this.makeRoom()}>개설하기</Button>
             </Form>
@@ -82,6 +82,6 @@ const Mroom = () => {
             <br/>이 기기의 IP주소는 {ip}입니다.
         </div>
     )
-}
+}*/
 
-export default Mroom;
+//export default Mroom;

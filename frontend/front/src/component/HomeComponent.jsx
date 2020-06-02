@@ -5,7 +5,7 @@ import '../css/Home.css';
 import MroomComponent from "../component/MroomComponent";
 import EroomComponent from "../component/EroomComponent";
 
-class HomeComponent extends Component {
+/*class HomeComponent extends Component {
     handleClick = () => {
         console.log("Click");
     }
@@ -27,6 +27,6 @@ class HomeComponent extends Component {
             </Router>
         )
     }
-}
+}*/
 
-export default HomeComponent;
+//export default HomeComponent;

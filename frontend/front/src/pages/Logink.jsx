@@ -1,6 +1,6 @@
 import React from 'react';
 import Kakao from 'kakaojs';
-
+/*
 const Logink = () => {
     return (
         <div>
@@ -32,6 +32,6 @@ const handleClickKakaoLogin = () => {
             console.log(response);
         }
     })
-}
+}*/
 
-export default Logink;
+//export default Logink;

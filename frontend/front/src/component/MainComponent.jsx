@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
-
+/*
 class MainComponent extends Component {
 
     constructor(props) {
@@ -25,7 +25,7 @@ class MainComponent extends Component {
             .catch(res => console.log(res))
     }
 
-    /*render() {
+    render() {
         return(
             <div>
                 Main 페이지
@@ -34,7 +34,7 @@ class MainComponent extends Component {
 
             </div>
         )
-    }*/
-}
+    }
+}*/
 
-export default MainComponent
+//export default MainComponent

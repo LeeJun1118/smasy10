@@ -1,10 +1,6 @@
 import React, {Component} from "react";
-import Eroom from "../pages/Eroom";
-import axios from "axios";
 import {Card, Table, Button} from 'react-bootstrap'
 import '../css/Eroom.css';
-import {EachRoom} from "../pages";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 import {Link} from "react-router-dom";
 
 class EroomComponent extends Component {

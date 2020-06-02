@@ -1,5 +1,6 @@
 import React,{Component} from "react";
 
+/*
 class LoginComponent extends Component {
     render() {
         return(
@@ -9,5 +10,6 @@ class LoginComponent extends Component {
         )
     }
 }
+*/
 
-export default LoginComponent
+//export default LoginComponent
