@@ -48,6 +48,11 @@ public class Room extends BaseTimeEntity{
     @OneToMany(mappedBy = "room")
     private List<User> users = new ArrayList<>();
 
+/*
+    @ManyToOne
+    private User user;
+*/
+
     @OneToMany(mappedBy = "room")
     private List<Reservation> reservations = new ArrayList<>();
 

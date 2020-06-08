@@ -1,25 +1,30 @@
 import React from 'react';
 import '../css/Home.css';
+import {Component} from 'react'
+import {NavLink} from "react-router-dom";
 
-const Home = () => {
-    return (
-        <div className="imgt">
+class Home extends Component {
 
-                <a href="/room/create">
-                    <img src="/img/fire3.gif" alt="" onClick={handleClick} className="img"/>
+    handleClick() {
+        console.log("Click");
+    }
+
+    render() {
+        return (
+            <div className="imgt">
+                <NavLink to="/room/create">
+                    <img src="/img/fire3.gif" alt="" onClick={this.handleClick} className="img"/>
                     {/*<img src="/img/make.png" className="subimg"/>*/}
-                </a>
+                </NavLink>
 
-                <a href="/rooms">
-                    <img src="/img/fire3.gif" alt="" onClick={handleClick} className="img"/>
+                <NavLink to="/rooms">
+                    <img src="/img/fire3.gif" alt="" onClick={this.handleClick} className="img"/>
                     {/*<img src="/img/enter.png" alt="" onClick={handleClick} className="subimg"/>*/}
-                </a>
-
-        </div>
-
-    );
+                </NavLink>
+            </div>
+        );
+    }
 };
-const handleClick = () => {
-    console.log("Click");
-}
+
+
 export default Home;

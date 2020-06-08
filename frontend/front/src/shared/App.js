@@ -1,27 +1,27 @@
-import React, {Component, useEffect} from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css'
-import '../css/App.css';
-import {Route, Switch} from 'react-router-dom';
+import React, {Component} from 'react';
 import {
-    MenuComponent,
-    Home,
-    EroomComponent,
-    Eroom,
-    MroomComponent,
-    EachRoomComponent,
-} from "pages";
+    Route,
+    Switch
+} from 'react-router-dom';
+import AppHeader from '../common/AppHeader';
+
 import Login from '../user/login/Login';
 import Signup from '../user/signup/Signup';
 import Profile from '../user/profile/Profile';
 import OAuth2RedirectHandler from '../user/oauth2/OAuth2RedirectHandler';
+import NotFound from '../common/NotFound';
+import LoadingIndicator from '../common/LoadingIndicator';
 import {getCurrentUser} from '../util/APIUtils';
 import {ACCESS_TOKEN} from '../constants';
 import PrivateRoute from '../common/PrivateRoute';
 import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
-import AppHeader from '../common/AppHeader';
-import NotFound from "../common/NotFound";
+import './App.css';
+import Home from "../pages/Home";
+import MroomComponent from "../component/MroomComponent";
+import Eroom from "../pages/Eroom";
+import EachRoomComponent from "../component/EachRoomComponent";
 
 class App extends Component {
     constructor(props) {
@@ -62,9 +62,6 @@ class App extends Component {
             currentUser: null
         });
         Alert.success("You're safely logged out!");
-        // this.props.history.push("/");
-        // window.location.replace('/');
-        /////////////////////////////////////////홈으로 돌아갔음 좋겠다ㅏ
     }
 
     componentDidMount() {
@@ -72,35 +69,44 @@ class App extends Component {
     }
 
     render() {
-        /*        if(this.state.loading) {
-                    return <LoadingIndicator />
-                }*/
+        if (this.state.loading) {
+            return <LoadingIndicator/>
+        }
+
         return (
             <div className="app">
                 <div className="app-top-box">
-                    {/*<AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout}/>*/}
-                    <MenuComponent authenticated={this.state.authenticated} onLogout={this.handleLogout}/>
+                    <AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout}/>
                 </div>
                 <div className="app-body">
-                <Switch>
-                    <Route exact path="/" component={Home}/>
-                    {/*<Route exact path="/about" component={About}/>*/}
-                    {/*<Route exact path="/login" component={Login}/>*/}
-                    <Route exact path="/room/create" component={MroomComponent}/>
-                    <Route path="/rooms" component={Eroom}/>
-                    {/*<Route exact path="/rooms" component={EroomComponent}/>*/}
-                    {/*<Route exact path="/rooms/enter/:id" component={EachRoomComponent}/>*/}
-                    {/* <Route exact path="/kakaologin" component={Logink}/>*/}
-                    <PrivateRoute path="/profile" authenticated={this.state.authenticated}
-                                  currentUser={this.state.currentUser}
-                                  component={Profile}/>
-                    <Route path="/login"
-                           render={(props) => <Login authenticated={this.state.authenticated} {...props} />}/>
-                    <Route path="/signup"
-                           render={(props) => <Signup authenticated={this.state.authenticated} {...props} />}/>
-                    <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}/>
-                    <Route component={NotFound}/>
-                </Switch>
+                    <Switch>
+                        <Route exact path="/" component={Home}/>
+
+                        <PrivateRoute path="/room/create" authenticated={this.state.authenticated}
+                                      currentUser={this.state.currentUser}
+                                      component={MroomComponent}/>
+
+                        {/*<Route path="/rooms" component={Eroom}/>*/}
+
+                        <Route path="/rooms" authenticated={this.state.authenticated}
+                                      currentUser={this.state.currentUser}
+                                      component={Eroom}/>
+
+                        <PrivateRoute path="/rooms/enter/:id" authenticated={this.state.authenticated}
+                                      currentUser={this.state.currentUser}
+                                      component={EachRoomComponent}/>
+
+                        <PrivateRoute path="/profile" authenticated={this.state.authenticated}
+                                      currentUser={this.state.currentUser}
+                                      component={Profile}/>
+
+                        <Route path="/login"
+                               render={(props) => <Login authenticated={this.state.authenticated} {...props} />}/>
+                        <Route path="/signup"
+                               render={(props) => <Signup authenticated={this.state.authenticated} {...props} />}/>
+                        <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}/>
+                        <Route component={NotFound}/>
+                    </Switch>
                 </div>
                 <Alert stack={{limit: 3}}
                        timeout={3000}
@@ -111,3 +117,5 @@ class App extends Component {
 }
 
 export default App;
+
+

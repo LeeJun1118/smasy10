@@ -2,11 +2,11 @@ package com.smasy10.apple.controller;
 
 import com.smasy10.apple.common.Exception.ApiException;
 import com.smasy10.apple.domain.Room;
-import com.smasy10.apple.domain.dto.roomDto.RoomListResponseDto;
-import com.smasy10.apple.domain.dto.roomDto.RoomResponseDto;
-import com.smasy10.apple.domain.dto.roomDto.RoomSaveRequestDto;
-import com.smasy10.apple.domain.dto.roomDto.RoomUpdateRequestDto;
+import com.smasy10.apple.domain.User;
+import com.smasy10.apple.domain.dto.roomDto.*;
 import com.smasy10.apple.repository.RoomRepository;;
+import com.smasy10.apple.security.CurrentUser;
+import com.smasy10.apple.security.UserPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -56,14 +56,13 @@ public class RoomController {
         Page<RoomListResponseDto> roomDto = rooms.map(room -> new RoomListResponseDto((room)));
         return new ResponseEntity<>(roomDto.getContent(), HttpStatus.OK);
     }
-
     //방 만들기
-    @PostMapping(value = "/api/room/create")
+    @PostMapping(value = "/room/create")
     //밑에 있는 @RequestBody : 포스트맨에서 실행시만에 주석 달기 테스트 코드에서는 주석해제
     public ResponseEntity createRoom(@RequestBody Room room) {
         log.debug("REST request to create Room : {}", room);
+
         Room roomSaved = roomRepository.save(room);
-        /*return new ResponseEntity("Room created",HttpStatus.CREATED);*/
         return ResponseEntity.status(HttpStatus.CREATED).body(roomSaved);
     }
 

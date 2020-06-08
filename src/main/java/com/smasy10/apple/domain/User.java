@@ -8,6 +8,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 //소셜로그인데모프로젝트코드
 @Table(name = "users", uniqueConstraints = {
@@ -25,7 +26,6 @@ import java.util.List;
 
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-
 
 
 //해당 클래스의 빌더 패턴 클래스 생성
@@ -89,8 +89,20 @@ public class User /*extends BaseTimeEntity*/ {
     /*@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Reply> replies = new ArrayList<>();*/
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Room room;
+
+    /*@OneToMany(mappedBy = "user")
+    private Set<Room> rooms;
+
+    public User(Long id) {
+        this.id = id;
+    }
+
+    public User(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }*/
 
    /* //해당 클래스의 빌더 패턴 클래스 생성
     //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함

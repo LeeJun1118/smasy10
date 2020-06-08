@@ -49,3 +49,11 @@ export function signup(signupRequest) {
         body: JSON.stringify(signupRequest)
     });
 }
+
+export function createRoom(createRoomRequest) {
+    return request({
+        url: API_BASE_URL + "/room/create",
+        method: 'POST',
+        body: JSON.stringify(createRoomRequest)
+    });
+}
