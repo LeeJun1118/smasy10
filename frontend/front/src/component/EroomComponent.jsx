@@ -1,7 +1,9 @@
-import React, {Component} from "react";
+import React, {Component, Fragment} from "react";
 import {Card, Table, Button} from 'react-bootstrap'
 import '../css/Eroom.css';
 import {Link} from "react-router-dom";
+import {searchRooms} from "../util/APIUtils";
+import SearchRoom from "./SearchRoom";
 
 class EroomComponent extends Component {
     constructor(props) {
@@ -11,8 +13,12 @@ class EroomComponent extends Component {
             search: '',
             currentPage: 1,
             roomsPerPage: 5,
-            sortToggle: true
+            sortToggle: true,
+            //roomTextSearch:'',
+
+            // searchRoomList:[]
         };
+        //this.findRooms = this.findRooms.bind(this);
     }
 
     sortData = () => {
@@ -20,10 +26,14 @@ class EroomComponent extends Component {
             sortToggle: !state.sortToggle
         }));
         this.findAllRooms(this.state.currentPage);
+        //this.handleSearchRoom(this.state.currentPage);
+        //this.handleSearchRoom(this.state.currentPage);
     }
 
     componentDidMount() {
         this.findAllRooms(this.state.currentPage);
+        //this.handleSearchRoom(this.state.currentPage);
+        //this.handleSearchRoom();
     }
 
     findAllRooms() {
@@ -34,6 +44,27 @@ class EroomComponent extends Component {
                 this.setState({rooms: data});
             })
     }
+
+    /*handleSearchRoom() {
+        fetch("http://localhost:8080/api/rooms/${text}")
+            .then(response => response.json()
+            )
+            .then((data) => {
+                this.setState({rooms: data});
+            })
+    }*/
+
+    /*handleSearchRoom =() => {
+        const text = this.state.roomTextSearch;
+        searchRooms(text)
+            .then(response =>{
+                const rooms = response.data
+                this.setState({rooms})
+            })
+            .catch(error => {
+                this.setState({rooms:[]})
+            })
+    }*/
 
     /*findAllRooms(currentPage) {
         currentPage -= 1;
@@ -149,45 +180,50 @@ class EroomComponent extends Component {
     }
 
     render() {
-        const {rooms, currentPage, totalPages, search} = this.state;
+        const {rooms, currentPage, totalPages, search,roomTextSearch} = this.state;
         return (
             <div className="Eroom">
+                {/*<SearchRoom
+                    roomTextSearch={roomTextSearch}
+                    handleSearchRoom={this.handleSearchRoom}
+                />*/}
                 {/*<Card style={{width: '18rem'}}>*/}
                 {/*    <Card.Body>*/}
-                        <Table  striped bordered hover id="table">
-                            <thead>
-                            <tr>
-                                <th>방 번호</th>
-                                <th>방 제목</th>
-                                <th>지역</th>
-                                <th>운동 종목</th>
-                                <th>경기 날짜</th>
-                                <th>입장 하기</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {
-                                rooms.length === 0 ?
-                                    (<tr align="center">
-                                        <td colSpan="7" onClick={this.onRoomEnter}>방이 없습니다.</td>
-                                    </tr>)
-                                :
-                                    rooms.map((room) => (
-                                        <tr key={room.id}>
-                                            <td>{room.id}</td>
-                                            <td>{room.title}</td>
-                                            <td>{room.area}</td>
-                                            <td>{room.sports}</td>
-                                            <td>{room.date}</td>
-                                            <td >
-                                                {/*<Link to={"/rooms/" + room.id} className="btn btn-sm btn-outline-primary">입장</Link>*/}
-                                                <Link to={this.props.match.url+ "/enter/" + room.id} className="btn btn-sm btn-outline-primary">입장</Link>
-                                            </td>
-                                        </tr>
-                                    ))
-                            }
-                            </tbody>
-                        </Table>
+                <Table striped bordered hover id="table">
+                    <thead>
+                    <tr>
+                        <th>방 번호</th>
+                        <th>방 제목</th>
+                        <th>지역</th>
+                        <th>운동 종목</th>
+                        <th>경기 날짜</th>
+                        <th>입장 하기</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        rooms.length === 0 ?
+                            (<tr align="center">
+                                <td colSpan="7" onClick={this.onRoomEnter}>방이 없습니다.</td>
+                            </tr>)
+                            :
+                            rooms.map((room) => (
+                                <tr key={room.id}>
+                                    <td>{room.id}</td>
+                                    <td>{room.title}</td>
+                                    <td>{room.area}</td>
+                                    <td>{room.sports}</td>
+                                    <td>{room.date}</td>
+                                    <td>
+                                        {/*<Link to={"/rooms/" + room.id} className="btn btn-sm btn-outline-primary">입장</Link>*/}
+                                        <Link to={this.props.match.url + "/enter/" + room.id}
+                                              className="btn btn-sm btn-outline-primary">입장</Link>
+                                    </td>
+                                </tr>
+                            ))
+                    }
+                    </tbody>
+                </Table>
                 {/*    </Card.Body>*/}
                 {/*</Card>*/}
 

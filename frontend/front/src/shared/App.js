@@ -21,7 +21,6 @@ import './App.css';
 import Home from "../pages/Home";
 import MroomComponent from "../component/MroomComponent";
 import Eroom from "../pages/Eroom";
-import EachRoomComponent from "../component/EachRoomComponent";
 
 class App extends Component {
     constructor(props) {
@@ -86,15 +85,9 @@ class App extends Component {
                                       currentUser={this.state.currentUser}
                                       component={MroomComponent}/>
 
-                        {/*<Route path="/rooms" component={Eroom}/>*/}
-
-                        <Route path="/rooms" authenticated={this.state.authenticated}
+                        <PrivateRoute path="/rooms" authenticated={this.state.authenticated}
                                       currentUser={this.state.currentUser}
                                       component={Eroom}/>
-
-                        <PrivateRoute path="/rooms/enter/:id" authenticated={this.state.authenticated}
-                                      currentUser={this.state.currentUser}
-                                      component={EachRoomComponent}/>
 
                         <PrivateRoute path="/profile" authenticated={this.state.authenticated}
                                       currentUser={this.state.currentUser}
@@ -117,5 +110,3 @@ class App extends Component {
 }
 
 export default App;
-
-
