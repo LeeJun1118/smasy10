@@ -18,7 +18,7 @@ class Home extends Component {
                 </NavLink>
 
                 <NavLink to="/rooms">
-                    <img src="/img/e-fire.gif" alt="" onClick={this.handleClick} className="img"/>
+                    <img src="/img/e-fire2.gif" alt="" onClick={this.handleClick} className="img"/>
                     {/*<img src="/img/enter.png" alt="" onClick={handleClick} className="subimg"/>*/}
                 </NavLink>
             </div>
