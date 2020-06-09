@@ -181,7 +181,7 @@ class EroomComponent extends Component {
                                             <td>{room.date}</td>
                                             <td >
                                                 {/*<Link to={"/rooms/" + room.id} className="btn btn-sm btn-outline-primary">입장</Link>*/}
-                                                <Link to={this.props.match.url+ "/enter/" + room.id} className="btn btn-sm btn-outline-primary">입장</Link>
+                                                <Link to={this.props.match.url+ "/enter/" + room.id}>입장</Link>
                                             </td>
                                         </tr>
                                     ))

@@ -37,12 +37,16 @@ class EachRoomComponent extends Component {
     onExitRoom = () => {
         this.setState(state => ({
             memberCount: this.state.memberCount-1
-            }));
+        }));
         window.history.back();
         // this.props.history.goBack();
         // window.location.assign('/rooms');
         // history.push('/room');
         // return this.props.history.push("/");
+    }
+
+    onReserve = () =>{
+        console.log("예약 완료");
     }
 
     render() {
@@ -108,9 +112,9 @@ class EachRoomComponent extends Component {
                         </Table>
 
 
-                <Button variant="dark" type="submit" className="btn">
+                <Button variant="primary" className="btn" onClick={this.onReserve}>
                     예약하기</Button>
-                <Button variant="dark" type="submit" className="btn" onClick={this.onExitRoom}>
+                <Button variant="primary" className="btn" onClick={this.onExitRoom}>
                     나가기</Button>
             </div>
         )

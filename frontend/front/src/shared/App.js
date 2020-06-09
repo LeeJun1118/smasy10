@@ -4,7 +4,7 @@ import {
     Switch
 } from 'react-router-dom';
 import AppHeader from '../common/AppHeader';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from '../user/login/Login';
 import Signup from '../user/signup/Signup';
 import Profile from '../user/profile/Profile';
@@ -21,7 +21,12 @@ import './App.css';
 import Home from "../pages/Home";
 import MroomComponent from "../component/MroomComponent";
 import Eroom from "../pages/Eroom";
+import Menu from "../pages/Menu";
 import EachRoomComponent from "../component/EachRoomComponent";
+import EroomComponent from "../component/EroomComponent";
+import MenuComponent from "../component/MenuComponent";
+import Reserve from "../pages/Reserve";
+import Review from "../pages/Review";
 
 class App extends Component {
     constructor(props) {
@@ -75,10 +80,10 @@ class App extends Component {
 
         return (
             <div className="app">
-                <div className="app-top-box">
-                    <AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout}/>
-                </div>
-                <div className="app-body">
+                {/*<div className="app-top-box">*/}
+                    <MenuComponent authenticated={this.state.authenticated} onLogout={this.handleLogout}/>
+                {/*</div>*/}
+                {/*<div className="app-body">*/}
                     <Switch>
                         <Route exact path="/" component={Home}/>
 
@@ -86,19 +91,19 @@ class App extends Component {
                                       currentUser={this.state.currentUser}
                                       component={MroomComponent}/>
 
-                        {/*<Route path="/rooms" component={Eroom}/>*/}
-
-                        <Route path="/rooms" authenticated={this.state.authenticated}
-                                      currentUser={this.state.currentUser}
-                                      component={Eroom}/>
-
+                        <Route exact path="/rooms" component={EroomComponent}/>
+                        {/*<Route exact path="/rooms" authenticated={this.state.authenticated}*/}
+                        {/*       currentUser={this.state.currentUser}*/}
+                        {/*       component={Eroom}/>*/}
                         <PrivateRoute path="/rooms/enter/:id" authenticated={this.state.authenticated}
                                       currentUser={this.state.currentUser}
                                       component={EachRoomComponent}/>
 
-                        <PrivateRoute path="/profile" authenticated={this.state.authenticated}
+                        <PrivateRoute exact path="/profile" authenticated={this.state.authenticated}
                                       currentUser={this.state.currentUser}
                                       component={Profile}/>
+                        <Route path="/profile/reserve" component={Reserve}/>
+                        <Route path="/profile/review" component={Review}/>
 
                         <Route path="/login"
                                render={(props) => <Login authenticated={this.state.authenticated} {...props} />}/>
@@ -107,7 +112,7 @@ class App extends Component {
                         <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}/>
                         <Route component={NotFound}/>
                     </Switch>
-                </div>
+                {/*</div>*/}
                 <Alert stack={{limit: 3}}
                        timeout={3000}
                        position='top-right' effect='slide' offset={65}/>
