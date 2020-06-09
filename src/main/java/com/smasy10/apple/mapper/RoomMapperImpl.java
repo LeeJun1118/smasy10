@@ -24,6 +24,7 @@ public class RoomMapperImpl implements RoomMapper {
 
         RoomDto roomDto = new RoomDto();
 
+        roomDto.setId(room.getId());
         roomDto.setTitle( room.getTitle() );
         roomDto.setArea( room.getArea() );
         roomDto.setSports( room.getSports());

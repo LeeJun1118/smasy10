@@ -9,6 +9,9 @@ import java.util.List;
 
 @Data
 public class RoomDto {
+
+    private Long id;
+
     @NotEmpty
     private String title;
 
