@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import './Profile.css';
+import {Button} from "react-bootstrap";
+import {Route} from "react-router-dom";
+import Reserve from "../../pages/Reserve";
+import Review from "../../pages/Review";
 
 class Profile extends Component {
     constructor(props) {
@@ -8,6 +12,7 @@ class Profile extends Component {
     }
     render() {
         return (
+            <div className="Profile">
             <div className="profile-container">
                 <div className="container">
                     <div className="profile-info">
@@ -29,6 +34,12 @@ class Profile extends Component {
                     </div>
                 </div>    
             </div>
+                <Button variant="primary" className="btn" href={this.props.match.url+ "/reserve"}>
+                    예약 내역</Button>
+                <Button variant="primary" className="btn" href={this.props.match.url+ "/review"}>
+                    리뷰</Button>
+            </div>
+
         );
     }
 }

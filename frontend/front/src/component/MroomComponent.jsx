@@ -84,7 +84,6 @@ class MroomComponent extends Component {
                                 <option selected disabled>Please select</option>
                                 <option value="a">a</option>
                                 <option value="b">b</option>
-
                             </Form.Control>
                         </Form.Group>
 
@@ -110,7 +109,7 @@ class MroomComponent extends Component {
 
 
                     </Form>
-                    <Button variant="dark" type="submit" onClick={this.handleSubmit}>
+                    <Button  bg="primary" onClick={this.handleSubmit}>
                         개설하기
                     </Button>
                 </form>

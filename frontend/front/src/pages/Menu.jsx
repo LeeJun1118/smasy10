@@ -1,7 +1,7 @@
 import React from 'react';
 import {Navbar, Nav} from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, NavLink, Route} from "react-router-dom";
+import '../css/Menu.css';
 
 const Menu = () => {
 
@@ -9,9 +9,10 @@ const Menu = () => {
         <div>
             <Navbar bg="dark" sticky="top" variant="dark">
                 {/*<Navbar.Collapse className="justify-content-center">*/}
-                    <Navbar.Brand href="/" onClick={handleClick}><h1>SMASY</h1></Navbar.Brand>
-                {/*</Navbar.Collapse>*/}
+                    <Nav.Brand href="/" onClick={handleClick}><h1>SMASY</h1></Nav.Brand>
+                {/* </Navbar.Collapse> */}
                 {/*<Navbar.Collapse id="responsive-navbar-nav">*/}
+                {/*<Navbar.Collapse id="basic-navbar-nav">*/}
                     <Nav className="app-nav">
                         { this.props.authenticated ? (
                             <div>

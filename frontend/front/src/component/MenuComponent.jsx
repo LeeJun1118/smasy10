@@ -8,11 +8,12 @@ class MenuComponent extends Component {
     render() {
         return (
             <div>
-                <Navbar bg="dark" sticky="top" variant="dark">
-                    <Navbar.Collapse className="justify-content-center">
+                <Navbar bg="primary" sticky="top" variant="dark">
+                    {/*<Navbar.Collapse className="justify-content-center">*/}
                     <Navbar.Brand href="/"><h1>SMASY</h1></Navbar.Brand>
-                    </Navbar.Collapse>
+                    {/*</Navbar.Collapse>*/}
                     {/*<Navbar.Collapse id="responsive-navbar-nav">*/}
+                    <Navbar.Collapse className="justify-content-end">
                     <Nav className="app-nav">
                         { this.props.authenticated ? (
                             <span>
@@ -27,7 +28,7 @@ class MenuComponent extends Component {
 
                         )}
                     </Nav>
-                    {/*</Navbar.Collapse>*/}
+                    </Navbar.Collapse>
                 </Navbar>
             </div>
         )

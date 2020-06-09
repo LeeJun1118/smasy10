@@ -13,12 +13,12 @@ class Home extends Component {
         return (
             <div className="imgt">
                 <NavLink to="/room/create">
-                    <img src="/img/fire3.gif" alt="" onClick={this.handleClick} className="img"/>
+                    <img src="/img/m-fire.gif" alt="" onClick={this.handleClick} className="img"/>
                     {/*<img src="/img/make.png" className="subimg"/>*/}
                 </NavLink>
 
                 <NavLink to="/rooms">
-                    <img src="/img/fire3.gif" alt="" onClick={this.handleClick} className="img"/>
+                    <img src="/img/e-fire.gif" alt="" onClick={this.handleClick} className="img"/>
                     {/*<img src="/img/enter.png" alt="" onClick={handleClick} className="subimg"/>*/}
                 </NavLink>
             </div>
