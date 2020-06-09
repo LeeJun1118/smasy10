@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface RoomRepository extends JpaRepository<Room,Long> {
@@ -18,5 +19,7 @@ public interface RoomRepository extends JpaRepository<Room,Long> {
 
     Optional<Room> findById(Long id);
 
+    List<Room> findBySportsContainingOrTitleContainingOrderByTitle(String sports,String title);
 
+    List<Room> findAllByOrderByDate();
 }
