@@ -57,3 +57,11 @@ export function createRoom(createRoomRequest) {
         body: JSON.stringify(createRoomRequest)
     });
 }
+
+export function searchRooms(text) {
+    const searchUrl = text ? `/rooms?text=${text}` : '/rooms'
+    return request({
+        url: API_BASE_URL + searchUrl,
+        method: 'GET',
+    });
+}

@@ -50,47 +50,6 @@ class MroomComponent extends Component {
         });
     }
 
-    /*
-        createRoom(event){
-            event.preventDefault();
-
-            const room = {
-                title: this.state.title,
-                sports: this.state.sports,
-                area: this.state.area,
-                date: this.state.date
-            };
-
-            axios.post("http://localhost:8080/api/room/create", room)
-                .then(response => {
-                    if (response.data != null) {
-                        this.setState({"show": true, "method": "post"});
-                        setTimeout(() => this.setState({"show": false}), 3000);
-                        console.log(response.data);
-                    } else {
-                        this.setState({"show": false});
-                    }
-                });
-            this.setState(this.initialState);
-        };
-
-        redirectHome = () => {
-            window.location.assign('/');
-            // return this.props.history.push("/");
-        }
-
-
-        onSelectChange = (e) => {
-            this.setState({
-                [e.target.name]: e.target.value
-            })
-            console.log(e.target.name + ' , ' + e.target.value);
-        }*/
-
-    //캘린더 관련 함수
-    // state = () => {
-    //     date:  new Date()
-    // }
     onChangeDate = (date) => {
         console.log(moment(date).format("YYYY-MM-DD"));
         this.setState({

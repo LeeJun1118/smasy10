@@ -7,13 +7,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class RoomService {
+public class RoomService implements RoomServiceInterface {
 
     private final RoomRepository roomRepository;
 
@@ -39,5 +41,20 @@ public class RoomService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id = "+ id));
         roomRepository.delete(room);
         return "deleted : " + "id" + id;
+    }
+
+    @Override
+    public List<Room> getRooms() {
+        return roomRepository.findAllByOrderByDate();
+    }
+
+    @Override
+    public List<Room> getRoomsContainingText(String text) {
+        return roomRepository.findBySportsContainingOrTitleContainingOrderByTitle(text, text);
+    }
+
+    @Override
+    public Room saveRoom(Room room) {
+        return roomRepository.save(room);
     }
 }
