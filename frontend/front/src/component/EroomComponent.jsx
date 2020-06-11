@@ -1,7 +1,9 @@
 import React, {Component} from "react";
-import {Card, Table, Button} from 'react-bootstrap'
+import {Card, Table, Button, Form, FormControl} from 'react-bootstrap'
 import '../css/Eroom.css';
 import {Link} from "react-router-dom";
+import {searchRooms} from "../util/APIUtils";
+import Alert from "react-s-alert";
 
 class EroomComponent extends Component {
     constructor(props) {
@@ -11,8 +13,11 @@ class EroomComponent extends Component {
             search: '',
             currentPage: 1,
             roomsPerPage: 5,
-            sortToggle: true
+            sortToggle: true,
+            roomsSearch:''
         };
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSearchRoom = this.handleSearchRoom.bind(this);
     }
 
     sortData = () => {
@@ -148,10 +153,44 @@ class EroomComponent extends Component {
         // this.props.history.push("/enter/"+id);
     }
 
+    handleInputChange(event) {
+        const target = event.target;
+        // const inputName = target.name;
+        const inputValue = target.value;
+        this.setState({
+            roomsSearch : inputValue
+        });
+    }
+    handleSearchRoom(event) {
+        // event.preventDefault();
+
+        const text = this.state.roomsSearch;
+        // const text = Object.assign({}, this.state);
+        // const text = JSON.parse('')
+        searchRooms(text)
+            .then(response => {
+                Alert.success("You're successfully search room!");
+                const data = response;
+                console.log("data = " + data);
+
+                this.setState({ rooms: data  });
+            }).catch(error => {
+            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+            this.setState({ rooms: [] });
+        });
+    }
+
     render() {
         const {rooms, currentPage, totalPages, search} = this.state;
         return (
             <div className="Eroom">
+                <Form inline className="form">
+                    <FormControl type="text" placeholder="Search" className="mr-sm-2"
+                                 onChange={this.handleInputChange}
+                                 name="roomsSearch" />
+                    <Button variant="outline-primary" onClick={this.handleSearchRoom}>검색</Button>
+                </Form>
+
                 {/*<Card style={{width: '18rem'}}>*/}
                 {/*    <Card.Body>*/}
                         <Table  striped bordered hover id="table">

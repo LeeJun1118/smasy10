@@ -75,6 +75,7 @@ class MroomComponent extends Component {
                             <Form.Control as="select" onChange={this.handleInputChange} name="sports">
                                 <option selected disabled>Please select</option>
                                 <option value="1">1</option>
+                                <option value="축구">축구</option>
                             </Form.Control>
                         </Form.Group>
 

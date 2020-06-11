@@ -18,6 +18,7 @@ const request = (options) => {
             if(!response.ok) {
                 return Promise.reject(json);
             }
+            // console.log(json);
             return json;
         })
     );
@@ -59,9 +60,10 @@ export function createRoom(createRoomRequest) {
 }
 
 export function searchRooms(text) {
-    const searchUrl = text ? `/rooms?text=${text}` : '/rooms'
+    const searchUrl = text ? `/api/rooms?text=${text}` : '/api/rooms';
     return request({
         url: API_BASE_URL + searchUrl,
         method: 'GET',
+        // body: JSON.stringify(text)
     });
 }
