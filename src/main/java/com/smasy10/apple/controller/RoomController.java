@@ -2,9 +2,13 @@ package com.smasy10.apple.controller;
 
 import com.smasy10.apple.common.Exception.ApiException;
 import com.smasy10.apple.domain.Room;
+import com.smasy10.apple.domain.User;
 import com.smasy10.apple.domain.dto.roomDto.*;
 import com.smasy10.apple.mapper.RoomMapper;
 import com.smasy10.apple.repository.RoomRepository;;
+import com.smasy10.apple.repository.UserRepository;
+import com.smasy10.apple.security.CurrentUser;
+import com.smasy10.apple.security.UserPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import com.smasy10.apple.service.RoomService;
@@ -17,6 +21,7 @@ import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /*
@@ -33,8 +38,10 @@ public class RoomController {
     private final RoomRepository roomRepository;
     private final RoomMapper roomMapper;
 
+    private final UserRepository userRepository;
+
     //방 보기
-    @GetMapping(value = "/api/room/{id}")
+    @GetMapping(value = "/api/rooms/enter/{id}")
     public ResponseEntity<RoomResponseDto> getRoom(@PathVariable Long id) {
         log.debug("REST request to get Post : {}", id);
         Room room = roomService.findForId(id).orElseThrow(() -> new ApiException("Post does not exist", HttpStatus.NOT_FOUND));
@@ -60,8 +67,12 @@ public class RoomController {
     //방 만들기
     @PostMapping(value = "/room/create")
     //밑에 있는 @RequestBody : 포스트맨에서 실행시만에 주석 달기 테스트 코드에서는 주석해제
-    public ResponseEntity createRoom(@RequestBody Room room) {
+    public ResponseEntity createRoom(@RequestBody Room room/*,
+                                     @CurrentUser UserPrincipal userPrincipal*/) {
         log.debug("REST request to create Room : {}", room);
+
+        /*Room saveRoom = roomService.registerRoom(room,userPrincipal);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saveRoom);*/
 
         Room roomSaved = roomRepository.save(room);
         return ResponseEntity.status(HttpStatus.CREATED).body(roomSaved);

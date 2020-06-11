@@ -26,7 +26,7 @@ class EachRoomComponent extends Component {
     }
 
     findById(id) {
-        fetch("http://localhost:8080/api/rooms/enter/")
+        fetch("http://localhost:8080/api/rooms/enter/:id")
             .then(response => response.json()
             )
             .then((data) => {

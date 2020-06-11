@@ -1,6 +1,8 @@
 package com.smasy10.apple.domain.dto.roomDto;
 
+import com.smasy10.apple.domain.Room;
 import com.smasy10.apple.domain.User;
+import com.smasy10.apple.security.UserPrincipal;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,7 +11,7 @@ import java.util.List;
 
 @Data
 public class RoomDto {
-
+    @NotEmpty
     private Long id;
 
     @NotEmpty
