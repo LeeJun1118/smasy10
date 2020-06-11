@@ -165,7 +165,7 @@ class EroomComponent extends Component {
         // event.preventDefault();
 
         const text = this.state.roomsSearch;
-        
+
         searchRooms(text)
             .then(response => {
                 Alert.success("You're successfully search room!");
@@ -178,14 +178,23 @@ class EroomComponent extends Component {
         });
     }
 
+    onKeyPress = (e) =>{
+        if(e.key == 'Enter'){
+            this.handleSearchRoom();
+        }
+    }
+    onSubmit = (e) =>{
+        e.preventDefault();
+    }
+
     render() {
         const {rooms, currentPage, totalPages, search} = this.state;
         return (
             <div className="Eroom">
-                <Form inline className="form">
+                <Form inline className="form" onKeyPress={this.onKeyPress} onSubmit={this.onSubmit}>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2"
                                  onChange={this.handleInputChange}
-                                 name="roomsSearch" />
+                                 name="roomsSearch"/>
                     <Button variant="outline-primary" onClick={this.handleSearchRoom}>검색</Button>
                 </Form>
 
