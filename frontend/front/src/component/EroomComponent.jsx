@@ -165,15 +165,13 @@ class EroomComponent extends Component {
         // event.preventDefault();
 
         const text = this.state.roomsSearch;
-        // const text = Object.assign({}, this.state);
-        // const text = JSON.parse('')
+        
         searchRooms(text)
             .then(response => {
                 Alert.success("You're successfully search room!");
                 const data = response;
-                console.log("data = " + data);
-
-                this.setState({ rooms: data  });
+                // console.log("data = " + data);
+                this.setState({ rooms: data });
             }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
             this.setState({ rooms: [] });
