@@ -25,7 +25,7 @@ import java.util.Set;
 @NoArgsConstructor
 
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
+//@EqualsAndHashCode(of = "id")
 
 
 //해당 클래스의 빌더 패턴 클래스 생성
@@ -70,8 +70,16 @@ public class User /*extends BaseTimeEntity*/ {
 
     private String providerId;
 
-    @ManyToOne
-    private Room room;
+    /*@ManyToOne
+    private Room room;*/
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<UserRoom> userRooms;
+
+    /*\
+    public User(Long id) {
+    }*/
 
     /*@OneToMany(mappedBy = "user")
     private Set<Room> rooms;

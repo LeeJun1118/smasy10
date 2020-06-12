@@ -3,9 +3,11 @@ package com.smasy10.apple.service;
 import com.smasy10.apple.common.Exception.ApiException;
 import com.smasy10.apple.domain.Room;
 import com.smasy10.apple.domain.User;
+import com.smasy10.apple.domain.UserRoom;
 import com.smasy10.apple.domain.dto.roomDto.RoomDto;
 import com.smasy10.apple.repository.RoomRepository;
 import com.smasy10.apple.repository.UserRepository;
+import com.smasy10.apple.repository.UserRoomRepoesitory;
 import com.smasy10.apple.security.CurrentUser;
 import com.smasy10.apple.security.UserPrincipal;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,7 @@ public class RoomService implements RoomServiceInterface {
 
     private final RoomRepository roomRepository;
     private final UserRepository userRepository;
+    private final UserRoomRepoesitory userRoomRepoesitory;
 
     public Optional<Room> findForId(Long id) {
         return roomRepository.findById(id);
@@ -67,16 +70,20 @@ public class RoomService implements RoomServiceInterface {
         return roomRepository.save(room);
     }
 
-    public Room registerRoom(Room room,@CurrentUser UserPrincipal userPrincipal) {
+    /*public Room registerRoom(Room room, @CurrentUser UserPrincipal userPrincipal) {
 
-        Optional<User> user = Optional.ofNullable(userRepository.findById(userPrincipal.getId())
-                .orElseThrow(() -> new ApiException("Post does not exist", HttpStatus.NOT_FOUND)));
+        User user = userRepository.findById(userPrincipal.getId())
+                .orElseThrow(() -> new ApiException("Post does not exist", HttpStatus.NOT_FOUND));
 
-        user.map(u -> {
-            u.setRoom(room);
-            return u;
-        });
+*//*
+        user.setRoom(room);
+        userRepository.save(user);
+*//*
+        UserRoom newUserRoom = new UserRoom();
+        newUserRoom.setUser(user);
+        newUserRoom.setRoom(room);
+        userRoomRepoesitory.save(newUserRoom);
 
         return roomRepository.save(room);
-    }
+    }*/
 }

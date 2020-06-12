@@ -3,25 +3,24 @@ package com.smasy10.apple.controller;
 import com.smasy10.apple.common.Exception.ApiException;
 import com.smasy10.apple.domain.Room;
 import com.smasy10.apple.domain.User;
+import com.smasy10.apple.domain.UserRoom;
 import com.smasy10.apple.domain.dto.roomDto.*;
 import com.smasy10.apple.mapper.RoomMapper;
 import com.smasy10.apple.repository.RoomRepository;;
 import com.smasy10.apple.repository.UserRepository;
+import com.smasy10.apple.repository.UserRoomRepoesitory;
 import com.smasy10.apple.security.CurrentUser;
 import com.smasy10.apple.security.UserPrincipal;
+import com.smasy10.apple.service.UserRoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import com.smasy10.apple.service.RoomService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /*
@@ -38,26 +37,56 @@ public class RoomController {
     private final RoomRepository roomRepository;
     private final RoomMapper roomMapper;
 
-    private final UserRepository userRepository;
+    private final UserRoomRepoesitory userRoomRepoesitory;
 
-    //방 보기
+    private final UserRepository userRepository;
+    private final UserRoomService userRoomService;
+
+    //방 정보 보여주기
     @GetMapping(value = "/api/rooms/enter/{id}")
     public ResponseEntity<RoomResponseDto> getRoom(@PathVariable Long id) {
-        log.debug("REST request to get Post : {}", id);
-        Room room = roomService.findForId(id).orElseThrow(() -> new ApiException("Post does not exist", HttpStatus.NOT_FOUND));
+        log.debug("REST request to get Room : {}", id);
+        Room room = roomService.findForId(id).orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
+
         return new ResponseEntity<>(new RoomResponseDto(room), HttpStatus.OK);
     }
 
-    //방 목록 보기
-    /*@GetMapping(value = "/api/rooms")
-    public ResponseEntity<List<RoomListResponseDto>> getRoomList(Pageable pageable) {
-        log.debug("REST request to get Rooms : {}", pageable);
-        Page<Room> rooms = roomService.findAllByOrderByIdPageable(pageable);
-        Page<RoomListResponseDto> roomDto = rooms.map(room -> new RoomListResponseDto((room)));
-        return new ResponseEntity<>(roomDto.getContent(), HttpStatus.OK);
-    }*/
+    //방 입장하기 (UserRoom DB에 방, 유저 저장)
+    @PostMapping(value = "/api/rooms/enter/{id}")
+    public ResponseEntity enterRoom(@PathVariable Long id, @CurrentUser UserPrincipal userPrincipal) {
+        UserRoom userRoom = new UserRoom();
+
+        //로그인 중인 사용자 찾기
+        User user = userRepository.findById(userPrincipal.getId())
+                .orElseThrow(() -> new ApiException("User does not exist", HttpStatus.NOT_FOUND));
+
+        //파라미터로 받은 id의 방 찾기
+        Room room = roomRepository.findById(id)
+                .orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
+
+        userRoom.setRoom(room);
+        userRoom.setUser(user);
+
+        //입장(저장)
+        userRoomRepoesitory.save(userRoom);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(userRoom);
+    }
+
+    //방에 입장한 유저들의 정보와 입장한 방의 정보 보여줌
+    @GetMapping(value = "/api/rooms/enter/user/{id}")
+    public List<UserRoom> userList(@PathVariable Long id){
+        Room room = roomService.findForId(id).orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
+
+        //userRoomRepository 에서 room id가 {id}인 유저 아이디를 전부 뽑아
+        List<UserRoom> users = userRoomRepoesitory.findAllByRoom(room);
+
+        return users.stream().collect(Collectors.toList());
+    }
+
+    //방 목록 보기 (검색: 방의 id,title,area,sprots,date)
     @GetMapping(value = "/api/rooms")
-    public List<RoomDto> getRooms(@RequestParam(value = "text", required = false) String text){
+    public List<RoomDto> getRooms(@RequestParam(value = "text", required = false) String text) {
         List<Room> rooms = (text == null) ? roomService.getRooms() : roomService.getRoomsContainingText(text);
         return rooms.stream()
                 .map(room -> roomMapper.toRoomDto(room))
@@ -67,15 +96,22 @@ public class RoomController {
     //방 만들기
     @PostMapping(value = "/room/create")
     //밑에 있는 @RequestBody : 포스트맨에서 실행시만에 주석 달기 테스트 코드에서는 주석해제
-    public ResponseEntity createRoom(@RequestBody Room room/*,
-                                     @CurrentUser UserPrincipal userPrincipal*/) {
+    public ResponseEntity createRoom(@RequestBody Room room,
+                                     @CurrentUser UserPrincipal userPrincipal) {
         log.debug("REST request to create Room : {}", room);
+        /*Room saveRoom = roomService.registerRoom(room, userPrincipal);*/
+        Room newRoom = roomRepository.save(room);
 
-        /*Room saveRoom = roomService.registerRoom(room,userPrincipal);
-        return ResponseEntity.status(HttpStatus.CREATED).body(saveRoom);*/
+        UserRoom newUserRoom = new UserRoom();
+        newUserRoom.setRoom(newRoom);
 
-        Room roomSaved = roomRepository.save(room);
-        return ResponseEntity.status(HttpStatus.CREATED).body(roomSaved);
+        User user = userRepository.findById(userPrincipal.getId())
+                .orElseThrow(() -> new ApiException("Post does not exist", HttpStatus.NOT_FOUND));
+        newUserRoom.setUser(user);
+
+        userRoomRepoesitory.save(newUserRoom);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(newRoom);
     }
 
     //방 수정
@@ -88,11 +124,5 @@ public class RoomController {
     public String deleteRoom(@PathVariable Long id) {
         return roomService.delete(id);
     }
-
-   /* @GetMapping("/api/rooms/")
-    public List<Room> getRooms(@RequestParam(value = "text", required = false) String text) {
-        List<Room> rooms = (text == null) ? getRooms("No rooms!!!") : roomService.getRoomsContainingText(text);
-        return new ArrayList<>(rooms);
-    }*/
 
 }

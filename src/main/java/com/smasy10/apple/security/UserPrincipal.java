@@ -16,14 +16,12 @@ public class UserPrincipal implements OAuth2User, UserDetails {
     private Long id;
     private String email;
     private String password;
-    //private Room room;
     private Collection<? extends GrantedAuthority> authorities;
     private Map<String, Object> attributes;
 
-    public UserPrincipal(Long id, String email,/* Room room,*/ String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(Long id, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.email = email;
-        //this.room = room;
         this.password = password;
         this.authorities = authorities;
     }
@@ -35,7 +33,6 @@ public class UserPrincipal implements OAuth2User, UserDetails {
         return new UserPrincipal(
                 user.getId(),
                 user.getEmail(),
-                //user.getRoom(),
                 user.getPassword(),
                 authorities
         );
@@ -54,14 +51,6 @@ public class UserPrincipal implements OAuth2User, UserDetails {
     public String getEmail() {
         return email;
     }
-
-    /*public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }*/
 
     @Override
     public String getPassword() {
