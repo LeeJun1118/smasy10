@@ -1,5 +1,6 @@
 package com.smasy10.apple.security;
 
+import com.smasy10.apple.domain.Room;
 import com.smasy10.apple.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

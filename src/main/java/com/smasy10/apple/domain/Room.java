@@ -1,5 +1,6 @@
 package com.smasy10.apple.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 
-@EqualsAndHashCode(of = "id")
+//@EqualsAndHashCode(of = "id")
 
 //JPA 어노테이션
 //테이블과 연결될 클래스임을 나타냄
@@ -45,16 +46,21 @@ public class Room extends BaseTimeEntity{
     @Column(nullable = false)
     private String date;
 
-    @OneToMany(mappedBy = "room")
-    private List<User> users = new ArrayList<>();
-
-/*
-    @ManyToOne
-    private User user;
-*/
+   /* @OneToMany(mappedBy = "room")
+    @JsonIgnore
+    private List<User> users = new ArrayList<>();*/
 
     @OneToMany(mappedBy = "room")
+    @JsonIgnore
+    private List<UserRoom> userRooms= new ArrayList<>();
+
+    @OneToMany(mappedBy = "room")
+    @JsonIgnore
     private List<Reservation> reservations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "room")
+    @JsonIgnore
+    private List<Reply> replies = new ArrayList<>();
 
     //나중에 삭제
     public Room(String title,String area,String sports,String date) {

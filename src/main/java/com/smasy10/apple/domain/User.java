@@ -25,7 +25,7 @@ import java.util.Set;
 @NoArgsConstructor
 
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
+//@EqualsAndHashCode(of = "id")
 
 
 //해당 클래스의 빌더 패턴 클래스 생성
@@ -70,27 +70,20 @@ public class User /*extends BaseTimeEntity*/ {
 
     private String providerId;
 
-    /*@Column(length = 500, nullable = false)
-    private String phoneNo;
+    /*@ManyToOne
+    private Room room;*/
 
-    @Column(length = 500, nullable = false)
-    private String address;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<UserRoom> userRooms;
 
-    //로그인한 사용자인지 구분하기 위한 변수
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Role role;*/
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Reply> replies;
 
-    //일대다 매핑
-    //엔티티 자신을 기준으로 다중성을 생각해야함
-    //mappedBy 속성을 사용해 연관관계의 주인을 정함
-    //replies 의 주인은 user(replies 는 user 에 의해 매핑됨)
-    //LAZY 옵션은 Room 객체를 조회하는 시점이 아닌 객체가 실제로 사용될 때 조회하는 옵션
-    /*@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Reply> replies = new ArrayList<>();*/
-
-    @ManyToOne
-    private Room room;
+    /*\
+    public User(Long id) {
+    }*/
 
     /*@OneToMany(mappedBy = "user")
     private Set<Room> rooms;

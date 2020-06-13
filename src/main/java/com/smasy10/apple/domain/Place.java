@@ -15,7 +15,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode(of = "id")
+//@EqualsAndHashCode(of = "id")
 
 //JPA 어노테이션
 //테이블과 연결될 클래스임을 나타냄
