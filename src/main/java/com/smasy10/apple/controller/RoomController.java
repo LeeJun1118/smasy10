@@ -1,6 +1,7 @@
 package com.smasy10.apple.controller;
 
 import com.smasy10.apple.common.Exception.ApiException;
+import com.smasy10.apple.common.Exception.BadRequestException;
 import com.smasy10.apple.domain.Room;
 import com.smasy10.apple.domain.User;
 import com.smasy10.apple.domain.UserRoom;
@@ -17,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import com.smasy10.apple.service.RoomService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 
@@ -54,6 +56,7 @@ public class RoomController {
     //방 입장하기 (UserRoom DB에 방, 유저 저장)
     @PostMapping(value = "/api/rooms/enter/{id}")
     public ResponseEntity enterRoom(@PathVariable Long id, @CurrentUser UserPrincipal userPrincipal) {
+
         UserRoom userRoom = new UserRoom();
 
         //로그인 중인 사용자 찾기
@@ -64,18 +67,49 @@ public class RoomController {
         Room room = roomRepository.findById(id)
                 .orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
 
-        userRoom.setRoom(room);
-        userRoom.setUser(user);
+        //입장시 운동 종목에 따른 총 인원 수보다 적을 때만 입장 가능
+        List<UserRoom> users = userRoomRepoesitory.findAllByRoom(room);
+        if (room.getSports().equals("축구")) {
+            if (users.size() >= 2)
+                return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("인원이 모두 찼습니다.");
+            else {
+                userRoom.setRoom(room);
+                userRoom.setUser(user);
 
-        //입장(저장)
-        userRoomRepoesitory.save(userRoom);
+                //입장(저장)
+                userRoomRepoesitory.save(userRoom);
+            }
+        }
+        else if (room.getSports().equals("야구")) {
+            if (users.size() >= 2)
+                return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("인원이 모두 찼습니다.");
+            else {
+                userRoom.setRoom(room);
+                userRoom.setUser(user);
+
+                //입장(저장)
+                userRoomRepoesitory.save(userRoom);
+            }
+        }
+
 
         return ResponseEntity.status(HttpStatus.CREATED).body(userRoom);
     }
 
+    //현재 방에 입장해 있는 유저 수
+    @GetMapping(value = "/api/rooms/enter/user/count/{id}")
+    public int userCount(@PathVariable Long id) {
+        Room room = roomService.findForId(id).orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
+
+        //userRoomRepository 에서 room id가 {id}인 유저 아이디를 전부 뽑아
+        List<UserRoom> users = userRoomRepoesitory.findAllByRoom(room);
+
+        return users.size();
+    }
+
     //방에 입장한 유저들의 정보와 입장한 방의 정보 보여줌
     @GetMapping(value = "/api/rooms/enter/user/{id}")
-    public List<UserRoom> userList(@PathVariable Long id){
+    public List<UserRoom> userList(@PathVariable Long id) {
         Room room = roomService.findForId(id).orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
 
         //userRoomRepository 에서 room id가 {id}인 유저 아이디를 전부 뽑아
@@ -106,7 +140,7 @@ public class RoomController {
         newUserRoom.setRoom(newRoom);
 
         User user = userRepository.findById(userPrincipal.getId())
-                .orElseThrow(() -> new ApiException("Post does not exist", HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ApiException("User does not exist", HttpStatus.NOT_FOUND));
         newUserRoom.setUser(user);
 
         userRoomRepoesitory.save(newUserRoom);
@@ -120,9 +154,20 @@ public class RoomController {
         return ResponseEntity.status(HttpStatus.OK).body(roomService.update(id, room));
     }
 
-    @DeleteMapping(value = "/api/room/delete/{id}")
-    public String deleteRoom(@PathVariable Long id) {
-        return roomService.delete(id);
-    }
 
+    @DeleteMapping(value = "/api/room/exit/{id}")
+    @Transactional
+    public ResponseEntity<Void> exitRoom(@PathVariable Long id, @CurrentUser UserPrincipal userPrincipal){
+
+        Room room = roomRepository.findById(id)
+                .orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
+
+        User user = userRepository.findById(userPrincipal.getId())
+                .orElseThrow(() -> new ApiException("User does not exist", HttpStatus.NOT_FOUND));
+
+        //userRoomRepoesitory.deleteUserRoomByUserAndRoom(userPrincipal.getId(), id);
+        userRoomRepoesitory.deleteUserRoomByUserAndRoom(user,room);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

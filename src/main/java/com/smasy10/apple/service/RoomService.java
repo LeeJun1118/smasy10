@@ -4,21 +4,16 @@ import com.smasy10.apple.common.Exception.ApiException;
 import com.smasy10.apple.domain.Room;
 import com.smasy10.apple.domain.User;
 import com.smasy10.apple.domain.UserRoom;
-import com.smasy10.apple.domain.dto.roomDto.RoomDto;
 import com.smasy10.apple.repository.RoomRepository;
 import com.smasy10.apple.repository.UserRepository;
 import com.smasy10.apple.repository.UserRoomRepoesitory;
-import com.smasy10.apple.security.CurrentUser;
-import com.smasy10.apple.security.UserPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
