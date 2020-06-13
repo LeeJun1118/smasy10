@@ -60,7 +60,7 @@ export function createRoom(createRoomRequest) {
 }
 
 export function searchRooms(text) {
-    const searchUrl = text ? `/api/rooms?text=${text}` : '/api/rooms';
+    const searchUrl = text ? `/rooms?text=${text}` : '/api/rooms';
     return request({
         url: API_BASE_URL + searchUrl,
         method: 'GET',

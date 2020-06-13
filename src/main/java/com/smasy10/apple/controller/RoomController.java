@@ -46,7 +46,7 @@ public class RoomController {
     private final UserRoomService userRoomService;
 
     //방 정보 보여주기
-    @GetMapping(value = "/api/rooms/enter/{id}")
+    @GetMapping(value = "/rooms/enter/{id}")
     public ResponseEntity<RoomResponseDto> getRoom(@PathVariable Long id) {
         log.debug("REST request to get Room : {}", id);
         Room room = roomService.findForId(id).orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
@@ -55,7 +55,7 @@ public class RoomController {
     }
 
     //방 입장하기 (UserRoom DB에 방, 유저 저장)
-    @PostMapping(value = "/api/rooms/enter/{id}")
+    @PostMapping(value = "/rooms/enter/{id}")
     public ResponseEntity enterRoom(@PathVariable Long id, @CurrentUser UserPrincipal userPrincipal) {
 
         UserRoom userRoom = new UserRoom();
@@ -107,7 +107,7 @@ public class RoomController {
     }
 
     //현재 방에 입장해 있는 유저 수
-    @GetMapping(value = "/api/rooms/enter/user/count/{id}")
+    @GetMapping(value = "/rooms/enter/user/count/{id}")
     public int userCount(@PathVariable Long id) {
         Room room = roomService.findForId(id).orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
 
@@ -118,7 +118,7 @@ public class RoomController {
     }
 
     //방에 입장한 유저들의 정보와 입장한 방의 정보 보여줌
-    @GetMapping(value = "/api/rooms/enter/users/info/{id}")
+    @GetMapping(value = "/rooms/enter/users/info/{id}")
     public List<UserRoom> userList(@PathVariable Long id) {
         Room room = roomService.findForId(id).orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
 
@@ -129,7 +129,7 @@ public class RoomController {
     }
 
     //방 목록 보기 (검색: 방의 id,title,area,sprots,date)
-    @GetMapping(value = "/api/rooms")
+    @GetMapping(value = "/rooms")
     public List<RoomDto> getRooms(@RequestParam(value = "text", required = false) String text) {
         List<Room> rooms = (text == null) ? roomService.getRooms() : roomService.getRoomsContainingText(text);
         return rooms.stream()
@@ -166,7 +166,7 @@ public class RoomController {
     }*/
 
 
-    @DeleteMapping(value = "/api/room/exit/{id}")
+    @DeleteMapping(value = "/room/exit/{id}")
     @Transactional
     public ResponseEntity<Void> exitRoom(@PathVariable Long id, @CurrentUser UserPrincipal userPrincipal){
 

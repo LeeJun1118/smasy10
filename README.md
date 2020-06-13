@@ -6,13 +6,13 @@
  | POST         | /auth/signup                     | Sing Up                       |
  | POST         | /auth/login                      | Login                         |
  | GET          | /user/me                         | Profile                       |
- | GET          | /api/rooms                       | Room List(Search)             |
+ | GET          | /rooms                           | Room List(Search)             |
  | POST         | /room/create                     | Create Room                   |
- | POST         | /api/rooms/enter/{id}            | Enter Room                    | 
- | GET          | /api/rooms/enter/{id}            | Room info                     |
- | GET          | /api/rooms/enter/user/count/{id} | Number of Users in the Room   |
- | GET          | /api/rooms/enter/users/info/{id} | Info of Users in the Room     |
- | DELETE       | /api/room/exit/{id}              | Exit Room                     |
+ | POST         | /rooms/enter/{id}                | Enter Room                    | 
+ | GET          | /rooms/enter/{id}                | Room info                     |
+ | GET          | /rooms/enter/user/count/{id}     | Number of Users in the Room   |
+ | GET          | /rooms/enter/users/info/{id}     | Info of Users in the Room     |
+ | DELETE       | /room/exit/{id}                  | Exit Room                     |
 
 ### 첫 클론 후
 1. terminal 에서 \...\front 경로로 이동한 후 
