@@ -6,7 +6,7 @@
  | POST         | /auth/signup                     | Sing Up                       |
  | POST         | /auth/login                      | Login                         |
  | GET          | /user/me                         | Profile                       |
- | GET          | /rooms                           | Room List(Search)             |
+ | GET          | /api/rooms                           | Room List(Search)             |
  | POST         | /room/create                     | Create Room                   |
  | POST         | /rooms/enter/{id}                | Enter Room                    | 
  | GET          | /rooms/enter/{id}                | Room info                     |
