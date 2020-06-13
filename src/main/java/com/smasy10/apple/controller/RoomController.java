@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import com.smasy10.apple.service.RoomService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -67,7 +68,16 @@ public class RoomController {
         Room room = roomRepository.findById(id)
                 .orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
 
+        //종목에 따른 인원 제한 없는 입장
+        userRoom.setRoom(room);
+        userRoom.setUser(user);
+
+        //입장(저장)
+        userRoomRepoesitory.save(userRoom);
+
+        //종목에 따라 인원 제한
         //입장시 운동 종목에 따른 총 인원 수보다 적을 때만 입장 가능
+        /*
         List<UserRoom> users = userRoomRepoesitory.findAllByRoom(room);
         if (room.getSports().equals("축구")) {
             if (users.size() >= 2)
@@ -90,7 +100,7 @@ public class RoomController {
                 //입장(저장)
                 userRoomRepoesitory.save(userRoom);
             }
-        }
+        }*/
 
 
         return ResponseEntity.status(HttpStatus.CREATED).body(userRoom);
@@ -108,7 +118,7 @@ public class RoomController {
     }
 
     //방에 입장한 유저들의 정보와 입장한 방의 정보 보여줌
-    @GetMapping(value = "/api/rooms/enter/user/{id}")
+    @GetMapping(value = "/api/rooms/enter/users/info/{id}")
     public List<UserRoom> userList(@PathVariable Long id) {
         Room room = roomService.findForId(id).orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
 
@@ -148,11 +158,12 @@ public class RoomController {
         return ResponseEntity.status(HttpStatus.CREATED).body(newRoom);
     }
 
-    //방 수정
+    // -> 추후 방장이 방 수정할 수 있게 하기
+    /*//방 수정
     @PutMapping(value = "/api/room/update/{id}")
     public ResponseEntity updateRoom(@PathVariable Long id, @RequestBody Room room) {
         return ResponseEntity.status(HttpStatus.OK).body(roomService.update(id, room));
-    }
+    }*/
 
 
     @DeleteMapping(value = "/api/room/exit/{id}")
