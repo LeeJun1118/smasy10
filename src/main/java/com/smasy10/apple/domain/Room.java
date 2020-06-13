@@ -52,10 +52,15 @@ public class Room extends BaseTimeEntity{
 
     @OneToMany(mappedBy = "room")
     @JsonIgnore
-    private List<UserRoom> userRooms;
+    private List<UserRoom> userRooms= new ArrayList<>();
 
     @OneToMany(mappedBy = "room")
+    @JsonIgnore
     private List<Reservation> reservations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "room")
+    @JsonIgnore
+    private List<Reply> replies = new ArrayList<>();
 
     //나중에 삭제
     public Room(String title,String area,String sports,String date) {

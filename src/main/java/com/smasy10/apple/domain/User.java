@@ -77,6 +77,10 @@ public class User /*extends BaseTimeEntity*/ {
     @JsonIgnore
     private List<UserRoom> userRooms;
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Reply> replies;
+
     /*\
     public User(Long id) {
     }*/

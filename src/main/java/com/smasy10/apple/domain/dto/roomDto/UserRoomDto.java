@@ -15,8 +15,6 @@ public class UserRoomDto {
 
     private Long id;
 
-    private List<HashMap<String,String>> users;
-
     private Long userId;
     private String userName;
     private String userEmail;
