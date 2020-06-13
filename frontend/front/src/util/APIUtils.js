@@ -67,3 +67,11 @@ export function searchRooms(text) {
         // body: JSON.stringify(text)
     });
 }
+
+export function currentRoom(currentRoomRequest) {
+    return request({
+        url: API_BASE_URL + "/rooms/enter" + currentRoomRequest.id,
+        method: 'POST',
+        body: JSON.stringify(currentRoom)
+    });
+}

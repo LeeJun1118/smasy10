@@ -8,7 +8,7 @@ class EachRoomComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            rooms: [],
+            room: [],
             users : [],
             memberCount : 0
         };
@@ -50,17 +50,17 @@ class EachRoomComponent extends Component {
     }
 
     render() {
-        const {rooms, currentPage, totalPages, search} = this.state;
+        const {room} = this.state;
         return (
             <div className="EachRoom">
                 <Table striped bordered hover className="table">
                     <caption className="caption">현재 방</caption>
                     <tr><th>번호</th><th>제목</th><th>지역</th><th>운동 종목</th><th>경기 날짜</th></tr>
-                    <tr><td>1</td>
-                        <td>테스트</td>
-                        <td>테스트</td>
-                        <td>테스트</td>
-                        <td>테스트</td></tr>
+                    <tr><td>{room.id}</td>
+                        <td>{room.title}</td>
+                        <td>{room.area}</td>
+                        <td>{room.sports}</td>
+                        <td>{room.date}</td></tr>
                 </Table>
 
                 <Table className="table">

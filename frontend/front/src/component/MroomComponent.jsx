@@ -36,15 +36,16 @@ class MroomComponent extends Component {
     }
 
     handleSubmit(event) {
-        event.preventDefault();
+        // event.preventDefault();
 
         const createRoomRequest = Object.assign({}, this.state);
 
         createRoom(createRoomRequest)
             .then(response => {
                 Alert.success("You're successfully create room!");
-                this.props.history.push("/");
-                //this.props.history.push("/rooms/enter/" + this.state.id);
+                const data = response;
+                console.log(data.id);
+                this.props.history.push("/rooms/enter/" + data.id);
             }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
         });
@@ -57,64 +58,60 @@ class MroomComponent extends Component {
         })
     }
 
+    onSubmit(e){
+        e.preventDefault();
+    }
+
     render() {
         return (
             <div className="Mroom">
-                <form onSubmit={this.handleSubmit}>
+                <Form onSubmit={this.onSubmit}>
+                    <Form.Group controlId="exampleForm.ControlSelect1" id="title"
+                                value={this.state.title}>
+                        <Form.Label>방 제목</Form.Label>
+                        <Form.Control type="text" placeholder="Enter title" onChange={this.handleInputChange}
+                                      name="title"/>
+                    </Form.Group>
 
-                    <Form>
-                        <Form.Group controlId="exampleForm.ControlSelect1" id="title"
-                                    value={this.state.title}>
-                            <Form.Label>방 제목</Form.Label>
-                            <Form.Control type="text" placeholder="Enter title" onChange={this.handleInputChange}
-                                          name="title"/>
-                        </Form.Group>
-
-                        <Form.Group controlId="exampleForm.ControlSelect1" id="sports" value={this.state.sports}>
-                            <Form.Label>운동 종목</Form.Label>
-                            <Form.Control as="select" onChange={this.handleInputChange} name="sports">
-                                <option selected disabled>Please select</option>
-                                <option value="1">1</option>
-                                <option value="축구">축구</option>
-                            </Form.Control>
-                        </Form.Group>
-
-                        <Form.Group controlId="exampleForm.ControlSelect1" id="area" value={this.state.area}>
-                            <Form.Label>지역</Form.Label>
-                            <Form.Control as="select" onChange={this.handleInputChange} name="area">
-                                <option selected disabled>Please select</option>
-                                <option value="a">a</option>
-                                <option value="b">b</option>
-                            </Form.Control>
-                        </Form.Group>
-
-                        {/*<Form.Group controlId="exampleForm.ControlSelect1">
-                        <Form.Label>시설</Form.Label>
-                        <Form.Control as="select" onChange={this.onSelectChange} name="roomFacility">
+                    <Form.Group controlId="exampleForm.ControlSelect1" id="sports" value={this.state.sports}>
+                        <Form.Label>운동 종목</Form.Label>
+                        <Form.Control as="select" onChange={this.handleInputChange} name="sports">
                             <option selected disabled>Please select</option>
-                            <option>A</option>
-                            <option>B</option>
-                            <option>C</option>
-                            <option>D</option>
-                            <option>E</option>
+                            <option value="1">1</option>
+                            <option value="축구">축구</option>
                         </Form.Control>
-                    </Form.Group>*/}
+                    </Form.Group>
 
-                        <Form.Group id="calendar" value={this.state.date}>
-                            <Form.Label>날짜</Form.Label>
-                            <Calendar name="date"
-                                      onChange={this.onChangeDate}/>
-                        </Form.Group>
+                    <Form.Group controlId="exampleForm.ControlSelect1" id="area" value={this.state.area}>
+                        <Form.Label>지역</Form.Label>
+                        <Form.Control as="select" onChange={this.handleInputChange} name="area">
+                            <option selected disabled>Please select</option>
+                            <option value="a">a</option>
+                            <option value="b">b</option>
+                        </Form.Control>
+                    </Form.Group>
 
-                        {/* 각 시설 위치 지도 보여주면 좋을 듯*/}
+                    {/*<Form.Group controlId="exampleForm.ControlSelect1">*/}
+                    {/*    <Form.Label>시설</Form.Label>*/}
+                    {/*    <Form.Control as="select" onChange={this.onSelectChange} name="roomFacility">*/}
+                    {/*        <option selected disabled>Please select</option>*/}
+                    {/*        <option>A</option>*/}
+                    {/*        <option>B</option>*/}
+                    {/*        <option>C</option>*/}
+                    {/*        <option>D</option>*/}
+                    {/*        <option>E</option>*/}
+                    {/*    </Form.Control>*/}
+                    {/*</Form.Group>*/}
 
+                    <Form.Group id="calendar" value={this.state.date}>
+                        <Form.Label>날짜</Form.Label>
+                        <Calendar name="date"
+                                  onChange={this.onChangeDate}/>
+                    </Form.Group>
 
-                    </Form>
-                    <Button  bg="primary" onClick={this.handleSubmit}>
-                        개설하기
-                    </Button>
-                </form>
-
+                    {/* 각 시설 위치 지도 보여주면 좋을 듯*/}
+                    <Button  bg="primary" onClick={this.handleSubmit}>개설하기</Button>
+                </Form>
             </div>
         )
     }
