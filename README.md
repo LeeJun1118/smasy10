@@ -15,7 +15,8 @@
  | DELETE       | /room/exit/{id}                  | Exit Room                   (방 나가기)                      |
  | POST         | /room/create/reply/{id}          | Write a room comment        (방 댓글 쓰기)                    |
  | PUT          | /room/edit/reply/{id}            | Edit a room comment         (방 댓글 수정하기)                 | 
- | DELETE       | /reply/delete/{id}                | Delete Reply                (댓글 삭제하기)                   | 
+ | DELETE       | /reply/delete/{id}               | Delete Reply                (댓글 삭제하기)                   | 
+ | GET          | /room/replies/{id}               | List of room comments       (방 댓글 목록)                    |
 
 ### 첫 클론 후
 1. terminal 에서 \...\front 경로로 이동한 후 
