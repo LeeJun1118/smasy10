@@ -1,18 +1,21 @@
 # SMASY(Sport Matching System)
 
 ## REST API GUIDE
- | HTTP method  | URI                              | Role                          |
- |------------- | -------------------------------- | ----------------------------- |
- | POST         | /auth/signup                     | Sing Up                       |
- | POST         | /auth/login                      | Login                         |
- | GET          | /user/me                         | Profile                       |
- | GET          | /api/rooms                           | Room List(Search)             |
- | POST         | /room/create                     | Create Room                   |
- | POST         | /rooms/enter/{id}                | Enter Room                    | 
- | GET          | /rooms/enter/{id}                | Room info                     |
- | GET          | /rooms/enter/user/count/{id}     | Number of Users in the Room   |
- | GET          | /rooms/enter/users/info/{id}     | Info of Users in the Room     |
- | DELETE       | /room/exit/{id}                  | Exit Room                     |
+ | HTTP method  | URI                              | Role                                                       |
+ |------------- | -------------------------------- | ---------------------------------------------------------- |
+ | POST         | /auth/signup                     | Sing Up                     (회원가입)                       |
+ | POST         | /auth/login                      | Login                       (로그인)                         |
+ | GET          | /user/me                         | Profile                     (프로필)                         |
+ | GET          | /api/rooms                       | Room List(Search)           (방 목록)                        |
+ | POST         | /room/create                     | Create Room                 (방 생성)                        |
+ | POST         | /rooms/enter/{id}                | Enter Room                  (방 입장)                        | 
+ | GET          | /rooms/enter/{id}                | Room info                   (방 정보)                        |
+ | GET          | /rooms/enter/user/count/{id}     | Number of Users in the Room (방에 입장한 사용자 수)            |
+ | GET          | /rooms/enter/users/info/{id}     | Info of Users in the Room   (방에 입장한 사용자들 정보)         |
+ | DELETE       | /room/exit/{id}                  | Exit Room                   (방 나가기)                      |
+ | POST         | /room/create/reply/{id}          | Write a room comment        (방 댓글 쓰기)                    |
+ | PUT          | /room/edit/reply/{id}            | Edit a room comment         (방 댓글 수정하기)                 | 
+
 
 ### 첫 클론 후
 1. terminal 에서 \...\front 경로로 이동한 후 
