@@ -16,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 
 @RestController
 public class ReplyController {
@@ -57,6 +56,19 @@ public class ReplyController {
         } else {
             ReplyDto returnReply = replyService.editReply(id, replyDto, userPrincipal);
             return new ResponseEntity<ReplyDto>(returnReply, HttpStatus.OK);
+        }
+    }
+
+    //댓글 삭제하기 {id} 는 댓글 pk
+    @DeleteMapping(value = "/reply/delete/{id}")
+    public ResponseEntity<Void> deleteReply(@PathVariable Long id, @CurrentUser UserPrincipal userPrincipal){
+
+        log.debug("REST request to delete Reply id : {}", id);
+        if (id == null) {
+            throw new ApiException("Reply id cannot null", HttpStatus.NOT_FOUND);
+        } else {
+            replyService.deleteReply(id,userPrincipal);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
     }
 
