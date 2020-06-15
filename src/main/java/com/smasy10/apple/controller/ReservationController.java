@@ -1,13 +1,19 @@
 package com.smasy10.apple.controller;
 
 import com.smasy10.apple.common.Exception.ApiException;
+import com.smasy10.apple.domain.Place;
 import com.smasy10.apple.domain.Reservation;
+import com.smasy10.apple.domain.Room;
+import com.smasy10.apple.domain.User;
 import com.smasy10.apple.domain.dto.ReplyDto;
 import com.smasy10.apple.domain.dto.ReservationDto;
+import com.smasy10.apple.repository.PlaceRepository;
 import com.smasy10.apple.repository.ReservationRepository;
+import com.smasy10.apple.repository.RoomRepository;
 import com.smasy10.apple.security.CurrentUser;
 import com.smasy10.apple.security.UserPrincipal;
 import com.smasy10.apple.service.ReservationService;
+import com.smasy10.apple.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,22 +29,32 @@ import org.springframework.web.bind.annotation.RestController;
 public class ReservationController {
     private final Logger log = LoggerFactory.getLogger(ReservationController.class);
 
+    private final PlaceRepository placeRepository;
+    private final RoomService roomService;
     private final ReservationRepository reservationRepository;
-    private final ReservationService reservationService;
 
-    /*//예약하기
+    //예약하기
     @PostMapping(value = "/room/reservation/{id}")
-    public ResponseEntity<ReservationDto> createReservation(@PathVariable Long id,
-                                                            @RequestBody ReservationDto reservationDto,
-                                                            @CurrentUser UserPrincipal userPrincipal) {
+    public ResponseEntity createReservation(@PathVariable Long id,
+                                            @RequestBody Place place,
+                                            @CurrentUser UserPrincipal userPrincipal) {
 
-        log.debug("REST request to save Reservation : {}", reservationDto);
-        if (reservationDto.getId() != null) {
-            throw new ApiException("A new post cannot already have an ID", HttpStatus.CONFLICT);
-        } else {
-            ReservationDto returnReservation = reservationService.registerReservation(id, reservationDto, userPrincipal);
-            return new ResponseEntity<ReservationDto>(returnReservation, HttpStatus.CREATED);
-        }
-    }*/
+        log.debug("REST request to save Place : {}", place);
+
+        Place newPlace = placeRepository.save(place);
+
+        Room room = roomService.findForId(id)
+                .orElseThrow(() -> new ApiException("User does not exist", HttpStatus.NOT_FOUND));
+
+        Reservation newReservation = new Reservation();
+
+        newReservation.setPlace(newPlace);
+        newReservation.setUser(new User(userPrincipal.getId()));
+        newReservation.setRoom(new Room(room.getId()));
+
+        reservationRepository.save(newReservation);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(newReservation);
+    }
 
 }
