@@ -27,6 +27,7 @@ import EroomComponent from "../component/EroomComponent";
 import MenuComponent from "../component/MenuComponent";
 import Reserve from "../pages/Reserve";
 import Review from "../pages/Review";
+import Footer from "../pages/Footer";
 
 class App extends Component {
     constructor(props) {
@@ -112,6 +113,7 @@ class App extends Component {
                         <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}/>
                         <Route component={NotFound}/>
                     </Switch>
+                <Footer/>
                 {/*</div>*/}
                 <Alert stack={{limit: 3}}
                        timeout={3000}
