@@ -6,6 +6,7 @@ import com.smasy10.apple.domain.User;
 import com.smasy10.apple.domain.UserRoom;
 import com.smasy10.apple.domain.dto.RoomDto;
 import com.smasy10.apple.domain.dto.RoomResponseDto;
+import com.smasy10.apple.domain.dto.UserRoomDto;
 import com.smasy10.apple.mapper.RoomMapper;
 import com.smasy10.apple.repository.RoomRepository;;
 import com.smasy10.apple.repository.UserRepository;
@@ -174,20 +175,13 @@ public class RoomController {
         return ResponseEntity.status(HttpStatus.OK).body(roomService.update(id, room));
     }*/
 
-
     @DeleteMapping(value = "/room/exit/{id}")
-    @Transactional
-    public ResponseEntity<Void> exitRoom(@PathVariable Long id, @CurrentUser UserPrincipal userPrincipal) {
+    public UserRoom deleteMovie(@PathVariable Long id,
+                                   @CurrentUser UserPrincipal userPrincipal) {
 
-        Room room = roomRepository.findById(id)
-                .orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
+        UserRoom userRoom = userRoomService.validateUserRoom(id,userPrincipal);
+        userRoomRepoesitory.delete(userRoom);
 
-        User user = userRepository.findById(userPrincipal.getId())
-                .orElseThrow(() -> new ApiException("User does not exist", HttpStatus.NOT_FOUND));
-
-        //userRoomRepoesitory.deleteUserRoomByUserAndRoom(userPrincipal.getId(), id);
-        userRoomRepoesitory.deleteUserRoomByUserAndRoom(user, room);
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        return userRoom;
     }
 }
