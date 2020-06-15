@@ -170,7 +170,7 @@ class EroomComponent extends Component {
             .then(response => {
                 Alert.success("You're successfully search room!");
                 const data = response;
-                // console.log("data = " + data);
+                console.log("data = " + data);
                 this.setState({ rooms: data });
             }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');

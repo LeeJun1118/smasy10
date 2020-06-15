@@ -30,7 +30,7 @@ class EachRoomComponent extends Component {
             .then(response => response.json()
             )
             .then((data) => {
-                this.setState({rooms: data});
+                this.setState({room: data});
             })
     }
 
@@ -98,24 +98,20 @@ class EachRoomComponent extends Component {
                 </Table>
 
                 <Card className="card">
-                        <MapPopUp/>
-                    </Card>
+                    <MapPopUp/>
+                </Card>
 
-
-                        <Table id="fTable">
-                            <tbody>
-                            <tr><td>시설명</td><td>운동장</td></tr>
-                            <tr><td>위치</td><td>부산 남구 뭐시기</td></tr>
-                            <tr><td>가격</td><td>시간당 2만원</td></tr>
-                            <tr><td>정보</td><td>등등</td></tr>
-                            </tbody>
-                        </Table>
-
-
-                <Button variant="primary" className="btn" onClick={this.onReserve}>
-                    예약하기</Button>
-                <Button variant="primary" className="btn" onClick={this.onExitRoom}>
-                    나가기</Button>
+                <Table id="fTable">
+                    <tbody>
+                    <tr><td>시설명</td><td>운동장</td></tr>
+                    <tr><td>위치</td><td>부산 남구 뭐시기</td></tr>
+                    <tr><td>가격</td><td>시간당 2만원</td></tr>
+                    <tr><td>정보</td><td>등등</td></tr>
+                    </tbody>
+                </Table>
+                
+                <Button variant="primary" className="btn" onClick={this.onReserve}>예약하기</Button>
+                <Button variant="primary" className="btn" onClick={this.onExitRoom}>나가기</Button>
             </div>
         )
     }

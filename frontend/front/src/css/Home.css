@@ -1,13 +1,11 @@
-.btn{
-    background-color: #0f6674;
+.Home{
+    text-align: center;
+    margin: auto;
+    display: block;
+    margin-top: 50px;
+    margin-bottom: 100px;
 }
 
-.imgt{
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-}
 .imgs{
     /*text-align: center;*/
     /*margin-left: auto;*/

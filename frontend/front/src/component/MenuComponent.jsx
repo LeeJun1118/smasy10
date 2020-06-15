@@ -7,7 +7,7 @@ class MenuComponent extends Component {
 
     render() {
         return (
-            <div>
+            <div className="Menu">
                 <Navbar bg="primary" sticky="top" variant="dark">
                     {/*<Navbar.Collapse className="justify-content-center">*/}
                     <Navbar.Brand href="/"><h1>SMASY</h1></Navbar.Brand>
