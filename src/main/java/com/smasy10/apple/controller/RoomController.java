@@ -68,16 +68,21 @@ public class RoomController {
         //파라미터로 받은 id의 방 찾기
         Room room = roomRepository.findById(id)
                 .orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
-
-        /*List<UserRoom> updateUserRoom = userRoomRepoesitory.findAllByRoom(room);
-        updateUserRoom.stream();*/
-
+        
+        List<UserRoom> checkRooms = userRoomRepoesitory.findAllByRoom(room);
+        for (UserRoom u :checkRooms) {
+            if(u.getUser().getId() == user.getId()){
+                return ResponseEntity.status(HttpStatus.OK).body("이미 입장한 방입니다.");
+            }
+        }
         //종목에 따른 인원 제한 없는 입장
         userRoom.setRoom(room);
         userRoom.setUser(user);
 
         //입장(저장)
         userRoomRepoesitory.save(userRoom);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(userRoom);
 
         //종목에 따라 인원 제한
         //입장시 운동 종목에 따른 총 인원 수보다 적을 때만 입장 가능
@@ -105,9 +110,6 @@ public class RoomController {
                 userRoomRepoesitory.save(userRoom);
             }
         }*/
-
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(userRoom);
     }
 
     //현재 방에 입장해 있는 유저 수
@@ -175,7 +177,7 @@ public class RoomController {
 
     @DeleteMapping(value = "/room/exit/{id}")
     @Transactional
-    public ResponseEntity<Void> exitRoom(@PathVariable Long id, @CurrentUser UserPrincipal userPrincipal){
+    public ResponseEntity<Void> exitRoom(@PathVariable Long id, @CurrentUser UserPrincipal userPrincipal) {
 
         Room room = roomRepository.findById(id)
                 .orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
@@ -184,7 +186,7 @@ public class RoomController {
                 .orElseThrow(() -> new ApiException("User does not exist", HttpStatus.NOT_FOUND));
 
         //userRoomRepoesitory.deleteUserRoomByUserAndRoom(userPrincipal.getId(), id);
-        userRoomRepoesitory.deleteUserRoomByUserAndRoom(user,room);
+        userRoomRepoesitory.deleteUserRoomByUserAndRoom(user, room);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
