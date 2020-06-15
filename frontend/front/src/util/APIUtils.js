@@ -88,6 +88,13 @@ export function getUserInfo(id) { //현재 방 유저 정보
     });
 }
 
+export function enterRoom(id) { // 방들어가기
+    return request({
+        url: API_BASE_URL + "/rooms/enter/" + id,
+        method: 'POST',
+    });
+}
+
 export function exitRoom(id) { //방 나가기
     return request({
         url: API_BASE_URL + "/room/exit/" + id,
@@ -95,7 +102,7 @@ export function exitRoom(id) { //방 나가기
     });
 }
 
-export function createComments(createCommentsRequest,id) {
+export function registerComments(createCommentsRequest,id) {
     return request({
         url: API_BASE_URL + "/room/crate/reply/" + id,
         method: 'POST',
