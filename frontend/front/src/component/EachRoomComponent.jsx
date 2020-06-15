@@ -16,6 +16,8 @@ class EachRoomComponent extends Component {
             usersCount : 0,
             contents:''
         };
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleRegister = this.handleRegister.bind(this);
     }
 
     sortData = () => {
@@ -67,13 +69,13 @@ class EachRoomComponent extends Component {
 
     onExitRoom = () => {
         console.log("2 = "+this.state.room.id);
-        exitRoom(this.state.room.id)
-            .then(response => {
-                Alert.success("You're successfully exited the room!");
-                // window.history.back();
-            }).catch(error => {
-                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
-            });
+        // exitRoom(this.state.room.id)
+        //     .then(response => {
+        //         Alert.success("You're successfully exited the room!");
+        //         // window.history.back();
+        //     }).catch(error => {
+        //         Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+        //     });
     }
 
     onReserve = () =>{
@@ -90,7 +92,8 @@ class EachRoomComponent extends Component {
         });
     }
     handleRegister(){
-        const createCommentsRequest = Object.assign({}, this.state);
+        console.log("3 = "+this.state.room.id);
+        const createCommentsRequest = Object.assign({}, this.state.contents);
         createComments(createCommentsRequest, this.state.room.id)
             .then(response => {
                 Alert.success("You're successfully registered a comment!");
@@ -186,7 +189,7 @@ class EachRoomComponent extends Component {
                     <Form.Label>댓글&nbsp;</Form.Label>
                     <FormControl type="text" placeholder="Comments" className="mr-sm-2"
                                  onChange={this.handleInputChange}
-                                 name="roomsSearch"/>
+                                 name="roomsSearch" method="POST"/>
                     <Button variant="outline-primary" onClick={this.handleRegister}>등록</Button>
                 </Form>
                 <Table>
