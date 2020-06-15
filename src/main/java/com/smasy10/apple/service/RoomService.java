@@ -1,6 +1,7 @@
 package com.smasy10.apple.service;
 
 import com.smasy10.apple.common.Exception.ApiException;
+import com.smasy10.apple.domain.Reply;
 import com.smasy10.apple.domain.Room;
 import com.smasy10.apple.domain.User;
 import com.smasy10.apple.domain.UserRoom;
