@@ -69,6 +69,9 @@ public class RoomController {
         Room room = roomRepository.findById(id)
                 .orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
 
+        /*List<UserRoom> updateUserRoom = userRoomRepoesitory.findAllByRoom(room);
+        updateUserRoom.stream();*/
+
         //종목에 따른 인원 제한 없는 입장
         userRoom.setRoom(room);
         userRoom.setUser(user);
