@@ -1,7 +1,7 @@
 package com.smasy10.apple.mapper;
 
 import com.smasy10.apple.domain.Reply;
-import com.smasy10.apple.domain.dto.roomDto.ReplyDto;
+import com.smasy10.apple.domain.dto.ReplyDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;

@@ -5,7 +5,7 @@ import com.smasy10.apple.common.Exception.BadRequestException;
 import com.smasy10.apple.domain.Reply;
 import com.smasy10.apple.domain.Room;
 import com.smasy10.apple.domain.User;
-import com.smasy10.apple.domain.dto.roomDto.ReplyDto;
+import com.smasy10.apple.domain.dto.ReplyDto;
 import com.smasy10.apple.repository.ReplyRepository;
 import com.smasy10.apple.repository.RoomRepository;
 import com.smasy10.apple.repository.UserRepository;
@@ -14,8 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @Transactional

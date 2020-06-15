@@ -8,6 +8,7 @@ import java.util.List;
 //lombok 어노테이션
 //클래스 내 모든 필드의 Get 매소드 자동 생성
 @Getter
+@Setter
 
 //기본 생성자 자동 추가
 //public 클래스명(){} 과 같음
@@ -51,6 +52,10 @@ public class Place {
     //실제로 DB에 저장될 때는 Reply 의 PK 값이 저장됨.
     private List<Reply> replies;
 
+    @OneToMany(mappedBy = "place",fetch = FetchType.LAZY)
+    //실제로 DB에 저장될 때는 Reply 의 PK 값이 저장됨.
+    private List<Reservation> reservations;
+
     /*//해당 클래스의 빌더 패턴 클래스 생성
     //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
     @Builder
@@ -60,9 +65,13 @@ public class Place {
         this.phoneNo = phoneNo;
         this.replies = replies;
     }*/
-    public Place(String name, String address, String phoneNo) {
+    /*public Place(String name, String address, String phoneNo) {
         this.name = name;
         this.address = address;
         this.phoneNo = phoneNo;
+    }*/
+
+    public Place(Long id) {
+        this.id = id;
     }
 }

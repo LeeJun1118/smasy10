@@ -1,11 +1,10 @@
 package com.smasy10.apple.mapper;
 
 import com.smasy10.apple.domain.Room;
-import com.smasy10.apple.domain.dto.roomDto.RoomDto;
+import com.smasy10.apple.domain.dto.RoomDto;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Generated;
-import java.time.format.DateTimeFormatter;
 
 @Generated(
         value = "org.mapstruct.ap.MappingProcessor",

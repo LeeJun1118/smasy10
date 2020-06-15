@@ -70,6 +70,10 @@ public class Room extends BaseTimeEntity{
         this.date = date;
     }
 
+    public Room(Long id) {
+        this.id = id;
+    }
+
     public void update(String title,String area,String sports) {
         this.title = title;
         this.area = area;

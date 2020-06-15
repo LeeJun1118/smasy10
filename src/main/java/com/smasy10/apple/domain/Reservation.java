@@ -7,6 +7,7 @@ import javax.persistence.*;
 //**lombok 어노테이션
 //클래스 내 모든 필드의 Getter 매소드 자동 생성
 @Getter
+@Setter
 
 //기본 생성자 자동 추가
 //public Posts(){} 와 같은 효과
@@ -28,6 +29,9 @@ public class Reservation extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
+    private String state;
+
     //외래키를 매핑할 떄 사용
     //name 속성에는 매핑할 외래 키 이름을 지정
     //Room 의 id 를 외래키로 가지므로 room_id 로 작성
@@ -40,6 +44,11 @@ public class Reservation extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     //@JoinColumn(name= "place_id")
     private Place place;
+
+    //다대일 매핑 어노테이션
+    @ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name= "place_id")
+    private User user;
 
     /*@ManyToOne(fetch = FetchType.LAZY)
     private User user;*/

@@ -1,12 +1,9 @@
 package com.smasy10.apple.controller;
 
 import com.smasy10.apple.common.Exception.ApiException;
-import com.smasy10.apple.common.Exception.BadRequestException;
 import com.smasy10.apple.domain.Reply;
 import com.smasy10.apple.domain.Room;
-import com.smasy10.apple.domain.UserRoom;
-import com.smasy10.apple.domain.dto.roomDto.ReplyDto;
-import com.smasy10.apple.domain.dto.roomDto.RoomDto;
+import com.smasy10.apple.domain.dto.ReplyDto;
 import com.smasy10.apple.mapper.ReplyMapper;
 import com.smasy10.apple.repository.ReplyRepository;
 import com.smasy10.apple.repository.RoomRepository;
@@ -14,19 +11,14 @@ import com.smasy10.apple.repository.UserRepository;
 import com.smasy10.apple.security.CurrentUser;
 import com.smasy10.apple.security.UserPrincipal;
 import com.smasy10.apple.service.ReplyService;
-import com.smasy10.apple.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 

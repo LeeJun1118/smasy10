@@ -1,7 +1,7 @@
 package com.smasy10.apple.mapper;
 
 import com.smasy10.apple.domain.Room;
-import com.smasy10.apple.domain.dto.roomDto.RoomDto;
+import com.smasy10.apple.domain.dto.RoomDto;
 import org.springframework.context.annotation.Configuration;
 
 import org.mapstruct.Mapper;

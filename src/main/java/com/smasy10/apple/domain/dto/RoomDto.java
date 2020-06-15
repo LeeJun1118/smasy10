@@ -1,4 +1,4 @@
-package com.smasy10.apple.domain.dto.roomDto;
+package com.smasy10.apple.domain.dto;
 
 import com.smasy10.apple.domain.Room;
 import com.smasy10.apple.domain.User;

@@ -1,11 +1,11 @@
 package com.smasy10.apple.controller;
 
 import com.smasy10.apple.common.Exception.ApiException;
-import com.smasy10.apple.common.Exception.BadRequestException;
 import com.smasy10.apple.domain.Room;
 import com.smasy10.apple.domain.User;
 import com.smasy10.apple.domain.UserRoom;
-import com.smasy10.apple.domain.dto.roomDto.*;
+import com.smasy10.apple.domain.dto.RoomDto;
+import com.smasy10.apple.domain.dto.RoomResponseDto;
 import com.smasy10.apple.mapper.RoomMapper;
 import com.smasy10.apple.repository.RoomRepository;;
 import com.smasy10.apple.repository.UserRepository;
@@ -18,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import com.smasy10.apple.service.RoomService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -111,13 +110,14 @@ public class RoomController {
     //현재 방에 입장해 있는 유저 수
     @GetMapping(value = "/rooms/enter/user/count/{id}")
     //jwt 필요 (postman)
-    public int userCount(@PathVariable Long id) {
+    public ResponseEntity<Integer> userCount(@PathVariable Long id) {
         Room room = roomService.findForId(id).orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
 
         //userRoomRepository 에서 room id가 {id}인 유저 아이디를 전부 뽑아
         List<UserRoom> users = userRoomRepoesitory.findAllByRoom(room);
 
-        return users.size();
+        //return users.size();
+        return ResponseEntity.status(HttpStatus.OK).body(users.size());
     }
 
     //방에 입장한 유저들의 정보와 입장한 방의 정보 보여줌

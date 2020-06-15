@@ -2,9 +2,7 @@ package com.smasy10.apple.mapper;
 
 
 import com.smasy10.apple.domain.Reply;
-import com.smasy10.apple.domain.Room;
-import com.smasy10.apple.domain.dto.roomDto.ReplyDto;
-import com.smasy10.apple.domain.dto.roomDto.RoomDto;
+import com.smasy10.apple.domain.dto.ReplyDto;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Generated;
