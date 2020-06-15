@@ -23,7 +23,8 @@ class EachRoomComponent extends Component {
             users : [],
             usersCount : 0,
             comments: [],
-            content:''
+            content:'',
+            clicked: true
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleRegister = this.handleRegister.bind(this);
@@ -99,7 +100,13 @@ class EachRoomComponent extends Component {
     }
 
     onReserve = () =>{
-        console.log("예약 완료");
+
+        if(this.state.clicked){
+            console.log("예약 완료");
+        }else{
+            console.log("예약 취소");
+       }
+        this.setState({clicked: !this.state.clicked});
     }
 
     handleInputChange(event) {
@@ -120,8 +127,8 @@ class EachRoomComponent extends Component {
             .then(response => {
                 Alert.success("You're successfully registered a comment!");
             }).catch(error => {
-            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
-        });
+                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+            });
     }
 
     render() {
@@ -202,7 +209,11 @@ class EachRoomComponent extends Component {
                     </tbody>
                 </Table>
 
-                <Button variant="primary" className="btn" onClick={this.onReserve}>예약하기</Button>
+                <Button variant="primary" className="btn" onClick={this.onReserve}>
+                    {
+                        this.state.clicked ? "예약하기" : "예약 취소"
+                    }
+                </Button>
                 <Button variant="primary" className="btn" onClick={this.onExitRoom}>나가기</Button>
 
                 <Form inline className="form" onKeyPress={this.onKeyPress} onSubmit={this.onSubmit}>
