@@ -59,19 +59,69 @@ export function createRoom(createRoomRequest) {
     });
 }
 
-export function searchRooms(text) {
+export function searchRooms(text) { //방목록 검색
     const searchUrl = text ? `/api/rooms?text=${text}` : '/api/rooms';
     return request({
         url: API_BASE_URL + searchUrl,
         method: 'GET',
-        // body: JSON.stringify(text)
     });
 }
 
-export function currentRoom(currentRoomRequest) {
+export function currentRoom(id) { // 현재 방 정보
     return request({
-        url: API_BASE_URL + "/rooms/enter" + currentRoomRequest.id,
-        method: 'POST',
-        body: JSON.stringify(currentRoom)
+        url: API_BASE_URL + "/rooms/enter/" + id,
+        method: 'GET',
     });
 }
+
+export function getUserCounts(id) { //현재 방 유저 수
+    return request({
+        url: API_BASE_URL + "/rooms/enter/user/count/" + id,
+        method: 'GET',
+    });
+}
+
+export function getUserInfo(id) { //현재 방 유저 정보
+    return request({
+        url: API_BASE_URL + "/rooms/enter/users/info/" + id,
+        method: 'GET',
+    });
+}
+
+export function exitRoom(id) { //방 나가기
+    return request({
+        url: API_BASE_URL + "/room/exit/" + id,
+        method: 'DELETE',
+    });
+}
+
+export function createComments(createCommentsRequest,id) {
+    return request({
+        url: API_BASE_URL + "/room/crate/reply/" + id,
+        method: 'POST',
+        body: JSON.stringify(createCommentsRequest)
+    });
+}
+
+export function editComments(id) {
+    return request({
+        url: API_BASE_URL + "/room/edit/reply/" + id,
+        method: 'PUT',
+        // body: JSON.stringify()
+    });
+}
+export function deleteComments(id) {
+    return request({
+        url: API_BASE_URL + "/reply/delete/" + id,
+        method: 'DELETE',
+        // body: JSON.stringify()
+    });
+}
+export function CommentsList(id) {
+    return request({
+        url: API_BASE_URL + "/room/replies/" + id,
+        method: 'GET',
+        // body: JSON.stringify()
+    });
+}
+

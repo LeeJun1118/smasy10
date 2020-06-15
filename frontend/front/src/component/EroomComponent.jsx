@@ -163,14 +163,13 @@ class EroomComponent extends Component {
     }
     handleSearchRoom(event) {
         // event.preventDefault();
-
         const text = this.state.roomsSearch;
 
         searchRooms(text)
             .then(response => {
-                Alert.success("You're successfully search room!");
+                Alert.success("You're successfully searched for a room!");
                 const data = response;
-                console.log("data = " + data);
+                // console.log("data = " + data);
                 this.setState({ rooms: data });
             }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
@@ -215,7 +214,7 @@ class EroomComponent extends Component {
                             {
                                 rooms.length === 0 ?
                                     (<tr align="center">
-                                        <td colSpan="7" onClick={this.onRoomEnter}>방이 없습니다.</td>
+                                        <td colSpan="7">방이 없습니다.</td>
                                     </tr>)
                                 :
                                     rooms.map((room) => (

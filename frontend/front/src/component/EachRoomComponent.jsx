@@ -1,8 +1,11 @@
 import React, {Component} from "react";
 import axios from "axios";
 import '../css/EachRoom.css';
-import {Button, Card, Table} from 'react-bootstrap'
+import {Button, Card, Form, FormControl, Table} from 'react-bootstrap'
 import MapPopUp from "./MapPopUp";
+import Alert from "react-s-alert";
+import {currentRoom, getUserCounts, getUserInfo, exitRoom, createComments} from "../util/APIUtils";
+import {Link} from "react-router-dom";
 
 class EachRoomComponent extends Component {
     constructor(props) {
@@ -10,7 +13,8 @@ class EachRoomComponent extends Component {
         this.state = {
             room: [],
             users : [],
-            memberCount : 0
+            usersCount : 0,
+            contents:''
         };
     }
 
@@ -23,7 +27,34 @@ class EachRoomComponent extends Component {
 
     componentDidMount() {
         // this.findAllRooms(this.state.currentPage);
+        currentRoom(this.props.match.params.id)
+            .then(response => {
+                Alert.success("You're successfully entered the room!");
+                const data = response;
+                console.log(data);
+                this.setState({ room: data });
+                console.log("1 = "+this.state.room.id);
+            }).catch(error => {
+            this.setState({ room: [] });
+        });
+
+        getUserCounts(this.state.room.id)
+            .then(response => {
+                const data = response;
+                this.setState({usersCount: data});
+            }).catch(error => {
+            this.setState({usersCount: 0});
+        });
+
+        getUserInfo(this.state.room.id)
+            .then(response => {
+                const data = response;
+                this.setState({users: data});
+            }).catch(error => {
+            this.setState({users: []});
+        });
     }
+
 
     findById(id) {
         fetch("http://localhost:8080/api/rooms/enter/:id")
@@ -35,46 +66,77 @@ class EachRoomComponent extends Component {
     }
 
     onExitRoom = () => {
-        this.setState(state => ({
-            memberCount: this.state.memberCount-1
-        }));
-        window.history.back();
-        // this.props.history.goBack();
-        // window.location.assign('/rooms');
-        // history.push('/room');
-        // return this.props.history.push("/");
+        console.log("2 = "+this.state.room.id);
+        exitRoom(this.state.room.id)
+            .then(response => {
+                Alert.success("You're successfully exited the room!");
+                // window.history.back();
+            }).catch(error => {
+                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+            });
     }
 
     onReserve = () =>{
         console.log("예약 완료");
     }
 
+    handleInputChange(event) {
+        const target = event.target;
+        // const inputName = target.name;
+        const inputValue = target.value;
+        console.log("contents =" + inputValue);
+        this.setState({
+            contents : inputValue
+        });
+    }
+    handleRegister(){
+        const createCommentsRequest = Object.assign({}, this.state);
+        createComments(createCommentsRequest, this.state.room.id)
+            .then(response => {
+                Alert.success("You're successfully registered a comment!");
+                // const data = response;
+                // console.log("data = " + data);
+            }).catch(error => {
+            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+        });
+    }
+
     render() {
-        const {room} = this.state;
+        const {room, usersCount, users} = this.state;
         return (
             <div className="EachRoom">
                 <Table striped bordered hover className="table">
                     <caption className="caption">현재 방</caption>
-                    <tr><th>번호</th><th>제목</th><th>지역</th><th>운동 종목</th><th>경기 날짜</th></tr>
-                    <tr><td>{room.id}</td>
+                    <tr><th>번호</th><th>제목</th><th>지역</th><th>운동 종목</th><th>경기 날짜</th><th>현재 인원</th></tr>
+                    <tr>
+                        <td>{room.id}</td>
                         <td>{room.title}</td>
                         <td>{room.area}</td>
                         <td>{room.sports}</td>
-                        <td>{room.date}</td></tr>
+                        <td>{room.date}</td>
+                        <td>{usersCount}</td>
+                    </tr>
                 </Table>
 
                 <Table className="table">
                     <td>
                         <Table>
                             <caption className="caption">팀 1</caption>
-                            <thead><tr><th>이름</th><th>나이대</th></tr></thead>
+                            <thead><tr><th>id</th><th>나이대</th></tr></thead>
                             <tbody>
-                            <tr>
-                                <td>나축구</td><td>20대</td>
-                            </tr>
-                            <tr>
-                                <td>나축구</td><td>20대</td>
-                            </tr>
+                            {
+                                users.length === 0 ?
+                                    (<tr align="center">
+                                        <td colSpan="7" onClick={this.onRoomEnter}>없습니다.</td>
+                                    </tr>)
+                                    :
+                                    users.map((user) => (
+                                        <tr key={user.id}>
+                                            <td>{user.id}</td>
+                                            <td>{user.name}</td>
+                                        </tr>
+                                    ))
+                            }
                             </tbody>
                         </Table>
                     </td>
@@ -84,14 +146,21 @@ class EachRoomComponent extends Component {
                     <td>
                         <Table>
                             <caption className="caption">팀 2</caption>
-                            <thead><tr><th>이름</th><th>나이대</th></tr></thead>
+                            <thead><tr><th>id</th><th>이름</th></tr></thead>
                             <tbody>
-                            <tr>
-                                <td>나축구</td><td>20대</td>
-                            </tr>
-                            <tr>
-                                <td>나축구</td><td>20대</td>
-                            </tr>
+                            {
+                                users.length === 0 ?
+                                    (<tr align="center">
+                                        <td colSpan="7" onClick={this.onRoomEnter}>없습니다.</td>
+                                    </tr>)
+                                    :
+                                    users.map((user) => (
+                                        <tr key={user.id}>
+                                            <td>{user.id}</td>
+                                            <td>{user.name}</td>
+                                        </tr>
+                                    ))
+                            }
                             </tbody>
                         </Table>
                     </td>
@@ -109,9 +178,35 @@ class EachRoomComponent extends Component {
                     <tr><td>정보</td><td>등등</td></tr>
                     </tbody>
                 </Table>
-                
+
                 <Button variant="primary" className="btn" onClick={this.onReserve}>예약하기</Button>
                 <Button variant="primary" className="btn" onClick={this.onExitRoom}>나가기</Button>
+
+                <Form inline className="form" onKeyPress={this.onKeyPress} onSubmit={this.onSubmit}>
+                    <Form.Label>댓글&nbsp;</Form.Label>
+                    <FormControl type="text" placeholder="Comments" className="mr-sm-2"
+                                 onChange={this.handleInputChange}
+                                 name="roomsSearch"/>
+                    <Button variant="outline-primary" onClick={this.handleRegister}>등록</Button>
+                </Form>
+                <Table>
+                    <thead><tr><th>이름</th><th>내용</th></tr></thead>
+                    <tbody>
+                    {/*{*/}
+                    {/*    replies.length === 0 ?*/}
+                    {/*        (<tr align="center">*/}
+                    {/*            <td colSpan="7">댓글이 없습니다.</td>*/}
+                    {/*        </tr>)*/}
+                    {/*        :*/}
+                    {/*        replies.map((reply) => (*/}
+                    {/*            <tr key={reply.id}>*/}
+                    {/*                <td>{reply.id}</td>*/}
+                    {/*                <td>{reply.contents}</td>*/}
+                    {/*            </tr>*/}
+                    {/*        ))*/}
+                    {/*}*/}
+                    </tbody>
+                </Table>
             </div>
         )
     }
