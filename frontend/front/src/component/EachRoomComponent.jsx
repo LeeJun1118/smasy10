@@ -4,7 +4,15 @@ import '../css/EachRoom.css';
 import {Button, Card, Form, FormControl, Table} from 'react-bootstrap'
 import MapPopUp from "./MapPopUp";
 import Alert from "react-s-alert";
-import {currentRoom, getUserCounts, getUserInfo, exitRoom, createComments} from "../util/APIUtils";
+import {
+    currentRoom,
+    getUserCounts,
+    getUserInfo,
+    exitRoom,
+    registerComments,
+    CommentsList,
+    enterRoom
+} from "../util/APIUtils";
 import {Link} from "react-router-dom";
 
 class EachRoomComponent extends Component {
@@ -14,7 +22,8 @@ class EachRoomComponent extends Component {
             room: [],
             users : [],
             usersCount : 0,
-            contents:''
+            comments: [],
+            content:''
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleRegister = this.handleRegister.bind(this);
@@ -29,32 +38,44 @@ class EachRoomComponent extends Component {
 
     componentDidMount() {
         // this.findAllRooms(this.state.currentPage);
-        currentRoom(this.props.match.params.id)
+        enterRoom(this.props.match.params.id)
             .then(response => {
                 Alert.success("You're successfully entered the room!");
+            }).catch(error => {
+            });
+
+        currentRoom(this.props.match.params.id)
+            .then(response => {
                 const data = response;
                 console.log(data);
                 this.setState({ room: data });
-                console.log("1 = "+this.state.room.id);
             }).catch(error => {
-            this.setState({ room: [] });
-        });
+                this.setState({ room: [] });
+            });
 
         getUserCounts(this.state.room.id)
             .then(response => {
                 const data = response;
                 this.setState({usersCount: data});
             }).catch(error => {
-            this.setState({usersCount: 0});
-        });
+                this.setState({usersCount: 0});
+            });
 
         getUserInfo(this.state.room.id)
             .then(response => {
                 const data = response;
                 this.setState({users: data});
             }).catch(error => {
-            this.setState({users: []});
-        });
+                this.setState({users: []});
+            });
+
+        CommentsList(this.state.room.id)
+            .then(response => {
+                const data = response;
+                this.setState({comments: data});
+            }).catch(error => {
+                this.setState({comments: []});
+            });
     }
 
 
@@ -68,14 +89,13 @@ class EachRoomComponent extends Component {
     }
 
     onExitRoom = () => {
-        console.log("2 = "+this.state.room.id);
-        // exitRoom(this.state.room.id)
-        //     .then(response => {
-        //         Alert.success("You're successfully exited the room!");
-        //         // window.history.back();
-        //     }).catch(error => {
-        //         Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
-        //     });
+        exitRoom(this.state.room.id)
+            .then(response => {
+                Alert.success("You're successfully exited the room!");
+                // window.history.back();
+            }).catch(error => {
+                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+            });
     }
 
     onReserve = () =>{
@@ -86,19 +106,19 @@ class EachRoomComponent extends Component {
         const target = event.target;
         // const inputName = target.name;
         const inputValue = target.value;
-        console.log("contents =" + inputValue);
+        console.log("content =" + inputValue);
         this.setState({
-            contents : inputValue
+            content : inputValue
         });
     }
     handleRegister(){
-        console.log("3 = "+this.state.room.id);
-        const createCommentsRequest = Object.assign({}, this.state.contents);
-        createComments(createCommentsRequest, this.state.room.id)
+        const createCommentsRequest = Object.assign({}, this.state);
+
+        console.log("createCommentsRequest = "+createCommentsRequest.content);
+
+        registerComments(createCommentsRequest.content, this.state.room.id)
             .then(response => {
                 Alert.success("You're successfully registered a comment!");
-                // const data = response;
-                // console.log("data = " + data);
             }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
         });
@@ -189,7 +209,7 @@ class EachRoomComponent extends Component {
                     <Form.Label>댓글&nbsp;</Form.Label>
                     <FormControl type="text" placeholder="Comments" className="mr-sm-2"
                                  onChange={this.handleInputChange}
-                                 name="roomsSearch" method="POST"/>
+                                 name="roomsSearch"/>
                     <Button variant="outline-primary" onClick={this.handleRegister}>등록</Button>
                 </Form>
                 <Table>
