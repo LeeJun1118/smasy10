@@ -1,5 +1,6 @@
 package com.smasy10.apple.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -48,12 +49,14 @@ public class Place {
     //mappedBy 속성을 사용해 연관관계의 주인을 정함
     //replies 의 주인은 place(replies 는 place 에 의해 매핑됨)
     //LAZY 옵션은 Room 객체를 조회하는 시점이 아닌 객체가 실제로 사용될 때 조회하는 옵션
-    @OneToMany(mappedBy = "place",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "place")
+    @JsonIgnore
     //실제로 DB에 저장될 때는 Reply 의 PK 값이 저장됨.
     private List<Reply> replies;
 
-    @OneToMany(mappedBy = "place",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "place")
     //실제로 DB에 저장될 때는 Reply 의 PK 값이 저장됨.
+    @JsonIgnore
     private List<Reservation> reservations;
 
     /*//해당 클래스의 빌더 패턴 클래스 생성

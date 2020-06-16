@@ -42,15 +42,15 @@ public class Reply extends BaseTimeEntity {
     //다대일 매핑
     //엔티티 자신을 기준으로 다중성을 생각해야함
     //LAZY 옵션은 Room 객체를 조회하는 시점이 아닌 객체가 실제로 사용될 때 조회하는 옵션
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     //실제로 DB에 저장될 때는 User 의 PK 값이 저장됨.
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     //@JoinColumn(name = "place_id")
     private Place place;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     //@JoinColumn(name = "place_id")
     private Room room;
 

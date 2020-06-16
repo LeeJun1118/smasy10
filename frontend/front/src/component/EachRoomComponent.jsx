@@ -166,8 +166,8 @@ class EachRoomComponent extends Component {
                 Alert.success("You're successfully deleted a comment!");
                 this.showCommentsList();
             }).catch(error => {
-            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
-        });
+                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+            });
     }
 
     showCommentsList(){
@@ -211,7 +211,7 @@ class EachRoomComponent extends Component {
                                     :
                                     users.map((user) => (
                                         <tr key={user.id}>
-                                            <td>{user.userId}</td>
+                                            <td>{user.id}</td>
                                             <td>{user.name}</td>
                                         </tr>
                                     ))
@@ -274,11 +274,11 @@ class EachRoomComponent extends Component {
                 <Button variant="primary" className="btn" onClick={this.onExitRoom}>나가기</Button>
 
                 <Form inline className="form" onKeyPress={this.onKeyPress} onSubmit={this.onSubmit}>
-                    <Form.Label>댓글{'  '}</Form.Label>
+                    <Form.Label>댓글&nbsp;</Form.Label>
                     <FormControl type="text" placeholder="Comments" className="mr-sm-2"
                                  onChange={this.handleInputChange}
                                  name="roomsSearch"/>
-                    <Link onClick={this.handleRegister}>등록</Link>
+                    <Button variant="outline-primary" onClick={this.handleRegister}>등록</Button>
                 </Form>
                 <br/>
                 <Table>

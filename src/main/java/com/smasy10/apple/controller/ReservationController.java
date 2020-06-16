@@ -27,6 +27,7 @@ public class ReservationController {
     private final RoomService roomService;
     private final ReservationRepository reservationRepository;
     private final ReservationService reservationService;
+    private final RoomRepository roomRepository;
 
     //예약하기
     @PostMapping(value = "/room/reservation/{id}")
@@ -52,16 +53,18 @@ public class ReservationController {
         return ResponseEntity.status(HttpStatus.CREATED).body(newReservation);
     }
 
-    /*@DeleteMapping(value = "/room/reservation/cancel/{id}")
-    public Reservation cancelReservation(@PathVariable Long id,
-                                         @CurrentUser UserPrincipal userPrincipal) {
-        // 방 번호 id와 사용자 pk 로 예약된 내역을 삭제
-        // 예약 내역의 사용자와 방 번호가 아니면 return
+    //예약 취소 {id} 는 방 pk
+    @DeleteMapping(value = "/room/reservation/cancel/{id}")
+    public ResponseEntity cancelReservation(@PathVariable Long id
+                                         /*@CurrentUser UserPrincipal userPrincipal*/) {
+        // 방 번호 id로 예약 내역 삭제
+        Room room = roomRepository.findById(id)
+                .orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
 
-        Reservation reservation = reservationService.validateUserRoom(id,userPrincipal);
+        Reservation reservation = reservationRepository.findByRoom(room);
         reservationRepository.delete(reservation);
 
-        return reservation;
-    }*/
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }

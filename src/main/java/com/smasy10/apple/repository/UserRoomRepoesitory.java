@@ -18,4 +18,6 @@ public interface UserRoomRepoesitory extends JpaRepository<UserRoom,Long> {
     void deleteUserRoomByUserAndRoom(@Param("user_id") Long user_id,@Param("room_id") Long room_id);*/
 
     void deleteUserRoomByUserAndRoom(User user,Room room);
+
+    void deleteAllByRoom(Room room);
 }
