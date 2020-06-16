@@ -14,7 +14,8 @@ class EroomComponent extends Component {
             currentPage: 1,
             roomsPerPage: 5,
             sortToggle: true,
-            roomsSearch:''
+            roomsSearch:'',
+            isCap: false
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSearchRoom = this.handleSearchRoom.bind(this);
@@ -226,7 +227,7 @@ class EroomComponent extends Component {
                                             <td>{room.date}</td>
                                             <td >
                                                 {/*<Link to={"/rooms/" + room.id} className="btn btn-sm btn-outline-primary">입장</Link>*/}
-                                                <Link to={this.props.match.url+ "/enter/" + room.id}>입장</Link>
+                                                <Link to={this.props.match.url+ "/enter/" + room.id + "/" + this.state.isCap}>입장</Link>
                                             </td>
                                         </tr>
                                     ))

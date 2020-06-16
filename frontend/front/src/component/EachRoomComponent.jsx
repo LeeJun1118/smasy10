@@ -14,6 +14,7 @@ import {
     enterRoom
 } from "../util/APIUtils";
 import {Link} from "react-router-dom";
+import Check from "./Check";
 
 class EachRoomComponent extends Component {
     constructor(props) {
@@ -23,7 +24,8 @@ class EachRoomComponent extends Component {
             users : [],
             usersCount : 0,
             comments: [],
-            content:''
+            content:'',
+            clicked: true
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleRegister = this.handleRegister.bind(this);
@@ -53,7 +55,7 @@ class EachRoomComponent extends Component {
                 this.setState({ room: [] });
             });
 
-        getUserCounts(this.state.room.id)
+        getUserCounts(this.props.match.params.id)
             .then(response => {
                 const data = response;
                 this.setState({usersCount: data});
@@ -61,7 +63,7 @@ class EachRoomComponent extends Component {
                 this.setState({usersCount: 0});
             });
 
-        getUserInfo(this.state.room.id)
+        getUserInfo(this.props.match.params.id)
             .then(response => {
                 const data = response;
                 this.setState({users: data});
@@ -69,7 +71,7 @@ class EachRoomComponent extends Component {
                 this.setState({users: []});
             });
 
-        CommentsList(this.state.room.id)
+        CommentsList(this.props.match.params.id)
             .then(response => {
                 const data = response;
                 this.setState({comments: data});
@@ -99,7 +101,17 @@ class EachRoomComponent extends Component {
     }
 
     onReserve = () =>{
-        console.log("예약 완료");
+        if(this.state.clicked){
+            console.log("예약 완료");
+        }else{
+            console.log("예약 취소");
+        }
+        this.setState({clicked: !this.state.clicked});
+    }
+
+    onDelete = () =>{
+        console.log(this.props.match.params.isCap);
+        console.log("방 삭제");
     }
 
     handleInputChange(event) {
@@ -114,18 +126,16 @@ class EachRoomComponent extends Component {
     handleRegister(){
         const registerCommentsRequest = Object.assign({}, this.state);
 
-        console.log("comments = "+ registerCommentsRequest);
-
         registerComments(registerCommentsRequest, this.state.room.id)
             .then(response => {
                 Alert.success("You're successfully registered a comment!");
             }).catch(error => {
-            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
-        });
+                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+            });
     }
 
     render() {
-        const {room, usersCount, users} = this.state;
+        const {room, usersCount, users, comments} = this.state;
         return (
             <div className="EachRoom">
                 <Table striped bordered hover className="table">
@@ -145,7 +155,7 @@ class EachRoomComponent extends Component {
                     <td>
                         <Table>
                             <caption className="caption">팀 1</caption>
-                            <thead><tr><th>id</th><th>나이대</th></tr></thead>
+                            <thead><tr><th>id</th><th>이름</th></tr></thead>
                             <tbody>
                             {
                                 users.length === 0 ?
@@ -202,7 +212,19 @@ class EachRoomComponent extends Component {
                     </tbody>
                 </Table>
 
-                <Button variant="primary" className="btn" onClick={this.onReserve}>예약하기</Button>
+                { (this.props.match.params.isCap=="true")? (
+                    <div>
+                        <Button variant="primary" className="btn" onClick={this.onReserve}>{
+                            this.state.clicked ? "예약하기" : "예약 취소"
+                        }</Button>
+                        <Button variant="primary" className="btn" onClick={this.onDelete}>삭제하기</Button>
+                    </div>
+                    ) :(
+                        <div>권한없음</div>
+                    )
+
+                }
+                {/*<Button variant="primary" className="btn" onClick={this.onDelete}>삭제하기</Button>*/}
                 <Button variant="primary" className="btn" onClick={this.onExitRoom}>나가기</Button>
 
                 <Form inline className="form" onKeyPress={this.onKeyPress} onSubmit={this.onSubmit}>
@@ -215,19 +237,19 @@ class EachRoomComponent extends Component {
                 <Table>
                     <thead><tr><th>이름</th><th>내용</th></tr></thead>
                     <tbody>
-                    {/*{*/}
-                    {/*    replies.length === 0 ?*/}
-                    {/*        (<tr align="center">*/}
-                    {/*            <td colSpan="7">댓글이 없습니다.</td>*/}
-                    {/*        </tr>)*/}
-                    {/*        :*/}
-                    {/*        replies.map((reply) => (*/}
-                    {/*            <tr key={reply.id}>*/}
-                    {/*                <td>{reply.id}</td>*/}
-                    {/*                <td>{reply.contents}</td>*/}
-                    {/*            </tr>*/}
-                    {/*        ))*/}
-                    {/*}*/}
+                    {
+                        comments.length === 0 ?
+                            (<tr align="center">
+                                <td colSpan="7">댓글이 없습니다.</td>
+                            </tr>)
+                            :
+                            comments.map((comment) => (
+                                <tr key={comment.id}>
+                                    <td>{comment.id}</td>
+                                    <td>{comment.content}</td>
+                                </tr>
+                            ))
+                    }
                     </tbody>
                 </Table>
             </div>
