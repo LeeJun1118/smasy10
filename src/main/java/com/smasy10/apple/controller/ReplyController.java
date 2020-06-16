@@ -49,7 +49,7 @@ public class ReplyController {
                 .collect(Collectors.toList());
     }
 
-    //방 댓글 쓰기 {id} 는 방번호
+    /*//방 댓글 쓰기 {id} 는 방번호
     @PostMapping(value = "/room/create/reply/{id}")
     public ResponseEntity<ReplyDto> createReply(@PathVariable Long id,
                                                 @RequestBody ReplyDto replyDto,
@@ -61,6 +61,20 @@ public class ReplyController {
         } else {
             ReplyDto returnReply = replyService.registerReply(id, replyDto, userPrincipal);
             return new ResponseEntity<ReplyDto>(returnReply, HttpStatus.CREATED);
+        }
+    }*/
+    //방 댓글 쓰기 {id} 는 방번호
+    @PostMapping(value = "/room/create/reply/{id}")
+    public ResponseEntity<Reply> createReply(@PathVariable Long id,
+                                                @RequestBody Reply reply,
+                                                @CurrentUser UserPrincipal userPrincipal) {
+
+        log.debug("REST request to save Reply : {}", reply);
+        if (reply.getId() != null) {
+            throw new ApiException("A new post cannot already have an ID", HttpStatus.CONFLICT);
+        } else {
+            Reply returnReply = replyService.registerReply(id, reply, userPrincipal);
+            return new ResponseEntity<Reply>(returnReply, HttpStatus.CREATED);
         }
     }
 

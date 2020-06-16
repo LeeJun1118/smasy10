@@ -24,10 +24,10 @@ public class ReplyService {
     private final UserRepository userRepository;
     private final RoomRepository roomRepository;
 
-    public ReplyDto registerReply(Long id, ReplyDto replyDto, UserPrincipal userPrincipal) {
+    public Reply registerReply(Long id, Reply reply, UserPrincipal userPrincipal) {
 
         Reply newReply = new Reply();
-        newReply.setContent(replyDto.getContent());
+        newReply.setContent(reply.getContent());
 
         User user = userRepository.findById(userPrincipal.getId())
                 .orElseThrow(() -> new ApiException("User does not exist", HttpStatus.NOT_FOUND));
@@ -39,7 +39,7 @@ public class ReplyService {
         newReply.setUser(user);
         newReply.setRoom(room);
 
-        return new ReplyDto(replyRepository.saveAndFlush(newReply));
+        return replyRepository.saveAndFlush(newReply);
     }
 
     public ReplyDto editReply(Long id, ReplyDto replyDto, UserPrincipal userPrincipal) {
