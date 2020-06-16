@@ -21,4 +21,5 @@ public interface ReplyRepository extends JpaRepository<Reply,Long> {
 
     Optional<Reply> findById(Long id);
 
+    void deleteAllByRoom(Room room);
 }

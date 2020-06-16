@@ -1,6 +1,8 @@
 package com.smasy10.apple.controller;
 
 import com.smasy10.apple.common.Exception.ApiException;
+import com.smasy10.apple.common.Exception.BadRequestException;
+import com.smasy10.apple.domain.Reservation;
 import com.smasy10.apple.domain.Room;
 import com.smasy10.apple.domain.User;
 import com.smasy10.apple.domain.UserRoom;
@@ -8,9 +10,8 @@ import com.smasy10.apple.domain.dto.RoomDto;
 import com.smasy10.apple.domain.dto.RoomResponseDto;
 import com.smasy10.apple.domain.dto.UserRoomDto;
 import com.smasy10.apple.mapper.RoomMapper;
-import com.smasy10.apple.repository.RoomRepository;;
-import com.smasy10.apple.repository.UserRepository;
-import com.smasy10.apple.repository.UserRoomRepoesitory;
+import com.smasy10.apple.repository.*;
+;
 import com.smasy10.apple.security.CurrentUser;
 import com.smasy10.apple.security.UserPrincipal;
 import com.smasy10.apple.service.UserRoomService;
@@ -45,6 +46,10 @@ public class RoomController {
     private final UserRepository userRepository;
     private final UserRoomService userRoomService;
 
+    private final ReplyRepository replyRepository;
+
+    private final ReservationRepository reservationRepository;
+
     //방 정보 보여주기
     //jwt 필요 (postman)
     @GetMapping(value = "/rooms/enter/{id}")
@@ -69,10 +74,10 @@ public class RoomController {
         //파라미터로 받은 id의 방 찾기
         Room room = roomRepository.findById(id)
                 .orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
-        
+
         List<UserRoom> checkRooms = userRoomRepoesitory.findAllByRoom(room);
-        for (UserRoom u :checkRooms) {
-            if(u.getUser().getId() == user.getId()){
+        for (UserRoom u : checkRooms) {
+            if (u.getUser().getId() == user.getId()) {
                 return ResponseEntity.status(HttpStatus.OK).body("이미 입장한 방입니다.");
             }
         }
@@ -176,12 +181,32 @@ public class RoomController {
     }*/
 
     @DeleteMapping(value = "/room/exit/{id}")
-    public UserRoom deleteMovie(@PathVariable Long id,
-                                   @CurrentUser UserPrincipal userPrincipal) {
+    public UserRoom exitRoom(@PathVariable Long id,
+                             @CurrentUser UserPrincipal userPrincipal) {
 
-        UserRoom userRoom = userRoomService.validateUserRoom(id,userPrincipal);
+        UserRoom userRoom = userRoomService.validateUserRoom(id, userPrincipal);
         userRoomRepoesitory.delete(userRoom);
 
         return userRoom;
+    }
+
+    @DeleteMapping(value = "/room/delete/{id}")
+    @Transactional
+    public Room deleteRoom(@PathVariable Long id/*,
+                           @CurrentUser UserPrincipal userPrincipal*/) {
+
+        Room room = roomService.findForId(id).orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
+
+        Reservation reservation = reservationRepository.findByRoom(room);
+
+        if(reservation != null)
+            throw new BadRequestException("예약 취소 후 방 삭제가 가능합니다.");
+
+        reservationRepository.deleteAllByRoom(room);
+        userRoomRepoesitory.deleteAllByRoom(room);
+        replyRepository.deleteAllByRoom(room);
+        roomRepository.delete(room);
+
+        return room;
     }
 }
