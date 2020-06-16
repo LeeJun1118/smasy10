@@ -110,11 +110,11 @@ export function registerComments(registerCommentsRequest,id) {
     });
 }
 
-export function editComments(id) {
+export function editComments(editCommentsRequest, id) {
     return request({
         url: API_BASE_URL + "/room/edit/reply/" + id,
         method: 'PUT',
-        // body: JSON.stringify()
+        body: JSON.stringify(editCommentsRequest)
     });
 }
 export function deleteComments(id) {

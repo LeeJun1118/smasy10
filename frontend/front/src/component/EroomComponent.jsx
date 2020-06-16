@@ -197,7 +197,6 @@ class EroomComponent extends Component {
                                  name="roomsSearch"/>
                     <Button variant="outline-primary" onClick={this.handleSearchRoom}>검색</Button>
                 </Form>
-
                 {/*<Card style={{width: '18rem'}}>*/}
                 {/*    <Card.Body>*/}
                         <Table  striped bordered hover id="table">

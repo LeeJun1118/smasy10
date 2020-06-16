@@ -11,10 +11,11 @@ import {
     exitRoom,
     registerComments,
     CommentsList,
-    enterRoom
+    enterRoom,
+    editComments,
+    deleteComments
 } from "../util/APIUtils";
 import {Link} from "react-router-dom";
-import Check from "./Check";
 
 class EachRoomComponent extends Component {
     constructor(props) {
@@ -44,6 +45,7 @@ class EachRoomComponent extends Component {
             .then(response => {
                 Alert.success("You're successfully entered the room!");
             }).catch(error => {
+                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
             });
 
         currentRoom(this.props.match.params.id)
@@ -70,14 +72,14 @@ class EachRoomComponent extends Component {
             }).catch(error => {
                 this.setState({users: []});
             });
-
-        CommentsList(this.props.match.params.id)
-            .then(response => {
-                const data = response;
-                this.setState({comments: data});
-            }).catch(error => {
-                this.setState({comments: []});
-            });
+        this.showCommentsList();
+        // CommentsList(this.props.match.params.id)
+        //     .then(response => {
+        //         const data = response;
+        //         this.setState({comments: data});
+        //     }).catch(error => {
+        //         this.setState({comments: []});
+        //     });
     }
 
 
@@ -129,9 +131,53 @@ class EachRoomComponent extends Component {
         registerComments(registerCommentsRequest, this.state.room.id)
             .then(response => {
                 Alert.success("You're successfully registered a comment!");
+                this.showCommentsList();
             }).catch(error => {
                 Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
             });
+    }
+    onKeyPress = (e) =>{
+        if(e.key == 'Enter'){
+            this.handleRegister();
+        }
+    }
+    onSubmit = (e) =>{
+        e.preventDefault();
+    }
+
+    handleEdit(e){ //댓글 수정
+        const target = e.target;
+        // console.log(target.name);
+        // const editCommentsRequest = Object.assign({}, this.state);
+        editComments(this.state.content, target.name)
+            .then(response => {
+                Alert.success("You're successfully edited a comment!");
+                this.showCommentsList();
+            }).catch(error => {
+                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+            });
+    }
+
+    handleDelete(e){ //댓글 삭제
+        const target = e.target;
+        // console.log(target.name);
+        deleteComments(target.name)
+            .then(response => {
+                Alert.success("You're successfully deleted a comment!");
+                this.showCommentsList();
+            }).catch(error => {
+            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+        });
+    }
+
+    showCommentsList(){
+        CommentsList(this.props.match.params.id)
+            .then(response => {
+                const data = response;
+                this.setState({comments: data});
+            }).catch(error => {
+            this.setState({comments: []});
+        });
     }
 
     render() {
@@ -165,7 +211,7 @@ class EachRoomComponent extends Component {
                                     :
                                     users.map((user) => (
                                         <tr key={user.id}>
-                                            <td>{user.id}</td>
+                                            <td>{user.userId}</td>
                                             <td>{user.name}</td>
                                         </tr>
                                     ))
@@ -228,14 +274,15 @@ class EachRoomComponent extends Component {
                 <Button variant="primary" className="btn" onClick={this.onExitRoom}>나가기</Button>
 
                 <Form inline className="form" onKeyPress={this.onKeyPress} onSubmit={this.onSubmit}>
-                    <Form.Label>댓글&nbsp;</Form.Label>
+                    <Form.Label>댓글{'  '}</Form.Label>
                     <FormControl type="text" placeholder="Comments" className="mr-sm-2"
                                  onChange={this.handleInputChange}
                                  name="roomsSearch"/>
-                    <Button variant="outline-primary" onClick={this.handleRegister}>등록</Button>
+                    <Link onClick={this.handleRegister}>등록</Link>
                 </Form>
+                <br/>
                 <Table>
-                    <thead><tr><th>이름</th><th>내용</th></tr></thead>
+                    <thead><tr><th>이름</th><th>내용</th><th>비고</th></tr></thead>
                     <tbody>
                     {
                         comments.length === 0 ?
@@ -245,8 +292,12 @@ class EachRoomComponent extends Component {
                             :
                             comments.map((comment) => (
                                 <tr key={comment.id}>
-                                    <td>{comment.id}</td>
+                                    <td>{comment.userId}</td>
                                     <td>{comment.content}</td>
+                                    <td>
+                                        <Link name={comment.id} onClick={this.handleEdit}>수정</Link>{'  '}
+                                        <Link name={comment.id} onClick={this.handleDelete}>삭제</Link>
+                                    </td>
                                 </tr>
                             ))
                     }
