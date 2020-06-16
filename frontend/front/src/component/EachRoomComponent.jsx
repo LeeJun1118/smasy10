@@ -47,7 +47,7 @@ class EachRoomComponent extends Component {
         currentRoom(this.props.match.params.id)
             .then(response => {
                 const data = response;
-                console.log(data);
+                // console.log(data);
                 this.setState({ room: data });
             }).catch(error => {
                 this.setState({ room: [] });
@@ -92,7 +92,7 @@ class EachRoomComponent extends Component {
         exitRoom(this.state.room.id)
             .then(response => {
                 Alert.success("You're successfully exited the room!");
-                // window.history.back();
+                window.history.back();
             }).catch(error => {
                 Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
             });
@@ -112,11 +112,11 @@ class EachRoomComponent extends Component {
         });
     }
     handleRegister(){
-        const createCommentsRequest = Object.assign({}, this.state);
+        const registerCommentsRequest = Object.assign({}, this.state);
 
-        console.log("createCommentsRequest = "+createCommentsRequest.content);
+        console.log("comments = "+ registerCommentsRequest);
 
-        registerComments(createCommentsRequest.content, this.state.room.id)
+        registerComments(registerCommentsRequest, this.state.room.id)
             .then(response => {
                 Alert.success("You're successfully registered a comment!");
             }).catch(error => {

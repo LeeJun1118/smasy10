@@ -102,11 +102,11 @@ export function exitRoom(id) { //방 나가기
     });
 }
 
-export function registerComments(createCommentsRequest,id) {
+export function registerComments(registerCommentsRequest,id) {
     return request({
-        url: API_BASE_URL + "/room/crate/reply/" + id,
+        url: API_BASE_URL + "/room/create/reply/" + id,
         method: 'POST',
-        body: JSON.stringify(createCommentsRequest)
+        body: JSON.stringify(registerCommentsRequest)
     });
 }
 
