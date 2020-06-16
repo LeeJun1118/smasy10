@@ -42,20 +42,20 @@ public class ReplyService {
         return replyRepository.saveAndFlush(newReply);
     }
 
-    public ReplyDto editReply(Long id, ReplyDto replyDto, UserPrincipal userPrincipal) {
-        Reply reply = replyRepository.findById(id)
+    public ReplyDto editReply(Long id, Reply reply, UserPrincipal userPrincipal) {
+        Reply editReply = replyRepository.findById(id)
                 .orElseThrow(() -> new ApiException("User does not exist", HttpStatus.NOT_FOUND));
 
         User user = userRepository.findById(userPrincipal.getId())
                 .orElseThrow(() -> new ApiException("User does not exist", HttpStatus.NOT_FOUND));
 
-        if(reply.getUser().getId() != user.getId())
+        if(editReply.getUser().getId() != user.getId())
             throw new BadRequestException("It's not a writer.");
         else
-            reply.setContent(replyDto.getContent());
-        replyRepository.save(reply);
+            editReply.setContent(reply.getContent());
+        replyRepository.save(editReply);
 
-        return new ReplyDto(replyRepository.save(reply));
+        return new ReplyDto(replyRepository.save(editReply));
     }
 
     public void deleteReply(Long id, UserPrincipal userPrincipal) {
