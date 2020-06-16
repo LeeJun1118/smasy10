@@ -10,4 +10,6 @@ public interface ReservationRepository extends JpaRepository<Reservation,Long> {
     void deleteAllByRoom(Room room);
 
     Reservation findByRoom(Room room);
+
+    Reservation findByPlace(Long id);
 }

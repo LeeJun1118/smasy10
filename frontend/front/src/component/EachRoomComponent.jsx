@@ -14,7 +14,7 @@ import {
     enterRoom
 } from "../util/APIUtils";
 import {Link} from "react-router-dom";
-import Check from "./Check";
+
 
 class EachRoomComponent extends Component {
     constructor(props) {

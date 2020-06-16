@@ -61,9 +61,9 @@ public class ReplyService {
         return new ReplyDto(replyRepository.save(editReply));
     }
 
-    public void deleteReply(Long id, UserPrincipal userPrincipal) {
+    /*public Reply deleteReply(Long id, UserPrincipal userPrincipal) {
         Reply reply = replyRepository.findById(id)
-                .orElseThrow(() -> new ApiException("User does not exist", HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ApiException("Reply does not exist", HttpStatus.NOT_FOUND));
 
         User user = userRepository.findById(userPrincipal.getId())
                 .orElseThrow(() -> new ApiException("User does not exist", HttpStatus.NOT_FOUND));
@@ -72,7 +72,9 @@ public class ReplyService {
             throw new BadRequestException("It's not a writer.");
         else
             replyRepository.delete(reply);
-    }
+
+        return reply;
+    }*/
 
     public Reply registerReview(Long id, Reply reply, UserPrincipal userPrincipal) {
         Reply newReply = new Reply();

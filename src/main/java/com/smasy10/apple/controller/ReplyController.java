@@ -1,6 +1,7 @@
 package com.smasy10.apple.controller;
 
 import com.smasy10.apple.common.Exception.ApiException;
+import com.smasy10.apple.common.Exception.BadRequestException;
 import com.smasy10.apple.domain.Reply;
 import com.smasy10.apple.domain.Room;
 import com.smasy10.apple.domain.dto.ReplyDto;
@@ -16,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -81,15 +83,25 @@ public class ReplyController {
 
     //댓글 삭제하기 {id} 는 댓글 pk
     @DeleteMapping(value = "/reply/delete/{id}")
-    public ResponseEntity<Void> deleteReply(@PathVariable Long id, @CurrentUser UserPrincipal userPrincipal) {
+    //@Transactional
+    public ResponseEntity deleteReply(@PathVariable Long id, @CurrentUser UserPrincipal userPrincipal) {
 
-        log.debug("REST request to delete Reply id : {}", id);
+        /*log.debug("REST request to delete Reply id : {}", id);
         if (id == null) {
             throw new ApiException("Reply id cannot null", HttpStatus.NOT_FOUND);
         } else {
-            replyService.deleteReply(id, userPrincipal);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
+            return replyService.deleteReply(id, userPrincipal);
+            //return new ResponseEntity<>(HttpStatus.OK);
+        }*/
+
+        Reply reply = replyRepository.findById(id).
+                orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
+        if(reply.getUser().getId() != userPrincipal.getId())
+            throw new BadRequestException("It's not a writer.");
+
+        replyRepository.delete(reply);
+        //return "댓글이 삭제 되었습니다.";
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
