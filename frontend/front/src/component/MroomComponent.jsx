@@ -18,6 +18,7 @@ class MroomComponent extends Component {
             sports: '',
             area: '',
             date: '',
+            isCap : true
         };
         //this.createRoom = this.createRoom.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -45,10 +46,11 @@ class MroomComponent extends Component {
                 Alert.success("You're successfully create room!");
                 const data = response;
                 console.log(data.id);
-                this.props.history.push("/rooms/enter/" + data.id);
+                this.props.history.push("/rooms/enter/" + data.id + "/" + this.state.isCap);
             }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
         });
+
     }
 
     onChangeDate = (date) => {
