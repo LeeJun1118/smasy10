@@ -1,9 +1,6 @@
 package com.smasy10.apple.repository;
 
-import com.smasy10.apple.domain.Reply;
-import com.smasy10.apple.domain.Room;
-import com.smasy10.apple.domain.User;
-import com.smasy10.apple.domain.UserRoom;
+import com.smasy10.apple.domain.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -22,4 +19,6 @@ public interface ReplyRepository extends JpaRepository<Reply,Long> {
     Optional<Reply> findById(Long id);
 
     void deleteAllByRoom(Room room);
+
+    List<Reply> findAllByPlace(Place place);
 }
