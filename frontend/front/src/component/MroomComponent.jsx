@@ -17,7 +17,7 @@ class MroomComponent extends Component {
             title: '',
             sports: '',
             area: '',
-            date: ''
+            date: '',
         };
         //this.createRoom = this.createRoom.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);

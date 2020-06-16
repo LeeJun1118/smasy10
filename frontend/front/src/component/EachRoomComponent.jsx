@@ -14,6 +14,7 @@ import {
     enterRoom
 } from "../util/APIUtils";
 import {Link} from "react-router-dom";
+import Check from "./Check";
 
 class EachRoomComponent extends Component {
     constructor(props) {
@@ -209,11 +210,13 @@ class EachRoomComponent extends Component {
                     </tbody>
                 </Table>
 
-                <Button variant="primary" className="btn" onClick={this.onReserve}>
-                    {
-                        this.state.clicked ? "예약하기" : "예약 취소"
-                    }
-                </Button>
+                <Check resource="models" permission="write">
+                    <Button variant="primary" className="btn" onClick={this.onReserve}>{
+                            this.state.clicked ? "예약하기" : "예약 취소"
+                        }</Button>
+                    <Button variant="primary" className="btn">삭제하기</Button>
+                </Check>
+
                 <Button variant="primary" className="btn" onClick={this.onExitRoom}>나가기</Button>
 
                 <Form inline className="form" onKeyPress={this.onKeyPress} onSubmit={this.onSubmit}>
