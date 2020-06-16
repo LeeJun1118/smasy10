@@ -49,41 +49,34 @@ public class ReviewController {
                 .collect(Collectors.toList());
     }*/
 
-    //리뷰 쓰기 파라미터 = place pk
+    //리뷰 쓰기.  파라미터 = room pk
     //예약한 방이며 사용자가 그 방에 입장이 된 상태일때만 리뷰 작성 가능
-   /* @PostMapping(value = "/place/review/create/{id}")
-    public ResponseEntity<Reply> createReply(@PathVariable Long id,
+    @PostMapping(value = "/place/review/create/{id}")
+    public ResponseEntity<Reply> createReview(@PathVariable Long id,
                                              @RequestBody Reply reply,
                                              @CurrentUser UserPrincipal userPrincipal) {
 
-        //예약 내역 테이블에서 place_id가 id인 room_id를 찾는다.
-        Reservation reservation = reservationRepository.findByPlace(id);
-        Room room = roomRepository.findById(reservation.getRoom().getId())
+        Room room = roomRepository.findById(id)
                 .orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
+
+        Reservation reservation = reservationRepository.findByRoom(room);
+
+        Place place = placeRepository.findById(reservation.getPlace().getId())
+                .orElseThrow(() -> new ApiException("Place does not exist", HttpStatus.NOT_FOUND));
+
         User user = userRepository.findById(userPrincipal.getId())
                 .orElseThrow(() -> new ApiException("User does not exist", HttpStatus.NOT_FOUND));
-        UserRoom validateUser = new UserRoom();
 
-        if (room == null)
-            throw new ApiException("예약되지 않은 방입니다.", HttpStatus.CONFLICT);
-        else{
-            //userRoom 테이블에서 방id 가 찾은 id 이고 사용자 id가 userPrincipal.getId 이면 리뷰쓰기 가능
-            List<UserRoom> checkRooms = userRoomRepoesitory.findAllByRoom(room);
+        Reply newReview = new Reply();
 
-            //방 id로 찾은 UserRoom 들 중에서 user_id 가 현재 유저가 맞는지 검사
-            for (UserRoom u :checkRooms) {
-                if(u.getUser().getId() == user.getId()){
-                    validateUser = u;
-                }
-            }
-        }
-        if(validateUser == null)
-            throw new ApiException("이용하지 않은 장소입니다.", HttpStatus.CONFLICT);
-        else{
-            Reply returnReview = replyService.registerReview(id, reply, userPrincipal);
-            returnReview.setRoom(room);
-            replyRepository.saveAndFlush(returnReview);
-            return new ResponseEntity<Reply>(returnReview, HttpStatus.CREATED);
-        }
-    }*/
+        newReview.setRoom(room);
+        newReview.setPlace(place);
+        newReview.setUser(user);
+
+        newReview.setContent(reply.getContent());
+
+        replyRepository.saveAndFlush(newReview);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(newReview);
+    }
 }
