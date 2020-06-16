@@ -51,30 +51,30 @@ public class ReplyController {
 
     //방 댓글 쓰기 {id} 는 방번호
     @PostMapping(value = "/room/create/reply/{id}")
-    public ResponseEntity<ReplyDto> createReply(@PathVariable Long id,
-                                                @RequestBody ReplyDto replyDto,
-                                                @CurrentUser UserPrincipal userPrincipal) {
+    public ResponseEntity<Reply> createReply(@PathVariable Long id,
+                                             @RequestBody Reply reply,
+                                             @CurrentUser UserPrincipal userPrincipal) {
 
-        log.debug("REST request to save Reply : {}", replyDto);
-        if (replyDto.getId() != null) {
+        log.debug("REST request to save Reply : {}", reply);
+        if (reply.getId() != null) {
             throw new ApiException("A new post cannot already have an ID", HttpStatus.CONFLICT);
         } else {
-            ReplyDto returnReply = replyService.registerReply(id, replyDto, userPrincipal);
-            return new ResponseEntity<ReplyDto>(returnReply, HttpStatus.CREATED);
+            Reply returnReply = replyService.registerReply(id, reply, userPrincipal);
+            return new ResponseEntity<Reply>(returnReply, HttpStatus.CREATED);
         }
     }
 
     //방 댓글 수정 하기 {id} 는 댓글 pk
     @PutMapping(value = "/room/edit/reply/{id}")
     public ResponseEntity editReply(@PathVariable Long id,
-                                    @RequestBody ReplyDto replyDto,
+                                    @RequestBody Reply reply,
                                     @CurrentUser UserPrincipal userPrincipal) {
 
-        log.debug("REST request to save Reply : {}", replyDto);
-        if (replyDto.getId() != null) {
+        log.debug("REST request to save Reply : {}", reply);
+        if (reply.getId() != null) {
             throw new ApiException("A new post cannot already have an ID", HttpStatus.CONFLICT);
         } else {
-            ReplyDto returnReply = replyService.editReply(id, replyDto, userPrincipal);
+            ReplyDto returnReply = replyService.editReply(id, reply, userPrincipal);
             return new ResponseEntity<ReplyDto>(returnReply, HttpStatus.OK);
         }
     }
