@@ -96,7 +96,8 @@ class EachRoomComponent extends Component {
         exitRoom(this.state.room.id)
             .then(response => {
                 Alert.success("You're successfully exited the room!");
-                window.history.back();
+                this.props.history.replace("/rooms");
+                // window.history.back();
             }).catch(error => {
                 Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
             });
@@ -116,7 +117,7 @@ class EachRoomComponent extends Component {
         console.log("방 삭제");
     }
 
-    handleInputChange(event) {
+    handleInputChange = (event) =>{
         const target = event.target;
         // const inputName = target.name;
         const inputValue = target.value;
@@ -125,7 +126,18 @@ class EachRoomComponent extends Component {
             content : inputValue
         });
     }
-    handleRegister(){
+
+    showCommentsList = () =>{
+        CommentsList(this.props.match.params.id)
+            .then(response => {
+                const data = response;
+                this.setState({comments: data});
+            }).catch(error => {
+            this.setState({comments: []});
+        });
+    }
+
+    handleRegister = () =>{
         const registerCommentsRequest = Object.assign({}, this.state);
 
         registerComments(registerCommentsRequest, this.state.room.id)
@@ -136,20 +148,13 @@ class EachRoomComponent extends Component {
                 Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
             });
     }
-    onKeyPress = (e) =>{
-        if(e.key == 'Enter'){
-            this.handleRegister();
-        }
-    }
-    onSubmit = (e) =>{
-        e.preventDefault();
-    }
 
-    handleEdit(e){ //댓글 수정
+    handleEdit = (e) => { //댓글 수정
         const target = e.target;
-        // console.log(target.name);
-        // const editCommentsRequest = Object.assign({}, this.state);
-        editComments(this.state.content, target.name)
+        const id = target.name;
+        // console.log(id);
+        const editCommentsRequest = Object.assign({}, this.state);
+        editComments(editCommentsRequest, id)
             .then(response => {
                 Alert.success("You're successfully edited a comment!");
                 this.showCommentsList();
@@ -158,10 +163,11 @@ class EachRoomComponent extends Component {
             });
     }
 
-    handleDelete(e){ //댓글 삭제
+    handleDelete = (e) =>{ //댓글 삭제
         const target = e.target;
-        // console.log(target.name);
-        deleteComments(target.name)
+        const id = target.name;
+        // console.log(id);
+        deleteComments(id)
             .then(response => {
                 Alert.success("You're successfully deleted a comment!");
                 this.showCommentsList();
@@ -170,14 +176,13 @@ class EachRoomComponent extends Component {
             });
     }
 
-    showCommentsList(){
-        CommentsList(this.props.match.params.id)
-            .then(response => {
-                const data = response;
-                this.setState({comments: data});
-            }).catch(error => {
-            this.setState({comments: []});
-        });
+    onKeyPress = (e) =>{
+        if(e.key == 'Enter'){
+            this.handleRegister();
+        }
+    }
+    onSubmit = (e) =>{
+        e.preventDefault();
     }
 
     render() {
