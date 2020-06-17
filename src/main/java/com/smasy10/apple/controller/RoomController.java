@@ -148,7 +148,29 @@ public class RoomController {
     //방 목록 보기 (검색: 방의 id,title,area,sprots,date)
     @GetMapping(value = "/api/rooms")
     public List<RoomDto> getRooms(@RequestParam(value = "text", required = false) String text) {
+        //모든방
         List<Room> rooms = (text == null) ? roomService.getRooms() : roomService.getRoomsContainingText(text);
+/*
+        //예약한 방 넣을 곳
+        List<Room> reservationRoom = new ArrayList<>();
+
+        //예약 내역
+        List<Reservation> reservation = reservationRepository.findAll();
+
+        //예약한 방들 넣음
+        for (Reservation r :
+                reservation) {
+            reservationRoom.add(r.getRoom());
+        }
+        //보여줄 방 목록
+        List<Room> listRoom = new ArrayList<>();
+        for (Room r :
+                reservationRoom) {
+            if(!rooms.contains(r))
+                listRoom.add(r);
+        }*/
+
+
         return rooms.stream()
                 .map(room -> roomMapper.toRoomDto(room))
                 .collect(Collectors.toList());
@@ -212,7 +234,7 @@ public class RoomController {
         return room;
     }
 
-    //내가 입장한 방 보기
+    /*//내가 입장한 방 보기
     @GetMapping(value = "/rooms/me")
     public List<RoomDto> getReplies(@CurrentUser UserPrincipal userPrincipal) {
         //UserRoom에서 user id가 현재 사용자 id인 room id 를 뽑아온다.
@@ -224,13 +246,65 @@ public class RoomController {
 
         //userRooms 에서 빼낸 방들이 예약된 방이 아니면 출력해야함
 
-
-
         for (UserRoom room :userRooms) {
             myRooms.add(room.getRoom());
         }
 
         return myRooms.stream()
+                .map(room -> roomMapper.toRoomDto(room))
+                .collect(Collectors.toList());
+    }*/
+
+    //내가 입장한 방들 중에서 현재 예약된 방 목록
+    @GetMapping(value = "/rooms/me")
+    public List<RoomDto> getMyRooms(@CurrentUser UserPrincipal userPrincipal) {
+        // UserRoom 에서 사용자가 입장한 방 뽑아냄
+        // 뽑아낸 방에서 예약방을 뺌
+
+        //UserRoom에서 user id가 현재 사용자 id인 room id 를 뽑아온다.
+        User user = userRepository.findById(userPrincipal.getId())
+                .orElseThrow(() -> new ApiException("User does not exist", HttpStatus.NOT_FOUND));
+
+        //현재 유저가 방에 입장한 방들 리스트
+        List<UserRoom> userRooms = userRoomRepoesitory.findAllByUser(user);
+
+        //모든 예약 내역
+        List<Reservation> reservations = reservationRepository.findAll();
+        //예약 내역의 방들
+        List<Room> reservationRooms = new ArrayList<>();
+
+        //예약된 방들 reservationRooms에 뽑아 넣기
+        for (Reservation r :
+                reservations) {
+            reservationRooms.add(r.getRoom());
+        }
+
+        //내가 입장해 있는 방
+        List<Room> myRooms = new ArrayList<>();
+        //userRooms 에서 빼낸 방들이 예약된 방이 아니면 출력해야함
+        for (UserRoom room :userRooms) {
+            myRooms.add(room.getRoom());
+        }
+
+        List<Room> myReservationRooms = new ArrayList<>();
+        List<Room> noReservationRooms = new ArrayList<>();
+
+        for (Room r : myRooms) {
+            if (reservationRooms.contains(r))
+                myReservationRooms.add(r);
+            else
+                noReservationRooms.add(r);
+
+        }/*
+        for (Room r : reservationRooms) {
+            if (myRooms.contains(r))
+                myReservationRooms.add(r);
+            else
+                noReservationRooms.add(r);
+
+        }*/
+
+        return noReservationRooms.stream()
                 .map(room -> roomMapper.toRoomDto(room))
                 .collect(Collectors.toList());
     }

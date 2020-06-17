@@ -23,6 +23,7 @@
  | GET          | /place/replies/{id}              | View facility reviews       (시설 리뷰 보기)                   |
  | DELETE       | /place/review/delete/{id}        | Delete review               (리뷰 삭제하기)                    |
  | GET          | /rooms/me                        | My rooms                    (내가 입장한 방 보기)              |
+ | GET          | /rooms/reservation/me            | My reservation room list    (내가 입장한 방 보기)              |
 
 ### 첫 클론 후
 1. terminal 에서 \...\front 경로로 이동한 후 
