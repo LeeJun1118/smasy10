@@ -58,7 +58,7 @@ public class RoomService implements RoomServiceInterface {
 
     @Override
     public List<Room> getRoomsContainingText(String text) {
-        return roomRepository.findBySportsContainingOrTitleContainingOrderByTitle(text, text);
+        return roomRepository.findBySportsContainingOrTitleContainingOrAreaContainingOrDateContainingOrderByDate(text,text,text,text);
     }
 
     @Override

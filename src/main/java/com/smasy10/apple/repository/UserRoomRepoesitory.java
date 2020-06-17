@@ -22,4 +22,6 @@ public interface UserRoomRepoesitory extends JpaRepository<UserRoom,Long> {
     void deleteAllByRoom(Room room);
 
     List<UserRoom> findAllByUser(User user);
+
+    UserRoom findByUser(User user);
 }
