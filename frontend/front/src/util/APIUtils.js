@@ -102,6 +102,13 @@ export function exitRoom(id) { //방 나가기
     });
 }
 
+export function deleteRoom(id) { //방 삭제
+    return request({
+        url: API_BASE_URL + "/room/delete/" + id,
+        method: 'DELETE',
+    });
+}
+
 export function registerComments(registerCommentsRequest,id) {
     return request({
         url: API_BASE_URL + "/room/create/reply/" + id,
@@ -134,15 +141,21 @@ export function CommentsList(id) {
 
 export function reservationRoom(id) { // 방 예약
     return request({
-        url: API_BASE_URL + "/room/reservation/" + id,
+        url: API_BASE_URL + "/api/room/reservation/" + id,
         method: 'POST',
     });
 }
 
 export function reservationCancel(id) { // 방 예약 취소
     return request({
-        url: API_BASE_URL + "/room/reservation/cancel/" + id,
+        url: API_BASE_URL + "/api/room/reservation/cancel/" + id,
         method: 'DELETE',
     });
 }
 
+export function myRoom() { // 방 예약 취소
+    return request({
+        url: API_BASE_URL + "/rooms/me",
+        method: 'GET',
+    });
+}

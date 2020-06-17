@@ -17,8 +17,8 @@ class EroomComponent extends Component {
             roomsSearch:'',
             isCap: false
         };
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSearchRoom = this.handleSearchRoom.bind(this);
+        // this.handleInputChange = this.handleInputChange.bind(this);
+        // this.handleSearchRoom = this.handleSearchRoom.bind(this);
     }
 
     sortData = () => {
@@ -170,7 +170,7 @@ class EroomComponent extends Component {
             .then(response => {
                 Alert.success("You're successfully searched for a room!");
                 const data = response;
-                // console.log("data = " + data);
+                console.log("data = " + JSON.stringify(data));
                 this.setState({ rooms: data });
             }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Button, Form} from "react-bootstrap";
+import {Button, Form, Card} from "react-bootstrap";
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
 import '../css/Mroom.css';
@@ -7,6 +7,7 @@ import moment from 'moment';
 import axios from 'axios'
 import {createRoom} from "../util/APIUtils"
 import Alert from 'react-s-alert';
+import MyMapPopUp from './MyMapPopUp'
 
 class MroomComponent extends Component {
 
@@ -18,7 +19,8 @@ class MroomComponent extends Component {
             sports: '',
             area: '',
             date: '',
-            isCap : true
+            isCap : true,
+            location:''
         };
         //this.createRoom = this.createRoom.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -30,6 +32,7 @@ class MroomComponent extends Component {
         const target = event.target;
         const inputName = target.name;
         const inputValue = target.value;
+        console.log(inputValue);
 
         this.setState({
             [inputName]: inputValue
@@ -45,7 +48,7 @@ class MroomComponent extends Component {
             .then(response => {
                 Alert.success("You're successfully create room!");
                 const data = response;
-                console.log(data.id);
+                // console.log(data.id);
                 this.props.history.push("/rooms/enter/" + data.id + "/" + this.state.isCap);
             }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
@@ -85,12 +88,15 @@ class MroomComponent extends Component {
                     </Form.Group>
 
                     <Form.Group controlId="exampleForm.ControlSelect1" id="area" value={this.state.area}>
-                        <Form.Label>지역</Form.Label>
-                        <Form.Control as="select" onChange={this.handleInputChange} name="area">
-                            <option selected disabled>Please select</option>
-                            <option value="a">a</option>
-                            <option value="b">b</option>
-                        </Form.Control>
+                        {/*<br/>*/}
+                        {/*<Form.Control as="select" onChange={this.handleInputChange} name="area">*/}
+                        {/*    <option selected disabled>Please select</option>*/}
+                        {/*    <option value="a">a</option>*/}
+                        {/*    <option value="b">b</option>*/}
+                        {/*</Form.Control>*/}
+                        {/*<Card className="card">*/}
+                            <MyMapPopUp/>
+                        {/*</Card>*/}
                     </Form.Group>
 
                     {/*<Form.Group controlId="exampleForm.ControlSelect1">*/}

@@ -4,24 +4,26 @@ import {Button, Table} from "react-bootstrap";
 import {Link, Route} from "react-router-dom";
 import Reserve from "../../pages/Reserve";
 import Review from "../../pages/Review";
-import {getUserInfo} from "../../util/APIUtils";
+import {myRoom} from "../../util/APIUtils";
+import Alert from "react-s-alert";
 
 class Profile extends Component {
     constructor(props) {
         super(props);
         console.log(props);
         this.state = {
-            infos: []
+            infos: [],
         };
     }
     componentDidMount() {
-        getUserInfo(this.props.match.params.id)
+        myRoom()
             .then(response => {
                 const data = response;
-                console.log(data.room);
+                console.log(data);
                 this.setState({infos: data});
             }).catch(error => {
                 this.setState({infos: []});
+                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
             });
     }
     render() {

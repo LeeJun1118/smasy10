@@ -13,7 +13,7 @@ import {
     CommentsList,
     enterRoom,
     editComments,
-    deleteComments
+    deleteComments, reservationRoom, reservationCancel, deleteRoom
 } from "../util/APIUtils";
 import {Link} from "react-router-dom";
 
@@ -28,8 +28,8 @@ class EachRoomComponent extends Component {
             content:'',
             clicked: true
         };
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleRegister = this.handleRegister.bind(this);
+        // this.handleInputChange = this.handleInputChange.bind(this);
+        // this.handleRegister = this.handleRegister.bind(this);
     }
 
     sortData = () => {
@@ -106,16 +106,33 @@ class EachRoomComponent extends Component {
 
     onReserve = () =>{
         if(this.state.clicked){
-            console.log("예약 완료");
+            reservationRoom(this.state.room.id)
+                .then(response => {
+                    Alert.success("You're successfully reserved!");
+                    console.log("예약 완료");
+                }).catch(error => {
+                    Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+                });
         }else{
-            console.log("예약 취소");
+            reservationCancel(this.state.room.id)
+                .then(response => {
+                    Alert.success("You're successfully cancel reservation!");
+                    console.log("예약 취소");
+                }).catch(error => {
+                    Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+                });
         }
         this.setState({clicked: !this.state.clicked});
     }
 
     onDelete = () =>{
-        console.log(this.props.match.params.isCap);
-        console.log("방 삭제");
+        deleteRoom(this.state.room.id)
+            .then(response => {
+                Alert.success("You're successfully deleted the room!");
+                this.props.history.replace("/rooms");
+            }).catch(error => {
+                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+            });
     }
 
     handleInputChange = (event) =>{
@@ -134,8 +151,8 @@ class EachRoomComponent extends Component {
                 const data = response;
                 this.setState({comments: data});
             }).catch(error => {
-            this.setState({comments: []});
-        });
+                this.setState({comments: []});
+            });
     }
 
     handleRegister = () =>{
@@ -251,9 +268,9 @@ class EachRoomComponent extends Component {
                     </td>
                 </Table>
 
-                <Card className="card">
-                    <MapPopUp/>
-                </Card>
+                {/*<Card className="card">*/}
+                {/*    <MapPopUp/>*/}
+                {/*</Card>*/}
 
                 <Table id="fTable">
                     <tbody>
@@ -263,16 +280,18 @@ class EachRoomComponent extends Component {
                     <tr><td>정보</td><td>등등</td></tr>
                     </tbody>
                 </Table>
-
-                { (this.props.match.params.isCap=="true")? (
-                    <div>
-                        <Button variant="primary" className="btn" onClick={this.onReserve}>{
-                            this.state.clicked ? "예약하기" : "예약 취소"
-                        }</Button>
-                        <Button variant="primary" className="btn" onClick={this.onDelete}>삭제하기</Button>
-                    </div>
-                    ) :(
-                        <div>권한없음</div>
+                {
+                    (this.props.match.params.isCap=="false")? ( //true
+                        <div>
+                            <Button variant="primary" className="btn" onClick={this.onReserve}>{
+                                this.state.clicked ? "예약하기" : "예약 취소"
+                            }</Button>
+                            <Button variant="primary" className="btn" onClick={this.onDelete}>삭제하기</Button>
+                        </div>
+                    ):(
+                        <div>
+                            <Button variant="primary" className="btn" onClick={this.onExitRoom}>나가기</Button>
+                        </div>
                     )
 
                 }
