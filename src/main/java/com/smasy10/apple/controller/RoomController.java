@@ -2,10 +2,8 @@ package com.smasy10.apple.controller;
 
 import com.smasy10.apple.common.Exception.ApiException;
 import com.smasy10.apple.common.Exception.BadRequestException;
-import com.smasy10.apple.domain.Reservation;
-import com.smasy10.apple.domain.Room;
-import com.smasy10.apple.domain.User;
-import com.smasy10.apple.domain.UserRoom;
+import com.smasy10.apple.domain.*;
+import com.smasy10.apple.domain.dto.ReplyDto;
 import com.smasy10.apple.domain.dto.RoomDto;
 import com.smasy10.apple.domain.dto.RoomResponseDto;
 import com.smasy10.apple.mapper.RoomMapper;
@@ -23,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -202,7 +201,7 @@ public class RoomController {
 
         Reservation reservation = reservationRepository.findByRoom(room);
 
-        if(reservation != null)
+        if (reservation != null)
             throw new BadRequestException("예약 취소 후 방 삭제가 가능합니다.");
 
         reservationRepository.deleteAllByRoom(room);
@@ -211,5 +210,28 @@ public class RoomController {
         roomRepository.delete(room);
 
         return room;
+    }
+
+    //내가 입장한 방 보기
+    @GetMapping(value = "/rooms/me")
+    public List<RoomDto> getReplies(@CurrentUser UserPrincipal userPrincipal) {
+        //UserRoom에서 user id가 현재 사용자 id인 room id 를 뽑아온다.
+        User user = userRepository.findById(userPrincipal.getId())
+                .orElseThrow(() -> new ApiException("User does not exist", HttpStatus.NOT_FOUND));
+
+        List<UserRoom> userRooms = userRoomRepoesitory.findAllByUser(user);
+        List<Room> myRooms = new ArrayList<>();
+
+        //userRooms 에서 빼낸 방들이 예약된 방이 아니면 출력해야함
+
+
+
+        for (UserRoom room :userRooms) {
+            myRooms.add(room.getRoom());
+        }
+
+        return myRooms.stream()
+                .map(room -> roomMapper.toRoomDto(room))
+                .collect(Collectors.toList());
     }
 }
