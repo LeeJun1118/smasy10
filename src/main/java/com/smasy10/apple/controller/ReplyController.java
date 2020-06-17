@@ -84,7 +84,7 @@ public class ReplyController {
     //댓글 삭제하기 {id} 는 댓글 pk
     @DeleteMapping(value = "/reply/delete/{id}")
     //@Transactional
-    public ResponseEntity deleteReply(@PathVariable Long id, @CurrentUser UserPrincipal userPrincipal) {
+    public Reply deleteReply(@PathVariable Long id, @CurrentUser UserPrincipal userPrincipal) {
 
         /*log.debug("REST request to delete Reply id : {}", id);
         if (id == null) {
@@ -101,7 +101,8 @@ public class ReplyController {
 
         replyRepository.delete(reply);
         //return "댓글이 삭제 되었습니다.";
-        return new ResponseEntity<>(HttpStatus.OK);
+        //return new ResponseEntity<Reply>(HttpStatus.OK);
+        return reply;
     }
 
 }
