@@ -8,7 +8,6 @@ import com.smasy10.apple.domain.User;
 import com.smasy10.apple.domain.UserRoom;
 import com.smasy10.apple.domain.dto.RoomDto;
 import com.smasy10.apple.domain.dto.RoomResponseDto;
-import com.smasy10.apple.domain.dto.UserRoomDto;
 import com.smasy10.apple.mapper.RoomMapper;
 import com.smasy10.apple.repository.*;
 ;
@@ -63,7 +62,7 @@ public class RoomController {
     //방 입장하기 (UserRoom DB에 방, 유저 저장)
     @PostMapping(value = "/rooms/enter/{id}")
     //jwt 필요 (postman)
-    public ResponseEntity enterRoom(@PathVariable Long id, @CurrentUser UserPrincipal userPrincipal) {
+    public Room enterRoom(@PathVariable Long id, @CurrentUser UserPrincipal userPrincipal) {
 
         UserRoom userRoom = new UserRoom();
 
@@ -78,7 +77,8 @@ public class RoomController {
         List<UserRoom> checkRooms = userRoomRepoesitory.findAllByRoom(room);
         for (UserRoom u : checkRooms) {
             if (u.getUser().getId() == user.getId()) {
-                return ResponseEntity.status(HttpStatus.OK).body("이미 입장한 방입니다.");
+                //return ResponseEntity.status(HttpStatus.OK).body("이미 입장한 방입니다.");
+                return room;
             }
         }
         //종목에 따른 인원 제한 없는 입장
@@ -88,7 +88,10 @@ public class RoomController {
         //입장(저장)
         userRoomRepoesitory.save(userRoom);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(userRoom);
+        //return ResponseEntity.status(HttpStatus.CREATED).body(room);
+        //return new ResponseEntity<Room>(HttpStatus.OK);
+        return room;
+
 
         //종목에 따라 인원 제한
         //입장시 운동 종목에 따른 총 인원 수보다 적을 때만 입장 가능
