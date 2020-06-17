@@ -1,29 +1,52 @@
 # SMASY(Sport Matching System)
 
 ## REST API GUIDE
- | HTTP method  | URI                              | Role                                                       |
+### Auth
+ 
+ | HTTP method  | URI                              | Description                                                |
  |------------- | -------------------------------- | ---------------------------------------------------------- |
  | POST         | /auth/signup                     | Sing Up                     (회원가입)                       |
  | POST         | /auth/login                      | Login                       (로그인)                         |
  | GET          | /user/me                         | Profile                     (프로필)                         |
- | GET          | /api/rooms                       | Room List(Search)           (방 목록)                        |
- | POST         | /room/create                     | Create Room                 (방 생성)                        |
- | POST         | /rooms/enter/{id}                | Enter Room                  (방 입장)                        | 
- | GET          | /rooms/enter/{id}                | Room info                   (방 정보)                        |
- | GET          | /rooms/enter/user/count/{id}     | Number of Users in the Room (방에 입장한 사용자 수)            |
- | GET          | /rooms/enter/users/info/{id}     | Info of Users in the Room   (방에 입장한 사용자들 정보)         |
- | DELETE       | /room/exit/{id}                  | Exit Room                   (방 나가기)                      |
- | POST         | /room/create/reply/{id}          | Write a room comment        (방 댓글 쓰기)                    |
- | PUT          | /room/edit/reply/{id}            | Edit a room comment         (방 댓글 수정하기)                 | 
- | DELETE       | /reply/delete/{id}               | Delete Reply                (댓글 삭제하기)                   | 
- | GET          | /room/replies/{id}               | List of room comments       (방 댓글 목록)                    |
- | POST         | /room/reservation/{id}           | Make a reservation          (방 예약하기)                     |
- | DELETE       | /room/reservation/cancel/{id}    | Cancel a room reservation   (예약 취소하기)                    |
- | POST         | /place/review/delete/{id}        | Write a review              (리뷰쓰기)                        |
- | GET          | /place/replies/{id}              | View facility reviews       (시설 리뷰 보기)                   |
- | DELETE       | /place/review/delete/{id}        | Delete review               (리뷰 삭제하기)                    |
- | GET          | /rooms/me                        | My rooms                    (내가 입장한 방 보기)              |
- | GET          | /rooms/reservation/me            | My reservation room list    (내가 입장한 방 보기)              |
+ 
+ ### Room
+ | HTTP method  | URI                              | Description                                         | parameter |
+ |------------- | -------------------------------- | --------------------------------------------------- | --------- | 
+ | GET          | /api/rooms                       | Room List(Search)           (방 목록)                |           |
+ | POST         | /room/create                     | Create Room                 (방 생성)                |           |
+ | POST         | /rooms/enter/{id}                | Enter Room                  (방 입장)                |  Room Id  | 
+ | GET          | /rooms/enter/{id}                | Room info                   (방 정보)                |  Room Id  |
+ | GET          | /rooms/enter/user/count/{id}     | Number of Users in the Room (방에 입장한 사용자 수)    |  Room Id   |
+ | GET          | /rooms/enter/users/info/{id}     | Info of Users in the Room   (방에 입장한 사용자들 정보) |  Room Id   |
+ | DELETE       | /room/exit/{id}                  | Exit Room                   (방 나가기)              |User Room Id|
+ | DELETE       | /room/delete/{id}                | Delete Room                 (방 삭제하기)             |  Room Id  |
+
+ ### Comment
+ | HTTP method  | URI                              | Description                                        | parameter  |
+ |------------- | -------------------------------- | -------------------------------------------------- | ---------- |
+ | POST         | /room/create/reply/{id}          | Write a room comment        (방 댓글 쓰기)           |  Room Id   |
+ | PUT          | /room/edit/reply/{id}            | Edit a room comment         (방 댓글 수정하기)        |  Reply Id  |
+ | DELETE       | /reply/delete/{id}               | Delete Reply                (댓글 삭제하기)           |  Reply Id  | 
+ | GET          | /room/replies/{id}               | List of room comments       (방 댓글 목록)            |  Room Id   |
+ 
+  ### Reservation
+ | HTTP method  | URI                              | Description                                          | parameter  |
+ |------------- | -------------------------------- | ---------------------------------------------------- | ---------- |
+ | POST         | /room/reservation/{id}           | Make a reservation          (방 예약하기)              |  Room Id   |
+ | DELETE       | /room/reservation/cancel/{id}    | Cancel a room reservation   (예약 취소하기)            |  Room Id   |
+ 
+  ### Review
+ | HTTP method  | URI                              | Description                                          | parameter  |   
+ |------------- | -------------------------------- | ---------------------------------------------------- | ---------- | 
+ | POST         | /place/review/delete/{id}        | Write a review              (리뷰쓰기)                 | Place Id   | 
+ | GET          | /place/replies/{id}              | View facility reviews       (시설 리뷰 보기)            | Place Id   |
+ | DELETE       | /place/review/delete/{id}        | Delete review               (리뷰 삭제하기)             | Reply Id   | 
+ 
+  ### My Room & Reservation Room
+ | HTTP method  | URI                              | Description                                          | parameter  |
+ |------------- | -------------------------------- | ---------------------------------------------------- | ---------- |
+ | GET          | /rooms/me                        | My rooms                    (내가 입장한 방 보기)       |            |
+ | GET          | /rooms/reservation/me            | My reservation room list    (내 방 예약 목록 보기)      |            |
 
 ### 첫 클론 후
 1. terminal 에서 \...\front 경로로 이동한 후 
