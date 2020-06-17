@@ -45,7 +45,8 @@ class EachRoomComponent extends Component {
             .then(response => {
                 Alert.success("You're successfully entered the room!");
             }).catch(error => {
-                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+                //이상하게 메시지가 성공오류ㅠ 둘 다 뜸
+                // Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
             });
 
         currentRoom(this.props.match.params.id)
@@ -279,13 +280,15 @@ class EachRoomComponent extends Component {
                 <Button variant="primary" className="btn" onClick={this.onExitRoom}>나가기</Button>
 
                 <Form inline className="form" onKeyPress={this.onKeyPress} onSubmit={this.onSubmit}>
+                    <Form.Group>
                     <Form.Label>댓글&nbsp;</Form.Label>
-                    <FormControl type="text" placeholder="Comments" className="mr-sm-2"
+                    <FormControl type="text" placeholder="Comments"
                                  onChange={this.handleInputChange}
                                  name="roomsSearch"/>
+                        </Form.Group>
                     <Button variant="outline-primary" onClick={this.handleRegister}>등록</Button>
                 </Form>
-                <br/>
+                {/*<br/>*/}
                 <Table>
                     <thead><tr><th>이름</th><th>내용</th><th>비고</th></tr></thead>
                     <tbody>

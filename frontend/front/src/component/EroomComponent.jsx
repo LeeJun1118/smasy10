@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Card, Table, Button, Form, FormControl} from 'react-bootstrap'
+import {Card, Table, Button, Form, FormControl, Col} from 'react-bootstrap'
 import '../css/Eroom.css';
 import {Link} from "react-router-dom";
 import {searchRooms} from "../util/APIUtils";
@@ -154,7 +154,7 @@ class EroomComponent extends Component {
         // this.props.history.push("/enter/"+id);
     }
 
-    handleInputChange(event) {
+    handleInputChange = (event) => {
         const target = event.target;
         // const inputName = target.name;
         const inputValue = target.value;
@@ -162,7 +162,7 @@ class EroomComponent extends Component {
             roomsSearch : inputValue
         });
     }
-    handleSearchRoom(event) {
+    handleSearchRoom = (event) => {
         // event.preventDefault();
         const text = this.state.roomsSearch;
 
@@ -192,14 +192,16 @@ class EroomComponent extends Component {
         return (
             <div className="Eroom">
                 <Form inline className="form" onKeyPress={this.onKeyPress} onSubmit={this.onSubmit}>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2"
+                    <Form.Group>
+                    <FormControl type="text" placeholder="Search"
                                  onChange={this.handleInputChange}
                                  name="roomsSearch"/>
-                    <Button variant="outline-primary" onClick={this.handleSearchRoom}>검색</Button>
+                    </Form.Group>
+                    <Button variant="primary" type="submit" onClick={this.handleSearchRoom}>검색</Button>
                 </Form>
                 {/*<Card style={{width: '18rem'}}>*/}
                 {/*    <Card.Body>*/}
-                        <Table  striped bordered hover id="table">
+                        <Table striped bordered hover id="table">
                             <thead>
                             <tr>
                                 <th>방 번호</th>
