@@ -139,10 +139,11 @@ export function CommentsList(id) {
     });
 }
 
-export function reservationRoom(id) { // 방 예약
+export function reservationRoom(reservationRoomRequest, id) { // 방 예약
     return request({
         url: API_BASE_URL + "/api/room/reservation/" + id,
         method: 'POST',
+        body: JSON.stringify(reservationRoomRequest)
     });
 }
 

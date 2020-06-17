@@ -20,7 +20,7 @@ class MyMapPopUp extends Component {
     componentDidMount() {
         const script = document.createElement("script");
         script.async = true;
-        script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=105a9f622469f29871a3a2ab2f40c336&libraries=services,clusterer,drawing&autoload=false";
+        script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=105a9f622469f29871a3a2ab2f40c336&libraries=services&autoload=false";
         // script.src = = "http://apis.daum.net/maps/maps3.js?apikey=eee07da53bc4c518e9c78198be5dfba7"
         document.head.appendChild(script);
 
@@ -73,12 +73,17 @@ class MyMapPopUp extends Component {
                     infowindow.setContent(content);
                     infowindow.open(map, marker);
 
-                    let jsonStr = '{"name": "' + place.place_name +'" , "x":'+place.x+', "y":'+place.y+'}';
+                    let jsonStr = '{"name": "' + place.place_name +'" , "x":'+place.x+', "y":'+place.y
+                        +  ', "phone":"'+ place.phone +'", "road" :" ' + place.road_address_name + '", "addr":" '+place.address_name + ' "}';
                     let jsonObj = JSON.parse(jsonStr);
                     this.setState({ place : jsonObj});
-                    console.log("place : " + this.state.place.name + this.state.place.x +" "+ this.state.place.y);
+
+                    this.props.callbackFromA(this.state.place);
+
+                    // console.log("place : " + this.state.place.name + this.state.place.x +" "+ this.state.place.y);
+                    // console.log( this.state.place.phone +" "+ this.state.place.road +" "+ this.state.place.addr);
                     // console.log("place2 : " + jsonObj.name + jsonObj.x +" "+ jsonObj.y);
-                    // console.log("json : " + JSON.stringify(jsonObj));
+                    // console.log(place.phone +","+ place.address_name +"," + place.road_address_name );
                 }
 
                 // 지도에 마커를 표시하는 함수입니다
@@ -105,10 +110,11 @@ class MyMapPopUp extends Component {
                     // marker.setMap(map);
                 }
 
-                function searchDetailAddrFromCoords(coords, callback) {
-                    // 좌표로 법정동 상세 주소 정보를 요청합니다
-                    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-                }
+                // function searchDetailAddrFromCoords(coords, callback) {
+                //     // 좌표로 법정동 상세 주소 정보를 요청합니다
+                //     geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+                // }
+
                 // 마커가 지도 위에 표시되도록 설정합니다
                 // marker.setMap(map);
                 // 아래 코드는 지도 위의 마커를 제거하는 코드입니다

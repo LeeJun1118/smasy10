@@ -20,15 +20,15 @@ class MroomComponent extends Component {
             area: '',
             date: '',
             isCap : true,
-            location:''
+            location:'',
         };
         //this.createRoom = this.createRoom.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleInputChange = this.handleInputChange.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
 
     }
 
-    handleInputChange(event) {
+    handleInputChange=(event)=> {
         const target = event.target;
         const inputName = target.name;
         const inputValue = target.value;
@@ -39,7 +39,7 @@ class MroomComponent extends Component {
         });
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) =>{
         // event.preventDefault();
 
         const createRoomRequest = Object.assign({}, this.state);
@@ -53,7 +53,7 @@ class MroomComponent extends Component {
             }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
         });
-
+        // this.props.fromA(this.state.place);
     }
 
     onChangeDate = (date) => {
@@ -63,9 +63,16 @@ class MroomComponent extends Component {
         })
     }
 
-    onSubmit(e){
+    onSubmit=(e)=>{
         e.preventDefault();
     }
+
+    Acallback =(dataFromB)=>{
+        this.setState({
+            area: dataFromB.name
+        })
+    }
+
 
     render() {
         return (
@@ -87,7 +94,7 @@ class MroomComponent extends Component {
                         </Form.Control>
                     </Form.Group>
 
-                    <Form.Group controlId="exampleForm.ControlSelect1" id="area" value={this.state.area}>
+                    <Form.Group controlId="exampleForm.ControlSelect1" id="area">
                         {/*<br/>*/}
                         {/*<Form.Control as="select" onChange={this.handleInputChange} name="area">*/}
                         {/*    <option selected disabled>Please select</option>*/}
@@ -95,7 +102,7 @@ class MroomComponent extends Component {
                         {/*    <option value="b">b</option>*/}
                         {/*</Form.Control>*/}
                         {/*<Card className="card">*/}
-                            <MyMapPopUp/>
+                            <MyMapPopUp callbackFromA={this.Acallback}/>
                         {/*</Card>*/}
                     </Form.Group>
 

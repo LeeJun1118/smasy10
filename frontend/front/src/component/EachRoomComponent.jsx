@@ -16,6 +16,7 @@ import {
     deleteComments, reservationRoom, reservationCancel, deleteRoom
 } from "../util/APIUtils";
 import {Link} from "react-router-dom";
+import ne from "moment/locale/ne";
 
 class EachRoomComponent extends Component {
     constructor(props) {
@@ -26,7 +27,8 @@ class EachRoomComponent extends Component {
             usersCount : 0,
             comments: [],
             content:'',
-            clicked: true
+            clicked: true,
+            place: []
         };
         // this.handleInputChange = this.handleInputChange.bind(this);
         // this.handleRegister = this.handleRegister.bind(this);
@@ -106,18 +108,17 @@ class EachRoomComponent extends Component {
 
     onReserve = () =>{
         if(this.state.clicked){
-            reservationRoom(this.state.room.id)
+            const reservationRoomRequest = Object.assign({}, this.state.place);
+            reservationRoom(reservationRoomRequest, this.state.room.id)
                 .then(response => {
                     Alert.success("You're successfully reserved!");
-                    console.log("예약 완료");
                 }).catch(error => {
                     Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
                 });
         }else{
             reservationCancel(this.state.room.id)
                 .then(response => {
-                    Alert.success("You're successfully cancel reservation!");
-                    console.log("예약 취소");
+                    Alert.success("You're successfully cancel the reservation!");
                 }).catch(error => {
                     Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
                 });
@@ -203,13 +204,19 @@ class EachRoomComponent extends Component {
         e.preventDefault();
     }
 
+    Acallback =(dataFromB)=>{
+        this.setState({
+            place: dataFromB
+        })
+    }
+
     render() {
-        const {room, usersCount, users, comments} = this.state;
+        const {room, usersCount, users, comments, place} = this.state;
         return (
             <div className="EachRoom">
                 <Table striped bordered hover className="table">
                     <caption className="caption">현재 방</caption>
-                    <tr><th>번호</th><th>제목</th><th>지역</th><th>운동 종목</th><th>경기 날짜</th><th>현재 인원</th></tr>
+                    <tr><th>번호</th><th>제목</th><th>장소</th><th>운동 종목</th><th>경기 날짜</th><th>현재 인원</th></tr>
                     <tr>
                         <td>{room.id}</td>
                         <td>{room.title}</td>
@@ -268,16 +275,15 @@ class EachRoomComponent extends Component {
                     </td>
                 </Table>
 
-                {/*<Card className="card">*/}
-                {/*    <MapPopUp/>*/}
-                {/*</Card>*/}
+                <Card className="card">
+                    <MapPopUp placeName={room.area} callbackFromA={this.Acallback}/>
+                </Card>
 
                 <Table id="fTable">
                     <tbody>
-                    <tr><td>시설명</td><td>운동장</td></tr>
-                    <tr><td>위치</td><td>부산 남구 뭐시기</td></tr>
-                    <tr><td>가격</td><td>시간당 2만원</td></tr>
-                    <tr><td>정보</td><td>등등</td></tr>
+                    <tr><td>장소명</td><td>{place.name}</td></tr>
+                    <tr><td>위치</td><td>{place.address}</td></tr>
+                    <tr><td>번호</td><td>{place.phoneNo}</td></tr>
                     </tbody>
                 </Table>
                 {

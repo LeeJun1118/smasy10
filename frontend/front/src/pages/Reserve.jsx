@@ -34,7 +34,7 @@ class Reserve extends Component {
                         <th>지역</th>
                         <th>운동 종목</th>
                         <th>경기 날짜</th>
-                        <th>입장 하기</th>
+                        <th>예약 보기</th>
                     </tr>
                     </thead>
                     <tbody>

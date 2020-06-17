@@ -206,7 +206,7 @@ class EroomComponent extends Component {
                             <tr>
                                 <th>방 번호</th>
                                 <th>방 제목</th>
-                                <th>지역</th>
+                                <th>장소</th>
                                 <th>운동 종목</th>
                                 <th>경기 날짜</th>
                                 <th>입장 하기</th>
