@@ -12,14 +12,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RoomRepository extends JpaRepository<Room,Long> {
-    @Query("From Room r WHERE r.id=:searchText OR r.title=:searchText OR r.area=:searchText OR r.sports=:searchText OR r.date=:searchText ORDER BY r.id")
-    Page<Room> findAllRooms(Pageable pageable, @Param("searchText") String searchText);
 
     Page<Room> findAllByOrderById(Pageable pageable);
 
     Optional<Room> findById(Long id);
 
-    List<Room> findBySportsContainingOrTitleContainingOrderByTitle(String sports,String title);
+    List<Room> findBySportsContainingOrTitleContainingOrAreaContainingOrDateContainingOrderByDate(String sports,String title,String area, String date);
+
 
     List<Room> findAllByOrderByDate();
 }
