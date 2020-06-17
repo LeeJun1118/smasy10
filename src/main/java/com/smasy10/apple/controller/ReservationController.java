@@ -29,7 +29,7 @@ public class ReservationController {
     private final ReservationService reservationService;
     private final RoomRepository roomRepository;
 
-    //예약하기
+    //예약하기 {id} 는 방 pk
     @PostMapping(value = "/room/reservation/{id}")
     public ResponseEntity createReservation(@PathVariable Long id,
                                             @RequestBody Place place,
