@@ -17,6 +17,11 @@
  | PUT          | /room/edit/reply/{id}            | Edit a room comment         (방 댓글 수정하기)                 | 
  | DELETE       | /reply/delete/{id}               | Delete Reply                (댓글 삭제하기)                   | 
  | GET          | /room/replies/{id}               | List of room comments       (방 댓글 목록)                    |
+ | POST         | /room/reservation/{id}           | Make a reservation          (방 예약하기)                     |
+ | DELETE       | /room/reservation/cancel/{id}    | Cancel a room reservation   (예약 취소하기)                    |
+ | POST         | /place/review/delete/{id}        | Write a review              (리뷰쓰기)                        |
+ | GET          | /place/replies/{id}              | View facility reviews       (시설 리뷰 보기)                   |
+ | DELETE       | /place/review/delete/{id}        | Delete review               (리뷰 삭제하기)                    |
 
 ### 첫 클론 후
 1. terminal 에서 \...\front 경로로 이동한 후 
