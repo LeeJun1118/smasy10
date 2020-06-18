@@ -107,7 +107,7 @@ public class ReservationController {
 
     //예약 취소 {id} 는 방 pk
     @DeleteMapping(value = "/room/reservation/cancel/{id}")
-    public ResponseEntity cancelReservation(@PathVariable Long id
+    public Reservation cancelReservation(@PathVariable Long id
                                          /*@CurrentUser UserPrincipal userPrincipal*/) {
         // 방 번호 id로 예약 내역 삭제
         Room room = roomRepository.findById(id)
@@ -116,7 +116,8 @@ public class ReservationController {
         Reservation reservation = reservationRepository.findByRoom(room);
         reservationRepository.delete(reservation);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        //return new ResponseEntity<>(HttpStatus.OK);
+        return reservation;
     }
 
 }
