@@ -5,6 +5,7 @@ import com.smasy10.apple.domain.*;
 import com.smasy10.apple.domain.dto.ReplyDto;
 import com.smasy10.apple.domain.dto.ReservationDto;
 import com.smasy10.apple.domain.dto.RoomDto;
+import com.smasy10.apple.mapper.ReservationMapper;
 import com.smasy10.apple.mapper.RoomMapper;
 import com.smasy10.apple.repository.*;
 import com.smasy10.apple.security.CurrentUser;
@@ -35,10 +36,11 @@ public class ReservationController {
     private final UserRepository userRepository;
     private final UserRoomRepoesitory userRoomRepoesitory;
     private final RoomMapper roomMapper;
+    private final ReservationMapper reservationMapper;
 
     //내가 입장한 방들 중에서 현재 예약된 방 목록
     @GetMapping(value = "/rooms/reservation/me")
-    public List<RoomDto> getMyReservationRooms(@CurrentUser UserPrincipal userPrincipal) {
+    public List<ReservationDto> getMyReservationRooms(@CurrentUser UserPrincipal userPrincipal) {
         //UserRoom에서 user id가 현재 사용자 id인 room id 를 뽑아온다.
         User user = userRepository.findById(userPrincipal.getId())
                 .orElseThrow(() -> new ApiException("User does not exist", HttpStatus.NOT_FOUND));
@@ -48,43 +50,31 @@ public class ReservationController {
 
         //모든 예약 내역
         List<Reservation> reservations = reservationRepository.findAll();
-        //예약 내역의 방들
-        List<Room> reservationRooms = new ArrayList<>();
-
-        //예약된 방들 reservationRooms에 뽑아 넣기
-        for (Reservation r :
-                reservations) {
-            reservationRooms.add(r.getRoom());
-        }
 
         //내가 입장해 있는 방
         List<Room> myRooms = new ArrayList<>();
         //userRooms 에서 빼낸 방들이 예약된 방이 아니면 출력해야함
-        for (UserRoom room :userRooms) {
+        for (UserRoom room : userRooms) {
             myRooms.add(room.getRoom());
         }
 
-        List<Room> myReservationRooms = new ArrayList<>();
-        List<Room> noReservationRooms = new ArrayList<>();
-
-        for (Room r : reservationRooms) {
-            if (myRooms.contains(r))
-                myReservationRooms.add(r);
-            else
-                noReservationRooms.add(r);
-
+        List<Reservation> myReservationRooms = new ArrayList<>();
+        for (Reservation r : reservations) {
+            for (Room m : myRooms) {
+                if (r.getRoom().getId() == m.getId())
+                    myReservationRooms.add(r);
+            }
         }
-
         return myReservationRooms.stream()
-                .map(room -> roomMapper.toRoomDto(room))
+                .map(reservation -> reservationMapper.toReservationDto(reservation))
                 .collect(Collectors.toList());
     }
 
     //예약하기 {id} 는 방 pk
     @PostMapping(value = "/room/reservation/{id}")
     public Reservation createReservation(@PathVariable Long id,
-                                            @RequestBody Place place,
-                                            @CurrentUser UserPrincipal userPrincipal) {
+                                         @RequestBody Place place,
+                                         @CurrentUser UserPrincipal userPrincipal) {
 
         log.debug("REST request to save Place : {}", place);
 
@@ -108,7 +98,7 @@ public class ReservationController {
     //예약 취소 {id} 는 방 pk
     @DeleteMapping(value = "/room/reservation/cancel/{id}")
     public Reservation cancelReservation(@PathVariable Long id
-                                         /*@CurrentUser UserPrincipal userPrincipal*/) {
+            /*@CurrentUser UserPrincipal userPrincipal*/) {
         // 방 번호 id로 예약 내역 삭제
         Room room = roomRepository.findById(id)
                 .orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
