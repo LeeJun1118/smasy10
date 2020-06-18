@@ -26,12 +26,16 @@ public class ReservationDto {
     @NotEmpty
     private String roomSports;
     @NotEmpty
+    private String roomTitle;
+    @NotEmpty
     private String roomDate;
     @NotEmpty
     private String roomArea;
 
     @NotEmpty
     private Long placeId;
+    @NotEmpty
+    private String placeName;
     @NotEmpty
     private String placeAddress;
     @NotEmpty
@@ -48,10 +52,12 @@ public class ReservationDto {
         this.email = reservation.getUser().getEmail();
 
         this.roomId = reservation.getRoom().getId();
+        this.roomTitle = reservation.getRoom().getTitle();
         this.roomDate = reservation.getRoom().getDate();
         this.roomArea = reservation.getRoom().getArea();
 
         this.placeId = reservation.getPlace().getId();
+        this.placeName = reservation.getPlace().getName();
         this.placeAddress = reservation.getPlace().getAddress();
         this.placePhoneNo = reservation.getPlace().getPhoneNo();
     }

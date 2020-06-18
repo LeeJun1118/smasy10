@@ -34,6 +34,7 @@
  |------------- | -------------------------------- | ---------------------------------------------------- | ---------- |
  | POST         | /room/reservation/{id}           | Make a reservation          (방 예약하기)              |  Room Id   |
  | DELETE       | /room/reservation/cancel/{id}    | Cancel a room reservation   (예약 취소하기)            |  Room Id   |
+ | GET          | /rooms/reservation/me            | Reserved room               (예약된 방)                |           |
  
   ### Review
  | HTTP method  | URI                              | Description                                          | parameter  |   
@@ -42,6 +43,7 @@
  | GET          | /place/replies/{id}              | View facility reviews       (시설 리뷰 보기)            | Place Id   |
  | DELETE       | /place/review/delete/{id}        | Delete review               (리뷰 삭제하기)             | Reply Id   | 
  | GET          | /place/reviews                   | All reviews                 (전체 리뷰 보기)            |            |
+ | GET          | /place/my/reviews                | My Reviews                  (내가 쓴 리뷰들 보기)        |            |
  
   ### My Room & Reservation Room
  | HTTP method  | URI                              | Description                                          | parameter  |
