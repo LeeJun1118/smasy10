@@ -29,7 +29,7 @@ class Reserve extends Component {
 
     }
 
-    const [modalShow, setModalShow] = useState(false);
+    // const [modalShow, setModalShow] = useState(false);
 
     render() {
         const {reservations} = this.state;
@@ -75,10 +75,6 @@ class Reserve extends Component {
                     </tbody>
                 </Table>
 
-                <MyVerticallyCenteredModal
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                />
             </div>
         );
     }

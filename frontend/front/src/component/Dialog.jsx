@@ -20,7 +20,7 @@ class Dialog extends Component {
         });
     }
 
-    const [modalShow, setModalShow] = React.useState(false);
+    // const [modalShow, setModalShow] = React.useState(false);
 
     handleClose = () => setShow(false);
     handleShow = () => setShow(true);
