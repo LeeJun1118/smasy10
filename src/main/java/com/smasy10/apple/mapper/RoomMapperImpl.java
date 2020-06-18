@@ -28,6 +28,8 @@ public class RoomMapperImpl implements RoomMapper {
         roomDto.setArea( room.getArea() );
         roomDto.setSports( room.getSports());
         roomDto.setDate( room.getDate() );
+        roomDto.setHead(room.getHead());
+        roomDto.setState(room.getState());
 
         return roomDto;
     }

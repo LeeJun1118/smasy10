@@ -82,12 +82,14 @@ public class ReservationController {
 
         Room room = roomService.findForId(id)
                 .orElseThrow(() -> new ApiException("User does not exist", HttpStatus.NOT_FOUND));
+        room.setState(true);
+        roomRepository.save(room);
 
         Reservation newReservation = new Reservation();
 
         newReservation.setPlace(newPlace);
         newReservation.setUser(new User(userPrincipal.getId()));
-        newReservation.setRoom(new Room(room.getId()));
+        newReservation.setRoom(room);
 
         reservationRepository.save(newReservation);
 
@@ -102,6 +104,9 @@ public class ReservationController {
         // 방 번호 id로 예약 내역 삭제
         Room room = roomRepository.findById(id)
                 .orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
+
+        room.setState(false);
+        roomRepository.save(room);
 
         Reservation reservation = reservationRepository.findByRoom(room);
         reservationRepository.delete(reservation);

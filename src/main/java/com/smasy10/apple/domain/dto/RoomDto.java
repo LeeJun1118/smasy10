@@ -25,4 +25,10 @@ public class RoomDto {
 
     @NotEmpty
     private String date;
+
+    @NotEmpty
+    private Boolean state;
+
+    @NotEmpty
+    private Long head;
 }

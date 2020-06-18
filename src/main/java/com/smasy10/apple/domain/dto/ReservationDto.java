@@ -31,6 +31,10 @@ public class ReservationDto {
     private String roomDate;
     @NotEmpty
     private String roomArea;
+    @NotEmpty
+    private Boolean roomState;
+    @NotEmpty
+    private Long roomHead;
 
     @NotEmpty
     private Long placeId;
@@ -45,7 +49,6 @@ public class ReservationDto {
 
     public ReservationDto(Reservation reservation){
         this.id = reservation.getId();
-        this.state = reservation.getState();
 
         this.userId = reservation.getUser().getId();
         this.userName = reservation.getUser().getName();
@@ -55,6 +58,8 @@ public class ReservationDto {
         this.roomTitle = reservation.getRoom().getTitle();
         this.roomDate = reservation.getRoom().getDate();
         this.roomArea = reservation.getRoom().getArea();
+        this.roomState = reservation.getRoom().getState();
+        this.roomHead = reservation.getRoom().getHead();
 
         this.placeId = reservation.getPlace().getId();
         this.placeName = reservation.getPlace().getName();

@@ -25,6 +25,8 @@ public class PlaceReviewDto {
     private String roomSports;
     private String roomArea;
     private String roomDate;
+    private Boolean roomState;
+    private Long roomHead;
 
     public PlaceReviewDto(){}
 
@@ -46,5 +48,7 @@ public class PlaceReviewDto {
         this.roomSports = reply.getRoom().getSports();
         this.roomArea = reply.getRoom().getArea();
         this.roomDate = reply.getRoom().getDate();
+        this.roomState = reply.getRoom().getState();
+        this.roomHead = reply.getRoom().getHead();
     }
 }

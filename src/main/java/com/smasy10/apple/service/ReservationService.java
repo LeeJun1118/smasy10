@@ -33,8 +33,6 @@ public class ReservationService {
         newReservation.setUser(new User(userPrincipal.getId()));
         newReservation.setPlace(new Place(reservationDto.getPlaceId()));
 
-        newReservation.setState(reservationDto.getState());
-
         return new ReservationDto(reservationRepository.saveAndFlush(newReservation));
     }
 

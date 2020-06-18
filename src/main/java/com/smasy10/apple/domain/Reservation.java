@@ -29,9 +29,6 @@ public class Reservation extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String state;
-
     //외래키를 매핑할 떄 사용
     //name 속성에는 매핑할 외래 키 이름을 지정
     //Room 의 id 를 외래키로 가지므로 room_id 로 작성

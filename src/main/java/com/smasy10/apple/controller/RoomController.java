@@ -183,7 +183,19 @@ public class RoomController {
                                      @CurrentUser UserPrincipal userPrincipal) {
         log.debug("REST request to create Room : {}", room);
         /*Room saveRoom = roomService.registerRoom(room, userPrincipal);*/
-        Room newRoom = roomRepository.save(room);
+        Room newRoom = new Room();
+
+        newRoom.setTitle(room.getTitle());
+        newRoom.setArea(room.getArea());
+        newRoom.setSports(room.getSports());
+        newRoom.setDate(room.getDate());
+        newRoom.setHead(userPrincipal.getId());
+        newRoom.setState(false);
+
+        roomRepository.save(newRoom);
+        /*Room newRoom = roomRepository.save(room);
+        newRoom.setHead(userPrincipal.getId());
+        roomRepository.save(newRoom);*/
 
         UserRoom newUserRoom = new UserRoom();
         newUserRoom.setRoom(newRoom);
@@ -208,8 +220,41 @@ public class RoomController {
     public UserRoom exitRoom(@PathVariable Long id,
                              @CurrentUser UserPrincipal userPrincipal) {
 
+        //사용자가 나가진다.
         UserRoom userRoom = userRoomService.validateUserRoom(id, userPrincipal);
         userRoomRepoesitory.delete(userRoom);
+
+        //방 찾기
+        Room room = roomRepository.findById(id)
+                .orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
+
+        //나가는 사람이 그 방의 방장이라면
+        if(room.getHead() == userPrincipal.getId()){
+            //방안의 사용자들 찾기
+            List<UserRoom> userRooms = userRoomRepoesitory.findAllByRoom(room);
+
+            //사용자들 찾아 넣기
+            List<User> users = new ArrayList<>();
+            for (UserRoom u: userRooms) {
+                users.add(u.getUser());
+            }
+            User user = new User();
+
+            //사용자가 한명이라도 있다면
+            if(!users.isEmpty())
+            {
+                user = users.get(0);
+                room.setHead(user.getId());
+                roomRepository.save(room);
+            }
+            else //한명도 없으면 방 삭제
+            {
+                reservationRepository.deleteAllByRoom(room);
+                userRoomRepoesitory.deleteAllByRoom(room);
+                replyRepository.deleteAllByRoom(room);
+                roomRepository.delete(room);
+            }
+        }
 
         return userRoom;
     }
