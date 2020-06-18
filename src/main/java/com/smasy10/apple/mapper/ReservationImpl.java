@@ -23,7 +23,6 @@ public class ReservationImpl implements ReservationMapper {
 
         //Reservation
         reservationDto.setId(reservation.getId());
-        reservationDto.setState(reservation.getState());
 
         //place
         reservationDto.setPlaceId(reservation.getPlace().getId());
@@ -38,6 +37,7 @@ public class ReservationImpl implements ReservationMapper {
         reservationDto.setRoomSports(reservation.getRoom().getSports());
         reservationDto.setRoomArea(reservation.getRoom().getArea());
         reservationDto.setRoomDate(reservation.getRoom().getDate());
+        reservationDto.setRoomState(reservation.getRoom().getState());
 
 
         reservationDto.setUserId(reservation.getUser().getId());

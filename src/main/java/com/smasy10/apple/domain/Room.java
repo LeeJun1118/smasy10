@@ -46,6 +46,9 @@ public class Room extends BaseTimeEntity{
     @Column(nullable = false)
     private String date;
 
+    @Column(nullable = false)
+    private Boolean state;
+
    /* @OneToMany(mappedBy = "room")
     @JsonIgnore
     private List<User> users = new ArrayList<>();*/
