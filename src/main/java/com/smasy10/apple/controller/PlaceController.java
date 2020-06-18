@@ -69,7 +69,7 @@ public class PlaceController {
 
     //시설 리뷰 목록 보기 (검색: 시설 id, 시설 이름, 주소, 폰번호, 댓글 내용, 댓글 쓴 사람 이름)
     @GetMapping(value = "/place/reviews")
-    public List<ReplyDto> allReviews() {
+    public List<PlaceReviewDto> allReviews() {
 
         //모든 댓글
         List<Reply> replies = replyRepository.findAll();
@@ -87,7 +87,7 @@ public class PlaceController {
 
         return replyList.stream()
                 .filter(t -> t.getPlace().getId() != 0)
-                .map(reply -> replyMapper.toReplyDto(reply))
+                .map(reply -> replyMapper.toPlaceReviewDto(reply))
                 .collect(Collectors.toList());
     }
 }
