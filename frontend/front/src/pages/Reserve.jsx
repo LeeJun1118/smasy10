@@ -22,6 +22,7 @@ class Reserve extends Component {
                     reservations: data
                 })
             }).catch(error => {
+
                 Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
             });
     }
