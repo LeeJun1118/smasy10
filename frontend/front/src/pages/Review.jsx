@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import {Button, Form, Table} from "react-bootstrap";
-import {ReviewsList} from "../util/APIUtils";
+import {reviewsList, deleteReview, myReviewsList} from "../util/APIUtils";
 import Alert from "react-s-alert";
 // import '../css/Review.css';
 
@@ -9,19 +9,22 @@ class Review extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            reviews: []
+            reviews: [],
+            clicked: false
         };
     }
     componentDidMount() {
         this.showReviewsList();
     }
     showReviewsList=()=>{
-        ReviewsList()
+        console.log("현재 : " +JSON.stringify(this.props.currentUserId));
+        reviewsList()
             .then(response => {
                 Alert.success("You're successfully checked reviews!");
                 const data = response;
-                // console.log("data = " + JSON.stringify(data));
+                console.log("data = " + JSON.stringify(data));
                 this.setState({ reviews: data });
+                this.setState({clicked: !this.state.clicked})
             }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
             this.setState({ reviews: [] });
@@ -31,18 +34,31 @@ class Review extends Component {
         this.showReviewsList();
     }
     myReviews=()=>{
+        myReviewsList()
+            .then(response => {
+                Alert.success("You're successfully checked your reviews!");
+                const data = response;
+                // console.log("data = " + JSON.stringify(data));
+                this.setState({ reviews: data });
+                this.setState({clicked: !this.state.clicked})
+            }).catch(error => {
+                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+                this.setState({reviews: []});
+            });
+    }
+    onDelete = (e) =>{
+        const target = e.target;
+        const id = target.name;
+        // console.log("id : " + id);
+        deleteReview(id)
+            .then(response => {
+                Alert.success("You're successfully deleted a review!");
+                this.showReviewsList();
+            }).catch(error => {
+                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+            });
+    }
 
-    }
-    onDelete = () =>{
-        // deleteReview(id)
-        //     .then(response => {
-        //         Alert.success("You're successfully checked reviews!");
-        //         const data = response;
-        //         // console.log("data = " + JSON.stringify(data));
-        //     }).catch(error => {
-        //         Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
-        //     });
-    }
     render() {
         const {reviews} = this.state;
         return (
@@ -54,6 +70,7 @@ class Review extends Component {
                     <caption className="caption">리뷰 내역</caption>
                     <thead>
                     <tr>
+                        <th>작성자</th>
                         <th>장소</th>
                         <th>운동 종목</th>
                         <th>경기 날짜</th>
@@ -69,15 +86,17 @@ class Review extends Component {
                             </tr>)
                             :
                             reviews.map((rev) => (
-                                <tr key={rev.id}>
-                                    <td>{rev.area}</td>
-                                    <td>{rev.sports}</td>
-                                    <td>{rev.date}</td>
-                                    <td>{rev.content}</td>
-                                    <td >
-                                        {/*<Link to={"/rooms/" + room.id} className="btn btn-sm btn-outline-primary">입장</Link>*/}
-                                        <Link onClick={this.onDelete}>삭제</Link>
-                                    </td>
+                                <tr key={rev.replyId}>
+                                    <td>{rev.userName}</td>
+                                    <td>{rev.roomArea}</td>
+                                    <td>{rev.roomSports}</td>
+                                    <td>{rev.roomDate}</td>
+                                    <td>{rev.replyContent}</td>
+                                    <td>{
+                                        (!this.state.clicked)?(
+                                            <Link name={rev.replyId} onClick={this.onDelete}>삭제</Link>
+                                        ):(<></>)
+                                    }</td>
                                 </tr>
                             ))
                     }

@@ -36,9 +36,8 @@ class EroomComponent extends Component {
             getUserCounts(room.id)
                 .then(response => {
                     const data = response;
-                    let jsonStr = '{"cnt": ' + data +' }';
-                    let jsonObj = JSON.parse(jsonStr);
-                    room = room + jsonObj;
+                    console.log(JSON.stringify(data));
+
                 }).catch(error => {
             });
         })
@@ -233,18 +232,20 @@ class EroomComponent extends Component {
                                     </tr>)
                                 :
                                     rooms.map((room) => (
-                                        <tr key={room.id} >
-                                            <td>{room.id}</td>
-                                            <td>{room.title}</td>
-                                            <td>{room.area}</td>
-                                            <td>{room.sports}</td>
-                                            <td>{room.date}</td>
-                                            <td>{usersCount}</td>
-                                            <td >
-                                                {/*<Link to={"/rooms/" + room.id} className="btn btn-sm btn-outline-primary">입장</Link>*/}
-                                                <Link to={this.props.match.url+ "/enter/" + room.id + "/" + this.state.isCap}>입장</Link>
-                                            </td>
-                                        </tr>
+                                        (!room.state)?(
+                                            <tr key={room.id} >
+                                                <td>{room.id}</td>
+                                                <td>{room.title}</td>
+                                                <td>{room.area}</td>
+                                                <td>{room.sports}</td>
+                                                <td>{room.date}</td>
+                                                <td>{usersCount}</td>
+                                                <td >
+                                                    {/*<Link to={"/rooms/" + room.id} className="btn btn-sm btn-outline-primary">입장</Link>*/}
+                                                    <Link to={this.props.match.url+ "/enter/" + room.id }>입장</Link>
+                                                </td>
+                                            </tr>
+                                        ):(<></>)
                                     ))
                             }
                             </tbody>

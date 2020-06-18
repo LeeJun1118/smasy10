@@ -49,7 +49,7 @@ class MroomComponent extends Component {
                 Alert.success("You're successfully create room!");
                 const data = response;
                 // console.log(data.id);
-                this.props.history.push("/rooms/enter/" + data.id + "/" + this.state.isCap);
+                this.props.history.push("/rooms/enter/" + data.id);
             }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
         });
@@ -124,7 +124,6 @@ class MroomComponent extends Component {
                                   onChange={this.onChangeDate}/>
                     </Form.Group>
 
-                    {/* 각 시설 위치 지도 보여주면 좋을 듯*/}
                     <Button  bg="primary" onClick={this.handleSubmit}>개설하기</Button>
                 </Form>
             </div>

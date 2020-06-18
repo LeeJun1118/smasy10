@@ -102,7 +102,7 @@ class App extends Component {
                         {/*<Route exact path="/rooms" authenticated={this.state.authenticated}*/}
                         {/*       currentUser={this.state.currentUser}*/}
                         {/*       component={Eroom}/>*/}
-                        <PrivateRoute path="/rooms/enter/:id/:isCap" authenticated={this.state.authenticated}
+                        <PrivateRoute path="/rooms/enter/:id" authenticated={this.state.authenticated}
                                       currentUser={this.state.currentUser}
                                       // place={this.state.place}
                                       component={EachRoomComponent}/>

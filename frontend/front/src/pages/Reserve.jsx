@@ -10,6 +10,7 @@ class Reserve extends Component {
         super(props);
         this.state = {
             reservations: [],
+            content: ''
         };
     }
     componentDidMount() {
@@ -28,6 +29,27 @@ class Reserve extends Component {
                 reservations: []
             })
             });
+    }
+    handleSave = (e) => {
+        const target = e.target;
+        const id = target.name;
+        // console.log("id : " + id);
+
+        const registerReviewRequest = Object.assign({}, this.state);
+        // console.log(registerReviewRequest);
+
+        registerReview(registerReviewRequest, id)
+            .then(response => {
+                Alert.success("You're successfully registered a review!");
+            }).catch(error => {
+            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+        });
+    }
+    handleInputChange = (event) => {
+        const target = event.target;
+        // const inputName = target.name;
+        const inputValue = target.value;
+        this.setState({content:inputValue})
     }
 
     render() {
@@ -56,15 +78,15 @@ class Reserve extends Component {
                             reservations.map((resv) => (
                                 <tr key={resv.id}>
                                     <td>{resv.id}</td>
-                                    <td>{resv.area}</td>
-                                    <td>{resv.sports}</td>
-                                    <td>{resv.date}</td>
+                                    <td>{resv.roomArea}</td>
+                                    <td>{resv.roomSports}</td>
+                                    <td>{resv.roomDate}</td>
                                     <td >
                                         {/*<Link to={"/rooms/" + room.id} className="btn btn-sm btn-outline-primary">입장</Link>*/}
-                                        <Link to={this.props.match.url+ "/enter/" + resv.roomId }>확인</Link>
+                                        <Link  onClick={()=>this.props.history.push("/rooms/enter/" + resv.roomId)}>확인</Link>
                                     </td>
                                     <td >
-                                        <Dialog resvId={resv.id}/>
+                                        <Dialog resvId={resv.id} onSave={this.handleSave} onTyping={this.handleInputChange}/>
                                     </td>
                                 </tr>
                             ))
@@ -77,25 +99,6 @@ class Reserve extends Component {
 };
 
 function MyVerticallyCenteredModal(props) {
-    let inputValue;
-
-    const handleSave = () => {
-        console.log("flqb : " + props.resvId);
-        const registerCommentsRequest = Object.assign({}, inputValue);
-
-        registerReview(registerCommentsRequest, props.resvId)
-                .then(response => {
-                    Alert.success("You're successfully registered a review!");
-                }).catch(error => {
-                    Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
-                });
-    }
-    const handleInputChange = (event) => {
-        const target = event.target;
-        // const inputName = target.name;
-        inputValue = target.value;
-
-    }
     return (
         <Modal
             {...props}
@@ -110,12 +113,12 @@ function MyVerticallyCenteredModal(props) {
             </Modal.Header>
             <Modal.Body>
                     <Form.Control type="text" placeholder="Enter Contents"
-                                  onChange={handleInputChange}
+                                  onChange={props.onTyping}
                                   name="content"/>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={props.onHide}>Close</Button>
-                <Button variant="primary" onClick={handleSave}>Save</Button>
+                <Button variant="primary" onClick={props.onSave} name={props.resvId}>Save</Button>
             </Modal.Footer>
         </Modal>
     );
@@ -123,13 +126,16 @@ function MyVerticallyCenteredModal(props) {
 
 function Dialog(props) {
     const [modalShow, setModalShow] = useState(false);
+
     return (
         <>
             <Link onClick={() => setModalShow(true)} >작성</Link>
             {/*<Button >버튼</Button>*/}
             <MyVerticallyCenteredModal
                 show={modalShow}
+                onTyping={props.onTyping}
                 onHide={() => setModalShow(false)}
+                onSave={props.onSave}
                 resvId={props.resvId}
             />
         </>
