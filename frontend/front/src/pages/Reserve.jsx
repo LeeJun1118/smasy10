@@ -22,6 +22,7 @@ class Reserve extends Component {
                     reservations: data
                 })
             }).catch(error => {
+
                 Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
             });
     }
@@ -29,7 +30,7 @@ class Reserve extends Component {
 
     }
 
-    const [modalShow, setModalShow] = useState(false);
+    // const [modalShow, setModalShow] = useState(false);
 
     render() {
         const {reservations} = this.state;
@@ -75,10 +76,6 @@ class Reserve extends Component {
                     </tbody>
                 </Table>
 
-                <MyVerticallyCenteredModal
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                />
             </div>
         );
     }
