@@ -139,7 +139,7 @@ export function CommentsList(id) {
 
 export function reservationRoom(reservationRoomRequest, id) { // 방 예약
     return request({
-        url: API_BASE_URL + "/api/room/reservation/" + id,
+        url: API_BASE_URL + "/room/reservation/" + id,
         method: 'POST',
         body: JSON.stringify(reservationRoomRequest)
     });
@@ -147,7 +147,7 @@ export function reservationRoom(reservationRoomRequest, id) { // 방 예약
 
 export function reservationCancel(id) { // 방 예약 취소
     return request({
-        url: API_BASE_URL + "/api/room/reservation/cancel/" + id,
+        url: API_BASE_URL + "/room/reservation/cancel/" + id,
         method: 'DELETE',
     });
 }
