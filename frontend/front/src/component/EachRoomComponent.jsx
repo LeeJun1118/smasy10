@@ -157,7 +157,7 @@ class EachRoomComponent extends Component {
             });
     }
 
-    handleRegister = () =>{
+    handleRegister = () =>{ //댓글 쓰기
         const registerCommentsRequest = Object.assign({}, this.state);
 
         registerComments(registerCommentsRequest, this.state.room.id)
@@ -213,8 +213,8 @@ class EachRoomComponent extends Component {
 
     render() {
         const {room, usersCount, users, comments, place} = this.state;
-        const res1 = users.filter(it => it.id%2);
-        const res2 = users.filter(it => !(it.id%2));
+        const res1 = users.filter(users => users.id%2);
+        const res2 = users.filter(users => !(users.id%2));
         return (
             <div className="EachRoom">
                 <Table striped bordered hover className="table">
@@ -245,8 +245,8 @@ class EachRoomComponent extends Component {
                                     ) :
                                     res1.map((user) => (
                                     <tr key={user.id}>
-                                    <td>{user.id}</td>
-                                    <td>{user.name}</td>
+                                    <td>{user.user.id}</td>
+                                    <td>{user.user.name}</td>
                                     </tr>
                                 ))
                             }
@@ -269,8 +269,8 @@ class EachRoomComponent extends Component {
                                     :
                                     res2.map((user) => (
                                         <tr key={user.id}>
-                                            <td>{user.id}</td>
-                                            <td>{user.name}</td>
+                                            <td>{user.user.id}</td>
+                                            <td>{user.user.name}</td>
                                         </tr>
                                     ))
                             }
