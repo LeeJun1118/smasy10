@@ -50,17 +50,17 @@ public class ReviewController {
                 .collect(Collectors.toList());
     }
 
-    //리뷰 쓰기.  파라미터 = room pk
+    //리뷰 쓰기.  파라미터 = room pk -> reservation pk 로 바꿔보자
     //예약한 방이며 사용자가 그 방에 입장이 된 상태일때만 리뷰 작성 가능
     @PostMapping(value = "/place/review/create/{id}")
     public ResponseEntity<Reply> createReview(@PathVariable Long id,
                                              @RequestBody Reply reply,
                                              @CurrentUser UserPrincipal userPrincipal) {
-
-        Room room = roomRepository.findById(id)
+        Reservation reservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
 
-        Reservation reservation = reservationRepository.findByRoom(room);
+        Room room = roomRepository.findById(reservation.getRoom().getId())
+                .orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
 
         Place place = placeRepository.findById(reservation.getPlace().getId())
                 .orElseThrow(() -> new ApiException("Place does not exist", HttpStatus.NOT_FOUND));
