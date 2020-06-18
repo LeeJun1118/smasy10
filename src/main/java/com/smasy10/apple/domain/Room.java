@@ -52,6 +52,11 @@ public class Room extends BaseTimeEntity{
     @Column(nullable = false)
     private Long head;
 
+    @Column(nullable = false)
+    private Double placeX;
+    @Column(nullable = false)
+    private Double placeY;
+
    /* @OneToMany(mappedBy = "room")
     @JsonIgnore
     private List<User> users = new ArrayList<>();*/
@@ -67,6 +72,7 @@ public class Room extends BaseTimeEntity{
     @OneToMany(mappedBy = "room")
     @JsonIgnore
     private List<Reply> replies = new ArrayList<>();
+
 
     //나중에 삭제
     public Room(String title,String area,String sports,String date) {

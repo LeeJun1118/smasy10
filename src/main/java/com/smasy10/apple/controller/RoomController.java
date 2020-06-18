@@ -192,6 +192,8 @@ public class RoomController {
         newRoom.setDate(room.getDate());
         newRoom.setHead(userPrincipal.getId());
         newRoom.setState(false);
+        newRoom.setPlaceX(room.getPlaceX());
+        newRoom.setPlaceY(room.getPlaceY());
 
         roomRepository.save(newRoom);
         /*Room newRoom = roomRepository.save(room);
