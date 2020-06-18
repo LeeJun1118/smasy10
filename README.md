@@ -41,6 +41,7 @@
  | POST         | /place/review/create/{id}        | Write a review              (리뷰쓰기)                 | Place Id   | 
  | GET          | /place/replies/{id}              | View facility reviews       (시설 리뷰 보기)            | Place Id   |
  | DELETE       | /place/review/delete/{id}        | Delete review               (리뷰 삭제하기)             | Reply Id   | 
+ | GET          | /place/reviews                   | All reviews                 (전체 리뷰 보기)            |            |
  
   ### My Room & Reservation Room
  | HTTP method  | URI                              | Description                                          | parameter  |
