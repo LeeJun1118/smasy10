@@ -212,6 +212,8 @@ class EachRoomComponent extends Component {
 
     render() {
         const {room, usersCount, users, comments, place} = this.state;
+        const res1 = users.filter(it => it.id%2);
+        const res2 = users.filter(it => !(it.id%2));
         return (
             <div className="EachRoom">
                 <Table striped bordered hover className="table">
@@ -234,17 +236,18 @@ class EachRoomComponent extends Component {
                             <thead><tr><th>id</th><th>이름</th></tr></thead>
                             <tbody>
                             {
-                                users.length === 0 ?
+
+                                res1.length === 0 ?
                                     (<tr align="center">
                                         <td colSpan="7" onClick={this.onRoomEnter}>없습니다.</td>
-                                    </tr>)
-                                    :
-                                    users.map((user) => (
-                                        <tr key={user.id}>
-                                            <td>{user.id}</td>
-                                            <td>{user.name}</td>
-                                        </tr>
-                                    ))
+                                    </tr>
+                                    ) :
+                                    res1.map((user) => (
+                                    <tr key={user.id}>
+                                    <td>{user.id}</td>
+                                    <td>{user.name}</td>
+                                    </tr>
+                                ))
                             }
                             </tbody>
                         </Table>
@@ -258,12 +261,12 @@ class EachRoomComponent extends Component {
                             <thead><tr><th>id</th><th>이름</th></tr></thead>
                             <tbody>
                             {
-                                users.length === 0 ?
+                                res2.length === 0 ?
                                     (<tr align="center">
                                         <td colSpan="7" onClick={this.onRoomEnter}>없습니다.</td>
                                     </tr>)
                                     :
-                                    users.map((user) => (
+                                    res2.map((user) => (
                                         <tr key={user.id}>
                                             <td>{user.id}</td>
                                             <td>{user.name}</td>

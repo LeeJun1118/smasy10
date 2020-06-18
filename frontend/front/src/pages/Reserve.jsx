@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import {Table} from "react-bootstrap";
-import {enterRoom} from "../util/APIUtils";
+import {myRservation} from "../util/APIUtils";
 import Alert from "react-s-alert";
 // import '../css/Reserve.css';
 
@@ -14,9 +14,13 @@ class Reserve extends Component {
     }
     componentDidMount() {
         // this.findAllRooms(this.state.currentPage);
-        enterRoom(this.props.match.params.id)
+        myRservation()
             .then(response => {
                 Alert.success("You're successfully checked the reservations!");
+                const data = response;
+                this.setState({
+                    reservations: data
+                })
             }).catch(error => {
                 Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
             });
@@ -31,7 +35,7 @@ class Reserve extends Component {
                     <tr>
                         <th>방 번호</th>
                         <th>방 제목</th>
-                        <th>지역</th>
+                        <th>장소</th>
                         <th>운동 종목</th>
                         <th>경기 날짜</th>
                         <th>예약 보기</th>
@@ -41,7 +45,7 @@ class Reserve extends Component {
                     {
                         reservations.length === 0 ?
                             (<tr align="center">
-                                <td colSpan="7">방이 없습니다.</td>
+                                <td colSpan="7">예약 내역이 없습니다.</td>
                             </tr>)
                             :
                             reservations.map((resv) => (
@@ -53,7 +57,7 @@ class Reserve extends Component {
                                     <td>{resv.date}</td>
                                     <td >
                                         {/*<Link to={"/rooms/" + room.id} className="btn btn-sm btn-outline-primary">입장</Link>*/}
-                                        <Link to={this.props.match.url+ "/enter/" + resv.id + "/" + this.state.isCap}>입장</Link>
+                                        <Link to={this.props.match.url+ "/enter/" + resv.roomId + "/" + this.state.isCap}>확인</Link>
                                     </td>
                                 </tr>
                             ))

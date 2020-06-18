@@ -128,14 +128,12 @@ export function deleteComments(id) {
     return request({
         url: API_BASE_URL + "/reply/delete/" + id,
         method: 'DELETE',
-        // body: JSON.stringify()
     });
 }
 export function CommentsList(id) {
     return request({
         url: API_BASE_URL + "/room/replies/" + id,
         method: 'GET',
-        // body: JSON.stringify()
     });
 }
 
@@ -154,9 +152,15 @@ export function reservationCancel(id) { // 방 예약 취소
     });
 }
 
-export function myRoom() { // 방 예약 취소
+export function myRoom() { // 내가 입장한 방
     return request({
         url: API_BASE_URL + "/rooms/me",
+        method: 'GET',
+    });
+}
+export function myRservation() { // 나의 예약 내역
+    return request({
+        url: API_BASE_URL + "/rooms/reservation/me",
         method: 'GET',
     });
 }
