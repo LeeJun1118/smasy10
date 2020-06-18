@@ -51,11 +51,12 @@ public class RoomController {
     //방 정보 보여주기
     //jwt 필요 (postman)
     @GetMapping(value = "/rooms/enter/{id}")
-    public ResponseEntity<RoomResponseDto> getRoom(@PathVariable Long id) {
+    public ResponseEntity<Room> getRoom(@PathVariable Long id) {
         log.debug("REST request to get Room : {}", id);
         Room room = roomService.findForId(id).orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
 
-        return new ResponseEntity<>(new RoomResponseDto(room), HttpStatus.OK);
+        //ResponseEntity.status(HttpStatus.OK).body(users.size());
+        return ResponseEntity.status(HttpStatus.OK).body(room);
     }
 
     //방 입장하기 (UserRoom DB에 방, 유저 저장)
