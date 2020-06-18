@@ -93,7 +93,7 @@ public class PlaceController {
     }
 
 
-    //내가 쓴 리뷰들
+    //내가 쓴 시설 리뷰들
     @GetMapping(value = "/place/my/reviews")
     public List<PlaceReviewDto> allMyReviews(@CurrentUser UserPrincipal userPrincipal) {
 
