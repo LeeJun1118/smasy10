@@ -6,6 +6,7 @@ import com.smasy10.apple.domain.Place;
 import com.smasy10.apple.domain.Reply;
 import com.smasy10.apple.domain.Room;
 import com.smasy10.apple.domain.User;
+import com.smasy10.apple.domain.dto.PlaceReviewDto;
 import com.smasy10.apple.domain.dto.ReplyDto;
 import com.smasy10.apple.repository.PlaceRepository;
 import com.smasy10.apple.repository.ReplyRepository;
@@ -16,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -92,4 +95,15 @@ public class ReplyService {
 
         return replyRepository.saveAndFlush(newReply);
     }
+
+    /*public List<Reply> getReplies() {
+        Place place = placeRepository.findById(1L)
+                .orElseThrow(() -> new ApiException("Place does not exist", HttpStatus.NOT_FOUND));
+
+        return replyRepository.findAllByPlaceId(place);
+    }*/
+
+    /*public List<Reply> getPlaceReviewContainingText(String text) {
+        return replyRepository.findAllByText(text);
+    }*/
 }

@@ -82,7 +82,7 @@ public class ReservationController {
 
     //예약하기 {id} 는 방 pk
     @PostMapping(value = "/room/reservation/{id}")
-    public ResponseEntity createReservation(@PathVariable Long id,
+    public Reservation createReservation(@PathVariable Long id,
                                             @RequestBody Place place,
                                             @CurrentUser UserPrincipal userPrincipal) {
 
@@ -101,7 +101,8 @@ public class ReservationController {
 
         reservationRepository.save(newReservation);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(newReservation);
+        //return ResponseEntity.status(HttpStatus.CREATED).body(newReservation);
+        return newReservation;
     }
 
     //예약 취소 {id} 는 방 pk

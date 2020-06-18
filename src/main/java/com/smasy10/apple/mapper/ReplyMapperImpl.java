@@ -2,6 +2,7 @@ package com.smasy10.apple.mapper;
 
 
 import com.smasy10.apple.domain.Reply;
+import com.smasy10.apple.domain.dto.PlaceReviewDto;
 import com.smasy10.apple.domain.dto.ReplyDto;
 import org.springframework.stereotype.Component;
 
@@ -28,5 +29,36 @@ public class ReplyMapperImpl implements ReplyMapper {
         replyDto.setUserName(reply.getUser().getName());
 
         return replyDto;
+    }
+
+    @Override
+    public PlaceReviewDto toPlaceReviewDto(Reply reply) {
+        if (reply == null)
+            return null;
+        PlaceReviewDto placeReviewDto = new PlaceReviewDto();
+
+        //place
+        placeReviewDto.setPlaceId(reply.getPlace().getId());
+        placeReviewDto.setPlaceName(reply.getPlace().getName());
+        placeReviewDto.setPlaceAddress(reply.getPlace().getAddress());
+        placeReviewDto.setPlacePhoneNo(reply.getPlace().getPhoneNo());
+
+        //Reply
+        placeReviewDto.setReplyId(reply.getId());
+        placeReviewDto.setReplyContent(reply.getContent());
+
+        //User
+        placeReviewDto.setUserId(reply.getUser().getId());
+        placeReviewDto.setUserName(reply.getUser().getName());
+        placeReviewDto.setUserEmail(reply.getUser().getEmail());
+
+        //Room
+        placeReviewDto.setRoomId(reply.getRoom().getId());
+        placeReviewDto.setRoomTitle(reply.getRoom().getTitle());
+        placeReviewDto.setRoomSports(reply.getRoom().getSports());
+        placeReviewDto.setRoomArea(reply.getRoom().getArea());
+        placeReviewDto.setRoomDate(reply.getRoom().getDate());
+
+        return placeReviewDto;
     }
 }
