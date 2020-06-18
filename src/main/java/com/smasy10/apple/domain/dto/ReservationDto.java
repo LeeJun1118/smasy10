@@ -44,9 +44,10 @@ public class ReservationDto {
     private String placeAddress;
     @NotEmpty
     private String placePhoneNo;
-
-    private double placeX;
-    private double placeY;
+    @NotEmpty
+    private Double placeX;
+    @NotEmpty
+    private Double placeY;
 
     public ReservationDto(){}
 

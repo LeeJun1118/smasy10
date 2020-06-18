@@ -45,10 +45,10 @@ public class Place {
     private String phoneNo;
 
     @Column
-    private double placeX;
+    private Double placeX;
 
     @Column
-    private double placeY;
+    private Double placeY;
 
     //일대다 매핑
     //엔티티 자신을 기준으로 다중성을 생각해야함

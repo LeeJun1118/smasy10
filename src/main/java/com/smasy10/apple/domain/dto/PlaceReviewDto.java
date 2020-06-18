@@ -12,8 +12,8 @@ public class PlaceReviewDto {
     private String placeName;
     private String placeAddress;
     private String placePhoneNo;
-    private double placeX;
-    private double placeY;
+    private Double placeX;
+    private Double placeY;
 
     private Long replyId;
     private String replyContent;
