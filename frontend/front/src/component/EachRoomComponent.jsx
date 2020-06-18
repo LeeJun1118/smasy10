@@ -115,15 +115,16 @@ class EachRoomComponent extends Component {
                 }).catch(error => {
                     Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
                 });
+            this.setState({clicked: !this.state.clicked});
         }else{
             reservationCancel(this.state.room.id)
                 .then(response => {
-                    Alert.success("You're successfully cancel the reservation!");
+                    Alert.success("You're successfully canceled the reservation!");
                 }).catch(error => {
                     Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
                 });
+            this.setState({clicked: !this.state.clicked});
         }
-        this.setState({clicked: !this.state.clicked});
     }
 
     onDelete = () =>{

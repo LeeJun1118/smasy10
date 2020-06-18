@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {Link} from "react-router-dom";
 import {Table} from "react-bootstrap";
 import {myRservation} from "../util/APIUtils";
@@ -25,12 +25,18 @@ class Reserve extends Component {
                 Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
             });
     }
+    writeReview =()=>{
+
+    }
+
+    const [modalShow, setModalShow] = useState(false);
+
     render() {
         const {reservations} = this.state;
         return (
             <div className="Reserve">
                 <Table striped bordered hover id="table">
-                    <caption className="caption">현재 방</caption>
+                    <caption className="caption">예약 내역</caption>
                     <thead>
                     <tr>
                         <th>방 번호</th>
@@ -39,6 +45,7 @@ class Reserve extends Component {
                         <th>운동 종목</th>
                         <th>경기 날짜</th>
                         <th>예약 보기</th>
+                        <th>리뷰 쓰기</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -57,13 +64,21 @@ class Reserve extends Component {
                                     <td>{resv.date}</td>
                                     <td >
                                         {/*<Link to={"/rooms/" + room.id} className="btn btn-sm btn-outline-primary">입장</Link>*/}
-                                        <Link to={this.props.match.url+ "/enter/" + resv.roomId + "/" + this.state.isCap}>확인</Link>
+                                        <Link to={this.props.match.url+ "/enter/" + resv.roomId }>확인</Link>
+                                    </td>
+                                    <td >
+                                        <Link to={this.props.match.url} onClick={this.writeReview}>리뷰</Link>
                                     </td>
                                 </tr>
                             ))
                     }
                     </tbody>
                 </Table>
+
+                <MyVerticallyCenteredModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                />
             </div>
         );
     }

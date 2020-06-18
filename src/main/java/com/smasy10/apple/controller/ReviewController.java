@@ -52,7 +52,7 @@ public class ReviewController {
 
     //리뷰 쓰기.  파라미터 = room pk
     //예약한 방이며 사용자가 그 방에 입장이 된 상태일때만 리뷰 작성 가능
-    @PostMapping(value = "/place/review/delete/{id}")
+    @PostMapping(value = "/place/review/create/{id}")
     public ResponseEntity<Reply> createReview(@PathVariable Long id,
                                              @RequestBody Reply reply,
                                              @CurrentUser UserPrincipal userPrincipal) {
