@@ -251,6 +251,7 @@ public class RoomController {
             else //한명도 없으면 방 삭제
             {
                 reservationRepository.deleteAllByRoom(room);
+                //reservationRepository.deleteByRoom(room);
                 userRoomRepoesitory.deleteAllByRoom(room);
                 replyRepository.deleteAllByRoom(room);
                 roomRepository.delete(room);
@@ -350,7 +351,7 @@ public class RoomController {
 
         }*/
 
-        return myReservationRooms.stream()
+        return noReservationRooms.stream()
                 .map(room -> roomMapper.toRoomDto(room))
                 .collect(Collectors.toList());
     }
