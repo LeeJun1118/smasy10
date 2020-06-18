@@ -39,6 +39,8 @@ public interface ReplyRepository extends JpaRepository<Reply,Long> {
     @Query("FROM Reply r WHERE r.place >= :place ")
     List<Reply> findAllByPlaceId(@Param("place")Place place);
 
+    List<Reply> findAllByUser(User user);
+
     //List<Reply> findAllByOrderByDate();
 
    /* @Query(FIND_ALL_PLACE_SEARCH_REVIEW)

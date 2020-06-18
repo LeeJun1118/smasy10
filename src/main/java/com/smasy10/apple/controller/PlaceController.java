@@ -2,10 +2,7 @@ package com.smasy10.apple.controller;
 
 
 import com.smasy10.apple.common.Exception.ApiException;
-import com.smasy10.apple.domain.Place;
-import com.smasy10.apple.domain.Reply;
-import com.smasy10.apple.domain.Reservation;
-import com.smasy10.apple.domain.Room;
+import com.smasy10.apple.domain.*;
 import com.smasy10.apple.domain.dto.PlaceReviewDto;
 import com.smasy10.apple.domain.dto.ReplyDto;
 import com.smasy10.apple.domain.dto.RoomDto;
@@ -13,6 +10,9 @@ import com.smasy10.apple.mapper.ReplyMapper;
 import com.smasy10.apple.repository.PlaceRepository;
 import com.smasy10.apple.repository.ReplyRepository;
 import com.smasy10.apple.repository.ReservationRepository;
+import com.smasy10.apple.repository.UserRepository;
+import com.smasy10.apple.security.CurrentUser;
+import com.smasy10.apple.security.UserPrincipal;
 import com.smasy10.apple.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -33,6 +33,7 @@ public class PlaceController {
     private final ReservationRepository reservationRepository;
     private final ReplyRepository replyRepository;
     private final PlaceRepository placeRepository;
+    private final UserRepository userRepository;
 
     public final static String FIND_ALL_PLACE_SEARCH_REVIEW =
             /*"select r.id, r.content," +
@@ -67,12 +68,40 @@ public class PlaceController {
                 .collect(Collectors.toList());
     }*/
 
-    //시설 리뷰 목록 보기 (검색: 시설 id, 시설 이름, 주소, 폰번호, 댓글 내용, 댓글 쓴 사람 이름)
+    //시설 리뷰 목록 보기
     @GetMapping(value = "/place/reviews")
     public List<PlaceReviewDto> allReviews() {
 
         //모든 댓글
         List<Reply> replies = replyRepository.findAll();
+
+        //댓글들의 place
+        List<Place> places = placeRepository.findAll();
+
+        List<Reply> replyList = new ArrayList<>();
+        for (Reply r : replies) {
+            for (Place p : places) {
+                if (r.getPlace() == p)
+                    replyList.add(r);
+            }
+        }
+
+        return replyList.stream()
+                .filter(t -> t.getPlace().getId() != 0)
+                .map(reply -> replyMapper.toPlaceReviewDto(reply))
+                .collect(Collectors.toList());
+    }
+
+
+    //내가 쓴 리뷰들
+    @GetMapping(value = "/place/my/reviews")
+    public List<PlaceReviewDto> allMyReviews(@CurrentUser UserPrincipal userPrincipal) {
+
+        User user = userRepository.findById(userPrincipal.getId())
+                .orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
+
+        //모든 댓글
+        List<Reply> replies = replyRepository.findAllByUser(user);
 
         //댓글들의 place
         List<Place> places = placeRepository.findAll();
