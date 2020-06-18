@@ -42,6 +42,8 @@ class EachRoomComponent extends Component {
     }
 
     componentDidMount() {
+        // console.log("현재 : " +JSON.stringify(this.props.currentUser));
+
         // this.findAllRooms(this.state.currentPage);
         enterRoom(this.props.match.params.id)
             .then(response => {
@@ -76,13 +78,6 @@ class EachRoomComponent extends Component {
                 this.setState({users: []});
             });
         this.showCommentsList();
-        // CommentsList(this.props.match.params.id)
-        //     .then(response => {
-        //         const data = response;
-        //         this.setState({comments: data});
-        //     }).catch(error => {
-        //         this.setState({comments: []});
-        //     });
     }
 
 
@@ -91,6 +86,7 @@ class EachRoomComponent extends Component {
             .then(response => response.json()
             )
             .then((data) => {
+                console.log(JSON.stringify(data));
                 this.setState({room: data});
             })
     }
@@ -106,25 +102,24 @@ class EachRoomComponent extends Component {
             });
     }
 
-    onReserve = () =>{
-        if(this.state.clicked){
+    onReserve = () =>{ //예약하기
             const reservationRoomRequest = Object.assign({}, this.state.place);
             reservationRoom(reservationRoomRequest, this.state.room.id)
                 .then(response => {
                     Alert.success("You're successfully reserved!");
+                    this.setState({clicked: !this.state.clicked})
                 }).catch(error => {
-                    Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
-                });
-            this.setState({clicked: !this.state.clicked});
-        }else{
+                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+            });
+    }
+    onReserveCancel = () =>{ //예약 취소
             reservationCancel(this.state.room.id)
                 .then(response => {
                     Alert.success("You're successfully canceled the reservation!");
+                    this.setState({clicked: !this.state.clicked})
                 }).catch(error => {
-                    Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
-                });
-            this.setState({clicked: !this.state.clicked});
-        }
+                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+            });
     }
 
     onDelete = () =>{
@@ -138,10 +133,11 @@ class EachRoomComponent extends Component {
     }
 
     handleInputChange = (event) =>{
+        // console.log(this.state.room.head);
         const target = event.target;
         // const inputName = target.name;
         const inputValue = target.value;
-        console.log("content =" + inputValue);
+        // console.log("content =" + inputValue);
         this.setState({
             content : inputValue
         });
@@ -157,9 +153,9 @@ class EachRoomComponent extends Component {
             });
     }
 
-    handleRegister = () =>{
+    handleRegister = () =>{ //댓글 쓰기
         const registerCommentsRequest = Object.assign({}, this.state);
-
+        console.log(registerCommentsRequest);
         registerComments(registerCommentsRequest, this.state.room.id)
             .then(response => {
                 Alert.success("You're successfully registered a comment!");
@@ -213,8 +209,8 @@ class EachRoomComponent extends Component {
 
     render() {
         const {room, usersCount, users, comments, place} = this.state;
-        const res1 = users.filter(it => it.id%2);
-        const res2 = users.filter(it => !(it.id%2));
+        const res1 = users.filter(users => users.id%2);
+        const res2 = users.filter(users => !(users.id%2));
         return (
             <div className="EachRoom">
                 <Table striped bordered hover className="table">
@@ -245,8 +241,8 @@ class EachRoomComponent extends Component {
                                     ) :
                                     res1.map((user) => (
                                     <tr key={user.id}>
-                                    <td>{user.id}</td>
-                                    <td>{user.name}</td>
+                                    <td>{user.user.id}</td>
+                                    <td>{user.user.name}</td>
                                     </tr>
                                 ))
                             }
@@ -269,8 +265,8 @@ class EachRoomComponent extends Component {
                                     :
                                     res2.map((user) => (
                                         <tr key={user.id}>
-                                            <td>{user.id}</td>
-                                            <td>{user.name}</td>
+                                            <td>{user.user.id}</td>
+                                            <td>{user.user.name}</td>
                                         </tr>
                                     ))
                             }
@@ -291,22 +287,31 @@ class EachRoomComponent extends Component {
                     </tbody>
                 </Table>
                 {
-                    (this.props.match.params.isCap=="false")? ( //true
-                        <div>
-                            <Button variant="primary" className="btn" onClick={this.onReserve}>{
-                                this.state.clicked ? "예약하기" : "예약 취소"
-                            }</Button>
-                            <Button variant="primary" className="btn" onClick={this.onDelete}>삭제하기</Button>
-                        </div>
+                    (this.props.currentUser.id === room.head)? (
+                        ((!room.state && this.state.clicked) ? (
+                                <div>
+                                <Button variant="primary" className="btn" onClick={this.onReserve}>예약하기</Button>
+                                <Button variant="primary" className="btn" onClick={this.onDelete}>삭제하기</Button>
+                                </div>
+                            ): (
+                                <div>
+                                    <Button variant="primary" className="btn" onClick={this.onReserveCancel}>예약취소</Button>
+                                </div>
+                            ))
                     ):(
-                        <div>
-                            <Button variant="primary" className="btn" onClick={this.onExitRoom}>나가기</Button>
-                        </div>
+                        (!room.state)?(
+                            <div>
+                                <Button variant="primary" className="btn" onClick={this.onExitRoom}>나가기</Button>
+                            </div>
+                        ):(
+                            <></>
+                        )
                     )
-
                 }
+                {/*<Button variant="primary" className="btn" onClick={this.onReserve}>예약하기</Button>*/}
+                {/*<Button variant="primary" className="btn" onClick={this.onReserveCancel}>예약취소</Button>*/}
                 {/*<Button variant="primary" className="btn" onClick={this.onDelete}>삭제하기</Button>*/}
-                <Button variant="primary" className="btn" onClick={this.onExitRoom}>나가기</Button>
+                {/*<Button variant="primary" className="btn" onClick={this.onExitRoom}>나가기</Button>*/}
 
                 <Form inline className="form" onKeyPress={this.onKeyPress} onSubmit={this.onSubmit}>
                     <Form.Group>
@@ -329,12 +334,16 @@ class EachRoomComponent extends Component {
                             :
                             comments.map((comment) => (
                                 <tr key={comment.id}>
-                                    <td>{comment.userId}</td>
+                                    <td>{comment.userName}</td>
                                     <td>{comment.content}</td>
-                                    <td>
-                                        <Link name={comment.id} onClick={this.handleEdit}>수정</Link>{'  '}
-                                        <Link name={comment.id} onClick={this.handleDelete}>삭제</Link>
-                                    </td>
+                                    <td>{
+                                        (this.props.currentUser.id === comment.userId)? (
+                                            <>
+                                                <Link name={comment.id} onClick={this.handleEdit}>수정</Link>&nbsp;&nbsp;
+                                                <Link name={comment.id} onClick={this.handleDelete}>삭제</Link>
+                                            </>
+                                        ):(<></>)
+                                    }</td>
                                 </tr>
                             ))
                     }

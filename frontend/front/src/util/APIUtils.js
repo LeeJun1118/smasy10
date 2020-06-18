@@ -167,7 +167,7 @@ export function myRservation() { // 나의 예약 내역
 
 export function registerReview(registerReviewRequest,id) {
     return request({
-        url: API_BASE_URL + "/place/review/create" + id,
+        url: API_BASE_URL + "/place/review/create/" + id,
         method: 'POST',
         body: JSON.stringify(registerReviewRequest)
     });
@@ -186,9 +186,15 @@ export function deleteReview(id) {
         method: 'DELETE',
     });
 }
-export function ReviewsList(id) {
+export function reviewsList() {
     return request({
-        url: API_BASE_URL + "/place/replies/" + id,
+        url: API_BASE_URL + "/place/reviews",
+        method: 'GET',
+    });
+}
+export function myReviewsList() {
+    return request({
+        url: API_BASE_URL + "/place/my/reviews",
         method: 'GET',
     });
 }

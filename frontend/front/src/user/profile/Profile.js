@@ -19,7 +19,7 @@ class Profile extends Component {
         myRoom()
             .then(response => {
                 const data = response;
-                console.log(data);
+                console.log(JSON.stringify(data));
                 this.setState({infos: data});
             }).catch(error => {
                 this.setState({infos: []});
@@ -65,16 +65,20 @@ class Profile extends Component {
                             <td colSpan="7">입장한 방이 없습니다.</td>
                         </tr>):
                         infos.map((info) => (
-                            <tr>
-                            <td>{info.id}</td>
-                            <td>{info.title}</td>
-                            <td>{info.area}</td>
-                            <td>{info.sports}</td>
-                            <td>{info.date}</td>
-                            <td>
-                                <Link to={"/rooms/enter/" + info.id + "/" + this.state.isCap}>입장</Link>
-                            </td>
-                        </tr>
+                            (!info.state)?(
+                                <tr>
+                                    <td>{info.id}</td>
+                                    <td>{info.title}</td>
+                                    <td>{info.area}</td>
+                                    <td>{info.sports}</td>
+                                    <td>{info.date}</td>
+                                    <td>
+                                        <Link to={"/rooms/enter/" + info.id}>입장</Link>
+                                    </td>
+                                </tr>
+                        ) :(<tr align="center">
+                                <td colSpan="7">입장한 방이 없습니다.</td>
+                            </tr>)
                         ))
                     }
                 </Table>

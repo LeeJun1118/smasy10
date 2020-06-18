@@ -32,7 +32,7 @@ class MroomComponent extends Component {
         const target = event.target;
         const inputName = target.name;
         const inputValue = target.value;
-        console.log(inputValue);
+        // console.log(inputValue);
 
         this.setState({
             [inputName]: inputValue
@@ -49,7 +49,7 @@ class MroomComponent extends Component {
                 Alert.success("You're successfully create room!");
                 const data = response;
                 // console.log(data.id);
-                this.props.history.push("/rooms/enter/" + data.id + "/" + this.state.isCap);
+                this.props.history.push("/rooms/enter/" + data.id);
             }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
         });
@@ -77,15 +77,15 @@ class MroomComponent extends Component {
     render() {
         return (
             <div className="Mroom">
-                <Form onSubmit={this.onSubmit}>
+                <Form onSubmit={this.onSubmit} required>
                     <Form.Group controlId="exampleForm.ControlSelect1" id="title"
                                 value={this.state.title}>
                         <Form.Label>방 제목</Form.Label>
                         <Form.Control type="text" placeholder="Enter title" onChange={this.handleInputChange}
-                                      name="title"/>
+                                      name="title" required/>
                     </Form.Group>
 
-                    <Form.Group controlId="exampleForm.ControlSelect1" id="sports" value={this.state.sports}>
+                    <Form.Group controlId="exampleForm.ControlSelect1" id="sports" value={this.state.sports} required>
                         <Form.Label>운동 종목</Form.Label>
                         <Form.Control as="select" onChange={this.handleInputChange} name="sports">
                             <option selected disabled>Please select</option>
@@ -124,7 +124,6 @@ class MroomComponent extends Component {
                                   onChange={this.onChangeDate}/>
                     </Form.Group>
 
-                    {/* 각 시설 위치 지도 보여주면 좋을 듯*/}
                     <Button  bg="primary" onClick={this.handleSubmit}>개설하기</Button>
                 </Form>
             </div>

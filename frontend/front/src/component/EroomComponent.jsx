@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Card, Table, Button, Form, FormControl, Col} from 'react-bootstrap'
 import '../css/Eroom.css';
 import {Link} from "react-router-dom";
-import {searchRooms} from "../util/APIUtils";
+import {getUserCounts, searchRooms} from "../util/APIUtils";
 import Alert from "react-s-alert";
 
 class EroomComponent extends Component {
@@ -15,7 +15,8 @@ class EroomComponent extends Component {
             roomsPerPage: 5,
             sortToggle: true,
             roomsSearch:'',
-            isCap: false
+            isCap: false,
+            usersCount:0
         };
         // this.handleInputChange = this.handleInputChange.bind(this);
         // this.handleSearchRoom = this.handleSearchRoom.bind(this);
@@ -30,6 +31,16 @@ class EroomComponent extends Component {
 
     componentDidMount() {
         this.findAllRooms(this.state.currentPage);
+
+        this.state.rooms.map((room)=>{
+            getUserCounts(room.id)
+                .then(response => {
+                    const data = response;
+                    console.log(JSON.stringify(data));
+
+                }).catch(error => {
+            });
+        })
     }
 
     findAllRooms() {
@@ -170,12 +181,12 @@ class EroomComponent extends Component {
             .then(response => {
                 Alert.success("You're successfully searched for a room!");
                 const data = response;
-                console.log("data = " + JSON.stringify(data));
+                // console.log("data = " + JSON.stringify(data));
                 this.setState({ rooms: data });
             }).catch(error => {
-            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
-            this.setState({ rooms: [] });
-        });
+                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+                this.setState({ rooms: [] });
+            });
     }
 
     onKeyPress = (e) =>{
@@ -188,7 +199,7 @@ class EroomComponent extends Component {
     }
 
     render() {
-        const {rooms, currentPage, totalPages, search} = this.state;
+        const {rooms, currentPage, totalPages, search, usersCount} = this.state;
         return (
             <div className="Eroom">
                 <Form inline className="form" onKeyPress={this.onKeyPress} onSubmit={this.onSubmit}>
@@ -209,6 +220,7 @@ class EroomComponent extends Component {
                                 <th>장소</th>
                                 <th>운동 종목</th>
                                 <th>경기 날짜</th>
+                                <th>현재 인원</th>
                                 <th>입장 하기</th>
                             </tr>
                             </thead>
@@ -220,17 +232,20 @@ class EroomComponent extends Component {
                                     </tr>)
                                 :
                                     rooms.map((room) => (
-                                        <tr key={room.id}>
-                                            <td>{room.id}</td>
-                                            <td>{room.title}</td>
-                                            <td>{room.area}</td>
-                                            <td>{room.sports}</td>
-                                            <td>{room.date}</td>
-                                            <td >
-                                                {/*<Link to={"/rooms/" + room.id} className="btn btn-sm btn-outline-primary">입장</Link>*/}
-                                                <Link to={this.props.match.url+ "/enter/" + room.id + "/" + this.state.isCap}>입장</Link>
-                                            </td>
-                                        </tr>
+                                        (!room.state)?(
+                                            <tr key={room.id} >
+                                                <td>{room.id}</td>
+                                                <td>{room.title}</td>
+                                                <td>{room.area}</td>
+                                                <td>{room.sports}</td>
+                                                <td>{room.date}</td>
+                                                <td>{usersCount}</td>
+                                                <td >
+                                                    {/*<Link to={"/rooms/" + room.id} className="btn btn-sm btn-outline-primary">입장</Link>*/}
+                                                    <Link to={this.props.match.url+ "/enter/" + room.id }>입장</Link>
+                                                </td>
+                                            </tr>
+                                        ):(<></>)
                                     ))
                             }
                             </tbody>
