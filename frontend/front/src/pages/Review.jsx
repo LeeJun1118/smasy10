@@ -12,17 +12,23 @@ class Review extends Component {
             reviews: []
         };
     }
-    allReviews=()=>{
+    componentDidMount() {
+        this.showReviewsList();
+    }
+    showReviewsList=()=>{
         ReviewsList()
             .then(response => {
                 Alert.success("You're successfully checked reviews!");
                 const data = response;
-            // console.log("data = " + JSON.stringify(data));
+                // console.log("data = " + JSON.stringify(data));
                 this.setState({ reviews: data });
             }).catch(error => {
-                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
-                this.setState({ reviews: [] });
-            });
+            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+            this.setState({ reviews: [] });
+        });
+    }
+    allReviews=()=>{
+        this.showReviewsList();
     }
     myReviews=()=>{
 

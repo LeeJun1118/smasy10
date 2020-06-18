@@ -292,18 +292,22 @@ class EachRoomComponent extends Component {
                 </Table>
                 {
                     (this.props.match.params.isCap=="false")? ( //true
-                        <div>
-                            <Button variant="primary" className="btn" onClick={this.onReserve}>{
-                                this.state.clicked ? "예약하기" : "예약 취소"
-                            }</Button>
-                            <Button variant="primary" className="btn" onClick={this.onDelete}>삭제하기</Button>
-                        </div>
+                        ((this.state.clicked) ? (
+                                <div>
+                                <Button variant="primary" className="btn" onClick={this.onReserve}>예약하기</Button>
+                                <Button variant="primary" className="btn" onClick={this.onDelete}>삭제하기</Button>
+                                </div>
+                            ): (
+                                <div>
+                                    <Button variant="primary" className="btn" onClick={this.onReserve}>예약취소</Button>
+                                </div>
+                            )
+                    )
                     ):(
                         <div>
                             <Button variant="primary" className="btn" onClick={this.onExitRoom}>나가기</Button>
                         </div>
                     )
-
                 }
                 {/*<Button variant="primary" className="btn" onClick={this.onDelete}>삭제하기</Button>*/}
                 <Button variant="primary" className="btn" onClick={this.onExitRoom}>나가기</Button>
