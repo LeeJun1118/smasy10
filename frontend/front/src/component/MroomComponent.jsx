@@ -102,8 +102,16 @@ class MroomComponent extends Component {
                         <Form.Label>운동 종목</Form.Label>
                         <Form.Control as="select" onChange={this.handleInputChange} name="sports">
                             <option selected disabled>Please select</option>
-                            <option value="1">1</option>
+                            <option value="농구">농구</option>
+                            <option value="당구">당구</option>
+                            <option value="볼링">볼링</option>
+                            <option value="배구">배구</option>
+                            <option value="배드민턴">배드민턴</option>
+                            <option value="야구">야구</option>
                             <option value="축구">축구</option>
+                            <option value="탁구">탁구</option>
+                            <option value="테니스">테니스</option>
+                            <option value="풋살">풋살</option>
                         </Form.Control>
                     </Form.Group>
 
