@@ -102,7 +102,14 @@ export function exitRoom(id) { //방 나가기
     });
 }
 
-export function registerComments(registerCommentsRequest,id) {
+export function deleteRoom(id) { //방 삭제
+    return request({
+        url: API_BASE_URL + "/room/delete/" + id,
+        method: 'DELETE',
+    });
+}
+
+export function registerComments(registerCommentsRequest,id) { //댓글 달기
     return request({
         url: API_BASE_URL + "/room/create/reply/" + id,
         method: 'POST',
@@ -110,25 +117,78 @@ export function registerComments(registerCommentsRequest,id) {
     });
 }
 
-export function editComments(editCommentsRequest, id) {
+export function editComments(editCommentsRequest, id) { //댓글 수정
     return request({
         url: API_BASE_URL + "/room/edit/reply/" + id,
         method: 'PUT',
         body: JSON.stringify(editCommentsRequest)
     });
 }
-export function deleteComments(id) {
+export function deleteComments(id) { //댓글 삭제
     return request({
         url: API_BASE_URL + "/reply/delete/" + id,
         method: 'DELETE',
-        // body: JSON.stringify()
     });
 }
-export function CommentsList(id) {
+export function CommentsList(id) { //댓글 목록
     return request({
         url: API_BASE_URL + "/room/replies/" + id,
         method: 'GET',
-        // body: JSON.stringify()
     });
 }
 
+export function reservationRoom(reservationRoomRequest, id) { // 방 예약
+    return request({
+        url: API_BASE_URL + "/room/reservation/" + id,
+        method: 'POST',
+        body: JSON.stringify(reservationRoomRequest)
+    });
+}
+
+export function reservationCancel(id) { // 방 예약 취소
+    return request({
+        url: API_BASE_URL + "/room/reservation/cancel/" + id,
+        method: 'DELETE',
+    });
+}
+
+export function myRoom() { // 내가 입장한 방
+    return request({
+        url: API_BASE_URL + "/rooms/me",
+        method: 'GET',
+    });
+}
+export function myRservation() { // 나의 예약 내역
+    return request({
+        url: API_BASE_URL + "/rooms/reservation/me",
+        method: 'GET',
+    });
+}
+
+export function registerReview(registerReviewRequest,id) {
+    return request({
+        url: API_BASE_URL + "/place/review/create" + id,
+        method: 'POST',
+        body: JSON.stringify(registerReviewRequest)
+    });
+}
+
+// export function editReview(editReviewRequest, id) {
+//     return request({
+//         url: API_BASE_URL + "/room/edit/reply/" + id,
+//         method: 'PUT',
+//         body: JSON.stringify(editCommentsRequest)
+//     });
+// }
+export function deleteReview(id) {
+    return request({
+        url: API_BASE_URL + "/place/review/delete/" + id,
+        method: 'DELETE',
+    });
+}
+export function ReviewsList(id) {
+    return request({
+        url: API_BASE_URL + "/place/replies/" + id,
+        method: 'GET',
+    });
+}

@@ -38,7 +38,7 @@
   ### Review
  | HTTP method  | URI                              | Description                                          | parameter  |   
  |------------- | -------------------------------- | ---------------------------------------------------- | ---------- | 
- | POST         | /place/review/delete/{id}        | Write a review              (리뷰쓰기)                 | Place Id   | 
+ | POST         | /place/review/create/{id}        | Write a review              (리뷰쓰기)                 | Place Id   | 
  | GET          | /place/replies/{id}              | View facility reviews       (시설 리뷰 보기)            | Place Id   |
  | DELETE       | /place/review/delete/{id}        | Delete review               (리뷰 삭제하기)             | Reply Id   | 
  

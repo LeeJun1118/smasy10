@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Card, Table, Button, Form, FormControl} from 'react-bootstrap'
+import {Card, Table, Button, Form, FormControl, Col} from 'react-bootstrap'
 import '../css/Eroom.css';
 import {Link} from "react-router-dom";
 import {searchRooms} from "../util/APIUtils";
@@ -17,8 +17,8 @@ class EroomComponent extends Component {
             roomsSearch:'',
             isCap: false
         };
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSearchRoom = this.handleSearchRoom.bind(this);
+        // this.handleInputChange = this.handleInputChange.bind(this);
+        // this.handleSearchRoom = this.handleSearchRoom.bind(this);
     }
 
     sortData = () => {
@@ -154,7 +154,7 @@ class EroomComponent extends Component {
         // this.props.history.push("/enter/"+id);
     }
 
-    handleInputChange(event) {
+    handleInputChange = (event) => {
         const target = event.target;
         // const inputName = target.name;
         const inputValue = target.value;
@@ -162,7 +162,7 @@ class EroomComponent extends Component {
             roomsSearch : inputValue
         });
     }
-    handleSearchRoom(event) {
+    handleSearchRoom = (event) => {
         // event.preventDefault();
         const text = this.state.roomsSearch;
 
@@ -170,7 +170,7 @@ class EroomComponent extends Component {
             .then(response => {
                 Alert.success("You're successfully searched for a room!");
                 const data = response;
-                // console.log("data = " + data);
+                console.log("data = " + JSON.stringify(data));
                 this.setState({ rooms: data });
             }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
@@ -192,19 +192,21 @@ class EroomComponent extends Component {
         return (
             <div className="Eroom">
                 <Form inline className="form" onKeyPress={this.onKeyPress} onSubmit={this.onSubmit}>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2"
+                    <Form.Group>
+                    <FormControl type="text" placeholder="Search"
                                  onChange={this.handleInputChange}
                                  name="roomsSearch"/>
-                    <Button variant="outline-primary" onClick={this.handleSearchRoom}>검색</Button>
+                    </Form.Group>
+                    <Button variant="primary" type="submit" onClick={this.handleSearchRoom}>검색</Button>
                 </Form>
                 {/*<Card style={{width: '18rem'}}>*/}
                 {/*    <Card.Body>*/}
-                        <Table  striped bordered hover id="table">
+                        <Table striped bordered hover id="table">
                             <thead>
                             <tr>
                                 <th>방 번호</th>
                                 <th>방 제목</th>
-                                <th>지역</th>
+                                <th>장소</th>
                                 <th>운동 종목</th>
                                 <th>경기 날짜</th>
                                 <th>입장 하기</th>

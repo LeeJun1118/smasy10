@@ -35,7 +35,8 @@ class App extends Component {
         this.state = {
             authenticated: false,
             currentUser: null,
-            loading: false
+            loading: false,
+            // place: []
         }
 
         this.loadCurrentlyLoggedInUser = this.loadCurrentlyLoggedInUser.bind(this);
@@ -74,6 +75,10 @@ class App extends Component {
         this.loadCurrentlyLoggedInUser();
     }
 
+    // getData = (data) =>{
+    //     this.setState({place: data});
+    // }
+
     render() {
         if (this.state.loading) {
             return <LoadingIndicator/>
@@ -90,6 +95,7 @@ class App extends Component {
 
                         <PrivateRoute path="/room/create" authenticated={this.state.authenticated}
                                       currentUser={this.state.currentUser}
+                                      // fromA={this.getData}
                                       component={MroomComponent}/>
 
                         <Route exact path="/rooms" component={EroomComponent}/>
@@ -98,6 +104,7 @@ class App extends Component {
                         {/*       component={Eroom}/>*/}
                         <PrivateRoute path="/rooms/enter/:id/:isCap" authenticated={this.state.authenticated}
                                       currentUser={this.state.currentUser}
+                                      // place={this.state.place}
                                       component={EachRoomComponent}/>
 
                         <PrivateRoute exact path="/profile" authenticated={this.state.authenticated}
