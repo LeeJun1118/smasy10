@@ -29,6 +29,8 @@ public class ReservationImpl implements ReservationMapper {
         reservationDto.setPlaceName(reservation.getPlace().getName());
         reservationDto.setPlaceAddress(reservation.getPlace().getAddress());
         reservationDto.setPlacePhoneNo(reservation.getPlace().getPhoneNo());
+        reservationDto.setPlaceX(reservation.getPlace().getPlaceX());
+        reservationDto.setPlaceY(reservation.getPlace().getPlaceY());
 
 
         //Room

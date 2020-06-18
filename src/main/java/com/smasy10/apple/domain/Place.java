@@ -44,6 +44,12 @@ public class Place {
     @Column
     private String phoneNo;
 
+    @Column
+    private double placeX;
+
+    @Column
+    private double placeY;
+
     //일대다 매핑
     //엔티티 자신을 기준으로 다중성을 생각해야함
     //mappedBy 속성을 사용해 연관관계의 주인을 정함

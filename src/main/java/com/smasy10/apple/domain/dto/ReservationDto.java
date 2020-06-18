@@ -45,6 +45,9 @@ public class ReservationDto {
     @NotEmpty
     private String placePhoneNo;
 
+    private double placeX;
+    private double placeY;
+
     public ReservationDto(){}
 
     public ReservationDto(Reservation reservation){
@@ -65,5 +68,8 @@ public class ReservationDto {
         this.placeName = reservation.getPlace().getName();
         this.placeAddress = reservation.getPlace().getAddress();
         this.placePhoneNo = reservation.getPlace().getPhoneNo();
+        this.placeX = reservation.getPlace().getPlaceX();
+        this.placeY = reservation.getPlace().getPlaceY();
+
     }
 }

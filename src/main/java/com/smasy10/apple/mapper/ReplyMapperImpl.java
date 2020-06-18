@@ -42,6 +42,8 @@ public class ReplyMapperImpl implements ReplyMapper {
         placeReviewDto.setPlaceName(reply.getPlace().getName());
         placeReviewDto.setPlaceAddress(reply.getPlace().getAddress());
         placeReviewDto.setPlacePhoneNo(reply.getPlace().getPhoneNo());
+        placeReviewDto.setPlaceX(reply.getPlace().getPlaceX());
+        placeReviewDto.setPlaceY(reply.getPlace().getPlaceY());
 
         //Reply
         placeReviewDto.setReplyId(reply.getId());

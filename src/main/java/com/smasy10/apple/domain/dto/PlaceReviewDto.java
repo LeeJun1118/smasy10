@@ -12,6 +12,8 @@ public class PlaceReviewDto {
     private String placeName;
     private String placeAddress;
     private String placePhoneNo;
+    private double placeX;
+    private double placeY;
 
     private Long replyId;
     private String replyContent;
@@ -35,6 +37,8 @@ public class PlaceReviewDto {
         this.placeName = reply.getPlace().getName();
         this.placeAddress = reply.getPlace().getAddress();
         this.placePhoneNo = reply.getPlace().getPhoneNo();
+        this.placeX = reply.getPlace().getPlaceX();
+        this.placeY = reply.getPlace().getPlaceY();
 
         this.replyId = reply.getId();
         this.replyContent = reply.getContent();
