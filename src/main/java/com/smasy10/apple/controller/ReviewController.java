@@ -50,17 +50,29 @@ public class ReviewController {
                 .collect(Collectors.toList());
     }
 
-    //리뷰 쓰기.  파라미터 = room pk -> reservation pk 로 바꿔보자
+    //리뷰 쓰기.  파라미터 = room pk
     //예약한 방이며 사용자가 그 방에 입장이 된 상태일때만 리뷰 작성 가능
     @PostMapping(value = "/place/review/create/{id}")
     public ResponseEntity<Reply> createReview(@PathVariable Long id,
                                              @RequestBody Reply reply,
                                              @CurrentUser UserPrincipal userPrincipal) {
         Reservation reservation = reservationRepository.findById(id)
+                .orElseThrow(() -> new ApiException("Reservation does not exist", HttpStatus.NOT_FOUND));
+        Reply newReview = new Reply();
+
+        newReview.setRoom(reservation.getRoom());
+        newReview.setPlace(reservation.getPlace());
+        newReview.setUser(new User(userPrincipal.getId()));
+
+        newReview.setContent(reply.getContent());
+
+        replyRepository.saveAndFlush(newReview);
+
+
+        /*Room room = roomRepository.findById(id)
                 .orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
 
-        Room room = roomRepository.findById(reservation.getRoom().getId())
-                .orElseThrow(() -> new ApiException("Room does not exist", HttpStatus.NOT_FOUND));
+        Reservation reservation = reservationRepository.findByRoom(room);
 
         Place place = placeRepository.findById(reservation.getPlace().getId())
                 .orElseThrow(() -> new ApiException("Place does not exist", HttpStatus.NOT_FOUND));
@@ -76,7 +88,7 @@ public class ReviewController {
 
         newReview.setContent(reply.getContent());
 
-        replyRepository.saveAndFlush(newReview);
+        replyRepository.saveAndFlush(newReview);*/
 
         return ResponseEntity.status(HttpStatus.CREATED).body(newReview);
     }
