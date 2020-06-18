@@ -304,7 +304,7 @@ public class RoomController {
 
         }*/
 
-        return noReservationRooms.stream()
+        return myReservationRooms.stream()
                 .map(room -> roomMapper.toRoomDto(room))
                 .collect(Collectors.toList());
     }
