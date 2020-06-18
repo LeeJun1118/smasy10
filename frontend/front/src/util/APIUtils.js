@@ -158,7 +158,7 @@ export function myRoom() { // 내가 입장한 방
         method: 'GET',
     });
 }
-export function myRservation() { // 나의 예약 내역
+export function myReservation() { // 나의 예약 내역
     return request({
         url: API_BASE_URL + "/rooms/reservation/me",
         method: 'GET',

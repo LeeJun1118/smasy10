@@ -63,7 +63,7 @@ class MapPopUp extends Component {
                     }} );
 
 
-                });
+            });
         };
     }
 

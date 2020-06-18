@@ -19,8 +19,11 @@ class MroomComponent extends Component {
             sports: '',
             area: '',
             date: '',
+            createdDate: '',
             isCap : true,
             location:'',
+            placeX:0,
+            placeY:0,
         };
         //this.createRoom = this.createRoom.bind(this);
         // this.handleInputChange = this.handleInputChange.bind(this);
@@ -56,10 +59,19 @@ class MroomComponent extends Component {
         // this.props.fromA(this.state.place);
     }
 
+
+
     onChangeDate = (date) => {
-        console.log(moment(date).format("YYYY-MM-DD"));
+        // const moment = require('moment');
+        // require('moment-timezone');
+        // moment.tz.setDefault("Asia/Seoul");
+        const dateC = moment(date).format("YYYY-MM-DD")
+        // const now = moment().format("YYYY-MM-DD");
+        console.log(dateC);
+        console.log(date);
+        // console.log(now);
         this.setState({
-            date: moment(date).format("YYYY-MM-DD")
+            date: dateC
         })
     }
 
@@ -69,10 +81,11 @@ class MroomComponent extends Component {
 
     Acallback =(dataFromB)=>{
         this.setState({
-            area: dataFromB.name
+            area: dataFromB.name,
+            placeX: dataFromB.x,
+            placeY: dataFromB.y
         })
     }
-
 
     render() {
         return (

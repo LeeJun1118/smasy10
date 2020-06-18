@@ -32,15 +32,15 @@ class EroomComponent extends Component {
     componentDidMount() {
         this.findAllRooms(this.state.currentPage);
 
-        this.state.rooms.map((room)=>{
-            getUserCounts(room.id)
-                .then(response => {
-                    const data = response;
-                    console.log(JSON.stringify(data));
-
-                }).catch(error => {
-            });
-        })
+        // this.state.rooms.map((room)=>{
+        //     getUserCounts(room.id)
+        //         .then(response => {
+        //             const data = response;
+        //             console.log(JSON.stringify(data));
+        //
+        //         }).catch(error => {
+        //     });
+        // })
     }
 
     findAllRooms() {
@@ -49,6 +49,7 @@ class EroomComponent extends Component {
             )
             .then((data) => {
                 this.setState({rooms: data});
+                console.log("data = " + JSON.stringify(data));
             })
     }
 

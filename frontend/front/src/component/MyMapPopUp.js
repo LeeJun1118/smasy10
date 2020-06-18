@@ -11,7 +11,7 @@ class MyMapPopUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            keyword: '',
+            keyword: '경성대학교',
             place: []
         };
          // this.displayInfowindow = this.displayInfowindow.bind(this);
@@ -27,18 +27,18 @@ class MyMapPopUp extends Component {
         script.onload = () => {
         // useEffect( () => {
             window.kakao.maps.load(() => {
-                const infowindow = new window.kakao.maps.InfoWindow({zIndex: 1});
+
                 const container = document.getElementById('map'); // 지도를 표시할 div
                 // const container = this.mapRef // 지도를 표시할 div
                 const options = {
-                    center: new window.kakao.maps.LatLng(37.506502, 127.053617), // 지도의 중심좌표
-                    level: 7 // 지도의 확대 레벨
+                    center: new window.kakao.maps.LatLng(35.139778, 129.098500), // 지도의 중심좌표
+                    level: 4 // 지도의 확대 레벨
                 };
 
                 // 지도를 생성합니다
                 const map = new window.kakao.maps.Map(container, options);
 
-                const geocoder = new window.kakao.maps.services.Geocoder();
+                // const geocoder = new window.kakao.maps.services.Geocoder();
 
                 const keyword = this.state.keyword;
                 // console.log("keyword = " + keyword);
@@ -69,6 +69,7 @@ class MyMapPopUp extends Component {
 
                 // 키워드 검색 완료 시 호출되는 콜백함수 입니다
                 const displayInfowindow = (marker, place) => {
+                    const infowindow = new window.kakao.maps.InfoWindow({zIndex: 1});
                     const content = '<div style="padding:5px;z-index:1;">' + place.place_name + '</div>';
                     infowindow.setContent(content);
                     infowindow.open(map, marker);
@@ -96,8 +97,9 @@ class MyMapPopUp extends Component {
 
                     window.kakao.maps.event.addListener(marker, 'click', function () {
                         displayInfowindow(marker, place);
-                        // bounds.extend(new window.kakao.maps.LatLng(place.y, place.x));
-                        // map.setBounds(bounds);
+                        const bounds = new window.kakao.maps.LatLngBounds();
+                        bounds.extend(new window.kakao.maps.LatLng(place.y, place.x));
+                        map.setBounds(bounds);
                     });
                     // window.kakao.maps.event.addListener(marker, 'mouseover', function() {
                     //     displayInfowindow(marker, place);

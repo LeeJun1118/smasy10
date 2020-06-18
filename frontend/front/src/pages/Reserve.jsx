@@ -1,7 +1,7 @@
 import React, {Component, useState} from 'react';
 import {Link} from "react-router-dom";
 import {Button, Form, Modal, Table} from "react-bootstrap";
-import {myRservation, registerReview} from "../util/APIUtils";
+import {myReservation, registerReview} from "../util/APIUtils";
 import Alert from "react-s-alert";
 // import '../css/Reserve.css';
 
@@ -14,8 +14,11 @@ class Reserve extends Component {
         };
     }
     componentDidMount() {
-        // this.findAllRooms(this.state.currentPage);
-        myRservation()
+        this.showMyResvList();
+    }
+
+    showMyResvList=()=>{
+        myReservation()
             .then(response => {
                 Alert.success("You're successfully checked reservations!");
                 const data = response;
@@ -24,12 +27,13 @@ class Reserve extends Component {
                     reservations: data
                 })
             }).catch(error => {
-                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
             this.setState({
                 reservations: []
             })
-            });
+        });
     }
+
     handleSave = (e) => {
         const target = e.target;
         const id = target.name;
@@ -42,8 +46,8 @@ class Reserve extends Component {
             .then(response => {
                 Alert.success("You're successfully registered a review!");
             }).catch(error => {
-            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
-        });
+                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+            });
     }
     handleInputChange = (event) => {
         const target = event.target;

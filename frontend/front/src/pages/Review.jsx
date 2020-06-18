@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {Button, Form, Table} from "react-bootstrap";
 import {reviewsList, deleteReview, myReviewsList} from "../util/APIUtils";
 import Alert from "react-s-alert";
-// import '../css/Review.css';
+import '../css/Review.css';
 
 class Review extends Component {
     constructor(props) {
@@ -17,14 +17,12 @@ class Review extends Component {
         this.showReviewsList();
     }
     showReviewsList=()=>{
-        console.log("현재 : " +JSON.stringify(this.props.currentUserId));
         reviewsList()
             .then(response => {
                 Alert.success("You're successfully checked reviews!");
                 const data = response;
-                console.log("data = " + JSON.stringify(data));
-                this.setState({ reviews: data });
-                this.setState({clicked: !this.state.clicked})
+                // console.log("data = " + JSON.stringify(data));
+                this.setState({ reviews: data, clicked: false});
             }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
             this.setState({ reviews: [] });
@@ -39,8 +37,7 @@ class Review extends Component {
                 Alert.success("You're successfully checked your reviews!");
                 const data = response;
                 // console.log("data = " + JSON.stringify(data));
-                this.setState({ reviews: data });
-                this.setState({clicked: !this.state.clicked})
+                this.setState({ reviews: data, clicked: true});
             }).catch(error => {
                 Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
                 this.setState({reviews: []});
@@ -93,7 +90,7 @@ class Review extends Component {
                                     <td>{rev.roomDate}</td>
                                     <td>{rev.replyContent}</td>
                                     <td>{
-                                        (!this.state.clicked)?(
+                                        (this.state.clicked)?(
                                             <Link name={rev.replyId} onClick={this.onDelete}>삭제</Link>
                                         ):(<></>)
                                     }</td>

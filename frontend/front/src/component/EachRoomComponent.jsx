@@ -50,7 +50,7 @@ class EachRoomComponent extends Component {
                 Alert.success("You're successfully entered the room!");
             }).catch(error => {
                 //이상하게 메시지가 성공오류ㅠ 둘 다 뜸
-                // Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+                Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
             });
 
         currentRoom(this.props.match.params.id)
@@ -107,7 +107,7 @@ class EachRoomComponent extends Component {
             reservationRoom(reservationRoomRequest, this.state.room.id)
                 .then(response => {
                     Alert.success("You're successfully reserved!");
-                    this.setState({clicked: !this.state.clicked})
+                    this.setState({clicked: false})
                 }).catch(error => {
                 Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
             });
@@ -116,7 +116,7 @@ class EachRoomComponent extends Component {
             reservationCancel(this.state.room.id)
                 .then(response => {
                     Alert.success("You're successfully canceled the reservation!");
-                    this.setState({clicked: !this.state.clicked})
+                    this.setState({clicked: true})
                 }).catch(error => {
                 Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
             });

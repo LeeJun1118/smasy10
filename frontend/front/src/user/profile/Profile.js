@@ -19,7 +19,7 @@ class Profile extends Component {
         myRoom()
             .then(response => {
                 const data = response;
-                console.log(JSON.stringify(data));
+                console.log("입장방 : " + JSON.stringify(data));
                 this.setState({infos: data});
             }).catch(error => {
                 this.setState({infos: []});
