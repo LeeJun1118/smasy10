@@ -1,7 +1,7 @@
 import React, {Component, useState} from 'react';
 import {Link} from "react-router-dom";
 import {Button, Form, Modal, Table} from "react-bootstrap";
-import {myRservation, registerComments} from "../util/APIUtils";
+import {myRservation, registerReview} from "../util/APIUtils";
 import Alert from "react-s-alert";
 // import '../css/Reserve.css';
 
@@ -74,9 +74,11 @@ class Reserve extends Component {
 };
 
 function MyVerticallyCenteredModal(props) {
+    let inputValue;
+
     const handleSave = () => {
         console.log("flqb : " + props.resvId);
-        const registerCommentsRequest = Object.assign({}, this.state);
+        const registerCommentsRequest = Object.assign({}, inputValue);
 
         registerReview(registerCommentsRequest, props.resvId)
                 .then(response => {
@@ -88,9 +90,8 @@ function MyVerticallyCenteredModal(props) {
     const handleInputChange = (event) => {
         const target = event.target;
         // const inputName = target.name;
-        const inputValue = target.value;
+        inputValue = target.value;
 
-        this.props.callbackFromA(inputValue);
     }
     return (
         <Modal
@@ -106,7 +107,7 @@ function MyVerticallyCenteredModal(props) {
             </Modal.Header>
             <Modal.Body>
                     <Form.Control type="text" placeholder="Enter Contents"
-                                  onChange={this.handleInputChange}
+                                  onChange={handleInputChange}
                                   name="content"/>
             </Modal.Body>
             <Modal.Footer>
