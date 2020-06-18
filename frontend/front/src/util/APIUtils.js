@@ -188,7 +188,7 @@ export function deleteReview(id) {
 }
 export function ReviewsList(id) {
     return request({
-        url: API_BASE_URL + "/place/replies/" + id,
+        url: API_BASE_URL + "/place/reviews",
         method: 'GET',
     });
 }

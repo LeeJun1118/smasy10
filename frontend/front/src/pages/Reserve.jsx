@@ -16,8 +16,9 @@ class Reserve extends Component {
         // this.findAllRooms(this.state.currentPage);
         myRservation()
             .then(response => {
-                Alert.success("You're successfully checked the reservations!");
+                Alert.success("You're successfully checked reservations!");
                 const data = response;
+                console.log(JSON.stringify(data));
                 this.setState({
                     reservations: data
                 })
