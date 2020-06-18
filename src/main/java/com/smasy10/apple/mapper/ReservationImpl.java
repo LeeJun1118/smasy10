@@ -38,6 +38,7 @@ public class ReservationImpl implements ReservationMapper {
         reservationDto.setRoomArea(reservation.getRoom().getArea());
         reservationDto.setRoomDate(reservation.getRoom().getDate());
         reservationDto.setRoomState(reservation.getRoom().getState());
+        reservationDto.setRoomHead(reservation.getRoom().getHead());
 
 
         reservationDto.setUserId(reservation.getUser().getId());
