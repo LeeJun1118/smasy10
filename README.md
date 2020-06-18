@@ -12,7 +12,7 @@
  ### Room
  | HTTP method  | URI                              | Description                                         | parameter |
  |------------- | -------------------------------- | --------------------------------------------------- | --------- | 
- | GET          | /api/rooms                       | Room List(Search)           (방 목록)                |           |
+ | GET          | /api/rooms                       | Room List(Search)           (방 목록, 검색)                |           |
  | POST         | /room/create                     | Create Room                 (방 생성)                |           |
  | POST         | /rooms/enter/{id}                | Enter Room                  (방 입장)                |  Room Id  | 
  | GET          | /rooms/enter/{id}                | Room info                   (방 정보)                |  Room Id  |
@@ -34,12 +34,12 @@
  |------------- | -------------------------------- | ---------------------------------------------------- | ---------- |
  | POST         | /room/reservation/{id}           | Make a reservation          (방 예약하기)              |  Room Id   |
  | DELETE       | /room/reservation/cancel/{id}    | Cancel a room reservation   (예약 취소하기)            |  Room Id   |
- | GET          | /rooms/reservation/me            | Reserved room               (예약된 방)                |           |
+ | GET          | /rooms/reservation/me            | Reserved room               (예약된 내 방)                |           |
  
   ### Review
  | HTTP method  | URI                              | Description                                          | parameter  |   
  |------------- | -------------------------------- | ---------------------------------------------------- | ---------- | 
- | POST         | /place/review/create/{id}        | Write a review              (리뷰쓰기)                 | Place Id   | 
+ | POST         | /place/review/create/{id}        | Write a review              (리뷰쓰기)                 |Reservation Id| 
  | GET          | /place/replies/{id}              | View facility reviews       (시설 리뷰 보기)            | Place Id   |
  | DELETE       | /place/review/delete/{id}        | Delete review               (리뷰 삭제하기)             | Reply Id   | 
  | GET          | /place/reviews                   | All reviews                 (전체 리뷰 보기)            |            |
