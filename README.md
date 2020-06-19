@@ -110,6 +110,7 @@
 
 
 ### FrontEnd 폴더 구성 
+```markdown
 |-- smasy
     |-- frontend
     |   |-- front
@@ -178,3 +179,4 @@
                 |       |-- Signup.js
                 |-- util
                     |-- APIUtils.js
+```
