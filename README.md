@@ -108,13 +108,73 @@
     - [havijy tistory](https://haviyj.tistory.com/11)   
 
 
-###카카오 로그인
 
-   - [카카오 로그인](https://developers.kakao.com/docs/latest/ko/kakaologin/common)
-   - [JavaScript SDK 다운로드](https://developers.kakao.com/docs/latest/ko/sdk-download/js)
-   - [JavaScript SDK 사용법](https://developers.kakao.com/docs/latest/ko/getting-started/sdk-js)
-
-   - [참고](http://macaronics.net/index.php/m03/codeigniter/view/905)
-   - [카카오-참고](https://electricburglar.tistory.com/151)
-   - [참고2](https://m.blog.naver.com/PostView.nhn?blogId=hjinha2&logNo=221176502285&proxyReferer=https:%2F%2Fwww.google.com%2F)
-   - [참고3](https://krksap.tistory.com/1579)
+### FrontEnd 폴더 구성 
+|-- smasy
+    |-- frontend
+    |   |-- front
+    |   |   |-- src
+                |-- customAxios.js
+                |-- index.css
+                |-- index.js
+                |-- registerServiceWorker.js
+                |-- serviceWorker.js
+                |-- setupTests.js
+                |-- common
+                |   |-- AppHeader.css
+                |   |-- AppHeader.js
+                |   |-- LoadingIndicator.js
+                |   |-- NotFound.css
+                |   |-- NotFound.js
+                |   |-- PrivateRoute.js
+                |-- component
+                |   |-- EachRoomComponent.jsx
+                |   |-- EroomComponent.jsx
+                |   |-- MapPopUp.js
+                |   |-- MenuComponent.jsx
+                |   |-- MroomComponent.jsx
+                |   |-- MyMapPopUp.js
+                |   |-- SearchRoom.js
+                |-- constants
+                |   |-- index.js
+                |-- css
+                |   |-- App.css
+                |   |-- EachRoom.css
+                |   |-- Eroom.css
+                |   |-- Footer.css
+                |   |-- Home.css
+                |   |-- index.css
+                |   |-- MapPopUp.css
+                |   |-- Menu.css
+                |   |-- Mroom.css
+                |   |-- Review.css
+                |-- img
+                |   |-- fb-logo.png
+                |   |-- github-logo.png
+                |   |-- google-logo.png
+                |-- pages
+                |   |-- Between.jsx
+                |   |-- Eachroom.jsx
+                |   |-- Eroom.jsx
+                |   |-- Footer.jsx
+                |   |-- Home.jsx
+                |   |-- Menu.jsx
+                |   |-- Reserve.jsx
+                |   |-- Review.jsx
+                |-- shared
+                |   |-- App.css
+                |   |-- App.js
+                |-- user
+                |   |-- login
+                |   |   |-- Login.css
+                |   |   |-- Login.js
+                |   |-- oauth2
+                |   |   |-- OAuth2RedirectHandler.js
+                |   |-- profile
+                |   |   |-- Profile.css
+                |   |   |-- Profile.js
+                |   |-- signup
+                |       |-- Signup.css
+                |       |-- Signup.js
+                |-- util
+                    |-- APIUtils.js
