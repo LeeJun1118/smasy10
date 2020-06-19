@@ -180,3 +180,111 @@
                 |-- util
                     |-- APIUtils.js
 ```
+
+### Back-End 폴더 구성
+```markdown
+|-- src
+    |-- main
+    |   |-- java
+    |   |   |-- com
+    |   |       |-- smasy10
+    |   |           |-- apple
+    |   |               |-- Application.java
+    |   |               |-- common
+    |   |               |   |-- Exception
+    |   |               |       |-- ApiException.java
+    |   |               |       |-- BadRequestException.java
+    |   |               |       |-- OAuth2AuthenticationProcessingException.java
+    |   |               |       |-- ResourceNotFoundException.java
+    |   |               |-- config
+    |   |               |   |-- AppProperties.java
+    |   |               |   |-- SecurityConfig.java
+    |   |               |   |-- WebConfig.java
+    |   |               |-- controller
+    |   |               |   |-- ApiController.java
+    |   |               |   |-- AuthController.java
+    |   |               |   |-- PlaceController.java
+    |   |               |   |-- ReplyController.java
+    |   |               |   |-- ReservationController.java
+    |   |               |   |-- ReviewController.java
+    |   |               |   |-- RoomController.java
+    |   |               |   |-- SequenceGenerator.java
+    |   |               |   |-- UserController.java
+    |   |               |-- domain
+    |   |               |   |-- AuthProvider.java
+    |   |               |   |-- BaseTimeEntity.java
+    |   |               |   |-- Place.java
+    |   |               |   |-- Reply.java
+    |   |               |   |-- Reservation.java
+    |   |               |   |-- Role.java
+    |   |               |   |-- Room.java
+    |   |               |   |-- User.java
+    |   |               |   |-- UserRoom.java
+    |   |               |   |-- dto
+    |   |               |       |-- PlaceReviewDto.java
+    |   |               |       |-- ReplyDto.java
+    |   |               |       |-- ReservationDto.java
+    |   |               |       |-- RoomDto.java
+    |   |               |       |-- RoomResponseDto.java
+    |   |               |       |-- UserRoomDto.java
+    |   |               |-- mapper
+    |   |               |   |-- ReplyMapper.java
+    |   |               |   |-- ReplyMapperImpl.java
+    |   |               |   |-- ReservationImpl.java
+    |   |               |   |-- ReservationMapper.java
+    |   |               |   |-- RoomMapper.java
+    |   |               |   |-- RoomMapperImpl.java
+    |   |               |-- payload
+    |   |               |   |-- ApiResponse.java
+    |   |               |   |-- AuthResponse.java
+    |   |               |   |-- LoginRequest.java
+    |   |               |   |-- SignUpRequest.java
+    |   |               |-- repository
+    |   |               |   |-- PlaceRepository.java
+    |   |               |   |-- ReplyRepository.java
+    |   |               |   |-- ReservationRepository.java
+    |   |               |   |-- RoomRepository.java
+    |   |               |   |-- UserRepository.java
+    |   |               |   |-- UserRoomRepoesitory.java
+    |   |               |-- security
+    |   |               |   |-- CurrentUser.java
+    |   |               |   |-- CustomUserDetailsService.java
+    |   |               |   |-- RestAuthenticationEntryPoint.java
+    |   |               |   |-- TokenAuthenticationFilter.java
+    |   |               |   |-- TokenProvider.java
+    |   |               |   |-- UserPrincipal.java
+    |   |               |   |-- oauth
+    |   |               |       |-- CustomOAuth2UserService.java
+    |   |               |       |-- HttpCookieOAuth2AuthorizationRequestRepository.java
+    |   |               |       |-- OAuth2AuthenticationFailureHandler.java
+    |   |               |       |-- OAuth2AuthenticationSuccessHandler.java
+    |   |               |       |-- user
+    |   |               |           |-- GoogleOAuth2UserInfo.java
+    |   |               |           |-- OAuth2UserInfo.java
+    |   |               |           |-- OAuth2UserInfoFactory.java
+    |   |               |-- service
+    |   |               |   |-- ReplyService.java
+    |   |               |   |-- ReservationService.java
+    |   |               |   |-- RoomService.java
+    |   |               |   |-- RoomServiceInterface.java
+    |   |               |   |-- UserRoomService.java
+    |   |               |   |-- UserService.java
+    |   |               |-- util
+    |   |               |   |-- CookieUtils.java
+    |   |               |-- web
+    |   |                   |-- WebController.java
+    |   |-- resources
+    |       |-- application.yml
+    |-- test
+        |-- java
+            |-- com
+                |-- smasy10
+                    |-- apple
+                        |-- AppleApplicationTests.java
+                        |-- controller
+                        |   |-- RoomControllerTest.java
+                        |-- domain
+                            |-- RoomTest.java
+
+```
+
